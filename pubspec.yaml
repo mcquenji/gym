@@ -1,5 +1,5 @@
 name: gym
-description: "A PWA for tracking and comparing mine and my friend's gym progress."
+description: "A PWA for tracking and comparing my and my friend's gym progress."
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
