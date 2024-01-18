@@ -34,7 +34,9 @@ On every push to `main` the app is automatically deployed to Firebase hosting.
    - Select `public` as the public directory
    - Select `y` for single-page app
    - Select `N` when asked to overwrite any files
-2. Go to your repo settings and select _Secrets and Variables_ > _Actions_
+2. Run `flutterfire configure` to configure Firebase for Flutter and select `web` as supported platform
+3. Go to your repo settings and select _Secrets and Variables_ > _Actions_
    1. Add `FIREBASE_PROJECT_ID` with your Firebase project ID (e.g. `my-project`) as the value to your repository secrets
    2. Add `FIREBASE_UPPERCASE_PROJECT_ID` with your Firebase project ID in uppercase (e.g. `my-project` → `MY_PROJECT`) as the value to your repository secrets
-   3. Add `FLUTTER_VERSION` with the flutter version of the project (if unchanged it's `3.16.5`) as the value to your repository variables
+   3. Add `FIREBASE_OPTIONS` with the contents of the generated `firebase_options.dart` file in step 2 as the value to your repository secrets
+   4. Add `FLUTTER_VERSION` with the flutter version of the project (if unchanged it's `3.16.5`) as the value to your repository variables
