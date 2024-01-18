@@ -12,6 +12,9 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "${{ vars.FLUTTER_VERSION }}"
+      - name: "Write firebase_options.dart"
+        run: |
+          echo ${{ secrets.FIREBASE_OPTIONS }} > lib/firebase_options.dart
       - run: flutter build web -o public
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
