@@ -6,19 +6,21 @@ _No unit tests because it's just a personal project for me and my friends <sub>(
 
 # Development
 
-1. Start Firebase emulators
+1. If not done already [Setup Firebase Hosing](#setup-firebase-hosting)
+
+2. Start Firebase emulators
 
    ```bash
    firebase emulators:start
    ```
 
-2. Run the app
+3. Run the app
 
    ```bash
    flutter run -d [chrome|firefox]
    ```
 
-3. Happy coding!
+4. Happy coding!
 
 # Deployment
 
@@ -31,7 +33,7 @@ On every push to `main` the app is automatically deployed to Firebase hosting.
    - Select _Firestore rules and indexes_
    - Select `public` as the public directory
    - Select `y` for single-page app
-   - Select `N` for overwrite GitHub actions workflow files
+   - Select `N` when asked to overwrite any files
 2. Go to your repo settings and select _Secrets and Variables_ > _Actions_
    1. Add `FIREBASE_PROJECT_ID` with your Firebase project ID (e.g. `my-project`) as the value to your repository secrets
    2. Add `FIREBASE_UPPERCASE_PROJECT_ID` with your Firebase project ID in uppercase (e.g. `my-project` → `MY_PROJECT`) as the value to your repository secrets
