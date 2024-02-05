@@ -1,32 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
-import 'package:firebase_core/firebase_core.dart';
 import 'package:gym/features/auth/domain/domain.dart';
-import 'package:gym/shared/shared.dart';
 
 /// An implementation of [AuthService] that uses Firebase Authentication.
 class FirebaseAuthService implements AuthService {
-  final UsersDataSource usersDataSource;
-
-  FirebaseAuthService(this.usersDataSource);
-
   @override
-  Future<User?> getCurrentUser() async {
-    var fUser = FirebaseAuth.instance.currentUser;
-
-    if (fUser == null) {
-      return null;
-    }
-
-    var dbUser = await usersDataSource.get(fUser.uid);
-
-    return User(
-      id: fUser.uid,
-      name: fUser.displayName ?? '',
-      email: fUser.email ?? '',
-      registered: dbUser?.registered ?? false,
-    );
-  }
+  String? getCurrentUserId() => FirebaseAuth.instance.currentUser?.uid;
 
   @override
   bool isUserLoggedIn() => FirebaseAuth.instance.currentUser != null;

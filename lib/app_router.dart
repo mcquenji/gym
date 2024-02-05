@@ -78,9 +78,7 @@ part 'app_router.gr.dart';
 ///     ];
 /// ```
 ///
-/// 6. If you want the rote to appear in the sidebar, see [Sidebar].
-///
-/// 7. For subroutes, just do the same and for the path use `parent-path/subroute-path`:
+/// 6. For subroutes, just do the same and for the path use `parent-path/subroute-path`:
 ///
 /// ```dart
 /// @override
@@ -96,7 +94,6 @@ part 'app_router.gr.dart';
 ///     ];
 /// ```
 ///
-/// This is particularly useful when using the [Sidebar]. Consider having a main route like /admin accessible from the [Sidebar], and under this main route, there might be additional pages not directly linked in the sidebar—subroutes. These subroutes, like /admin/sub-page, can be accessed through the main /admin route. To maintain a consistent navigation experience, the sidebar should highlight the admin item as active, even when navigating its subroutes.
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends _$AppRouter {
   @override

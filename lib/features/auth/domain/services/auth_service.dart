@@ -1,5 +1,3 @@
-import 'package:gym/features/auth/auth.dart';
-
 /// A service responsible for authentication.
 abstract class AuthService {
   /// Logs in the user with the provided [email] and [password].
@@ -23,6 +21,6 @@ abstract class AuthService {
   /// Returns true if a user is currently authenticated.
   bool isUserLoggedIn();
 
-  /// Returns the currently authenticated user or `null` if no user is authenticated.
-  Future<User?> getCurrentUser();
+  /// Returns the id of the currently authenticated user or `null` if no user is authenticated.
+  String? getCurrentUserId();
 }
