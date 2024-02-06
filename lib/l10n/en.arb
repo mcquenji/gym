@@ -1,3 +1,8 @@
 {
-    "@@locale": "en"
+    "@@locale": "en",
+    "login_welcome": "Hey there,",
+    "login_welcome_subtitle": "Let's get ripped!",
+    "login_email": "Email",
+    "login_password": "Password",
+    "login_submit": "Login"
 }
