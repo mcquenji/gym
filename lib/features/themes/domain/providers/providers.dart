@@ -5,3 +5,5 @@ export 'device_brightness_provider_state.dart';
 export 'primary_swatch_provider.dart';
 export 'gradients_provider.dart';
 export 'system_brightness_service_provider.dart';
+export 'color_scheme_provider.dart';
+export 'greyscale_provider.dart';

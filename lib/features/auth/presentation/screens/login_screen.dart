@@ -1,23 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gym/features/auth/auth.dart';
 import 'package:gym/shared/shared.dart';
 
 @RoutePage()
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool attemptedLogin = false;
   bool showPassword = false;
+  bool loggingIn = false;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   toggleShowPassword() {
     setState(() {
       showPassword = !showPassword;
     });
+  }
+
+  login() async {
+    setState(() {
+      loggingIn = true;
+    });
+
+    var user = ref.read(userProvider.notifier);
+
+    await user.login(emailController.text, passwordController.text);
+
+    if (mounted) {
+      setState(() {
+        attemptedLogin = true;
+        loggingIn = false;
+      });
+    }
   }
 
   @override
@@ -43,9 +66,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TextField(),
-                  const SizedBox(height: 30),
-                  TextField(),
+                  const SizedBox(height: 60),
+                  TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      hintText: l10n.login_email,
+                      prefixIcon: const Icon(IconlyLight.message),
+                      errorText: attemptedLogin ? l10n.login_invalid : null,
+                    ),
+                    autofillHints: const [AutofillHints.email],
+                  ),
+                  const SizedBox(height: 15),
+                  TextField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      hintText: l10n.login_password,
+                      prefixIcon: const Icon(IconlyLight.lock),
+                      suffixIcon: GestureDetector(
+                        onTap: toggleShowPassword,
+                        child: Icon(
+                          showPassword ? IconlyLight.hide : IconlyLight.show,
+                        ),
+                      ),
+                      errorText: attemptedLogin ? l10n.login_invalid : null,
+                    ),
+                    obscureText: !showPassword,
+                    autofillHints: const [AutofillHints.password],
+                  ),
                   const SizedBox(height: 30),
                 ],
               ),
@@ -53,7 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               width: double.infinity,
               child: PrimaryButton(
-                onPressed: () {},
+                onPressed: login,
+                loading: loggingIn,
                 leading: const Icon(IconlyBold.login),
                 child: Text(l10n.login_submit),
               ),

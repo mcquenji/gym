@@ -1,14 +1,27 @@
 import 'package:gym/features/auth/auth.dart';
+import 'package:gym/shared/shared.dart';
 import 'package:riverpod/riverpod.dart';
 
 /// Provides a map of all registered users where the key is the user's id.
 ///
-/// Note: Manipulating user's information is not possible.
-class UsersProvider extends StateNotifier<UsersProviderState> {
-  UsersDataSource usersDataSource;
+/// Note: Manipulating user information is not possible.
+class UsersProvider extends Notifier<UsersProviderState> {
+  late UsersDataSource usersDataSource;
+  bool _isInitialized = false;
 
-  UsersProvider(this.usersDataSource) : super({}) {
+  @override
+  UsersProviderState build() {
+    if (!_isInitialized) {
+      _isInitialized = true;
+      state = {};
+    }
+
+    usersDataSource = ref.watch(usersDataSourceProvider);
+    ref.watch(collectionProvider("users")); // watch the collection for changes
+
     fetchUsers();
+
+    return state;
   }
 
   Future<void> fetchUsers() async {

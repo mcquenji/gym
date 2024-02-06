@@ -4,5 +4,6 @@
     "login_welcome_subtitle": "Let's get ripped!",
     "login_email": "Email",
     "login_password": "Password",
-    "login_submit": "Login"
+    "login_submit": "Login",
+    "login_invalid": "Invalid email or password"
 }

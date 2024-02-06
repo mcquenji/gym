@@ -25,7 +25,8 @@ class UserProvider extends StateNotifier<UserProviderState> {
   Future<bool> login(String email, String password) async {
     try {
       await authService.login(email, password);
-      state = users[authService.getCurrentUserId()];
+
+      if (mounted) state = users[authService.getCurrentUserId()];
 
       return true;
     } catch (e) {

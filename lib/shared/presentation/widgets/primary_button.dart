@@ -8,12 +8,14 @@ class PrimaryButton extends StatelessWidget {
     required this.child,
     this.leading,
     this.trailing,
+    this.loading = false,
   });
 
   final VoidCallback? onPressed;
   final Widget child;
   final Widget? leading;
   final Widget? trailing;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -26,31 +28,40 @@ class PrimaryButton extends StatelessWidget {
       );
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: Gradients.of(context).primaryGradient.linear,
-        borderRadius: BorderRadius.circular(50),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-      height: 56,
-      child: GestureDetector(
-        onTap: onPressed,
+    return GestureDetector(
+      onTap: loading ? null : onPressed,
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: Gradients.of(context).primaryGradient.linear,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+        height: 64,
         child: DefaultTextStyle(
           style: context.theme.textTheme.bodyLarge!.copyWith(
             color: context.theme.colorScheme.onPrimary,
             fontWeight: FontWeight.bold,
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (leading != null) onPrimaryIconTheme(leading!),
-              if (leading != null) const SizedBox(width: 8),
-              child,
-              if (trailing != null) const SizedBox(width: 8),
-              if (trailing != null) onPrimaryIconTheme(trailing!),
-            ],
-          ),
+          child: loading
+              ? Align(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    color: context.theme.colorScheme.onPrimary,
+                    strokeCap: StrokeCap.round,
+                  ),
+                )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (leading != null) onPrimaryIconTheme(leading!),
+                    if (leading != null) const SizedBox(width: 8),
+                    child,
+                    if (trailing != null) const SizedBox(width: 8),
+                    if (trailing != null) onPrimaryIconTheme(trailing!),
+                  ],
+                ),
         ),
       ),
     );
