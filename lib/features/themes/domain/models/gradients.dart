@@ -14,8 +14,8 @@ class Gradients extends ThemeExtension<Gradients> {
   ThemeExtension<Gradients> copyWith(
       {GradientThemeData? primary, GradientThemeData? secondary}) {
     return Gradients(
-      primaryGradient: primary ?? this.primaryGradient,
-      secondaryGradient: secondary ?? this.secondaryGradient,
+      primaryGradient: primary ?? primaryGradient,
+      secondaryGradient: secondary ?? secondaryGradient,
     );
   }
 

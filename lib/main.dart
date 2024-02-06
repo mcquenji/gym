@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gym/features/themes/domain/domain.dart';
 import 'package:gym/firebase_options.dart';
 import 'app.dart';
 
