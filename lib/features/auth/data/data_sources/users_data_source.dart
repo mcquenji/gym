@@ -63,4 +63,9 @@ class FirestoreUsersDataSource extends UsersDataSource {
   Future<String> createUserID() async {
     return collection.doc().id;
   }
+
+  @override
+  Future<void> setOnboarded(String id, bool onboarded) {
+    return collection.doc(id).update({'onboarded': onboarded});
+  }
 }

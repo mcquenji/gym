@@ -13,4 +13,6 @@ abstract class UsersDataSource {
   Future<void> delete(String id);
 
   Future<void> setRegistered(String id, bool registered);
+
+  Future<void> setOnboarded(String id, bool onboarded);
 }

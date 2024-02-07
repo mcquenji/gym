@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
 
 part 'app_router.gr.dart';
@@ -97,9 +98,56 @@ part 'app_router.gr.dart';
 ///
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends _$AppRouter {
+  final ProviderContainer ref;
+
+  AppRouter(this.ref);
+
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: LoginRoute.page, path: '/login', initial: true),
+        CustomRoute(
+          page: LoginRoute.page,
+          path: '/login',
+          initial: true,
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        ),
+        CustomRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: ChangePasswordRoute.page,
+          path: '/change-password',
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        ),
+        CustomRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: OnboardingRoute.page,
+          path: '/onboarding',
+          children: [
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: OnboardingAlsRoute.page,
+              path: 'als',
+            ),
+            CustomRoute(
+              page: OnboardingCompetitionRoute.page,
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              path: 'competition',
+            ),
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: OnboardingMonthlyPicsRoute.page,
+              path: 'monthly-pics',
+            ),
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: OnboardingTrackYourGoalsRoute.page,
+              path: '',
+            ),
+          ],
+          transitionsBuilder: TransitionsBuilders.slideTop,
+        )
       ];
 }
 

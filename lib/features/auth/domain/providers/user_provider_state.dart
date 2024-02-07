@@ -1,16 +1,22 @@
 import 'package:gym/features/auth/auth.dart';
 import 'package:riverpod/riverpod.dart';
 
-class UserProvider extends StateNotifier<UserProviderState> {
-  final AuthService authService;
-  final UsersProviderState users;
-  final UsersDataSource usersDataSource;
+class UserProvider extends Notifier<UserProviderState> {
+  late AuthService authService;
+  late UsersProviderState users;
+  late UsersDataSource usersDataSource;
 
-  UserProvider(this.authService, this.users, this.usersDataSource)
-      : super(null) {
+  @override
+  UserProviderState? build() {
+    authService = ref.watch(authServiceProvider);
+    users = ref.watch(usersProvider);
+    usersDataSource = ref.watch(usersDataSourceProvider);
+
     if (authService.isUserLoggedIn()) {
-      state = users[authService.getCurrentUserId()];
+      return users[authService.getCurrentUserId()];
     }
+
+    return null;
   }
 
   void logout() {
@@ -26,7 +32,7 @@ class UserProvider extends StateNotifier<UserProviderState> {
     try {
       await authService.login(email, password);
 
-      if (mounted) state = users[authService.getCurrentUserId()];
+      state = users[authService.getCurrentUserId()];
 
       return true;
     } catch (e) {
@@ -40,8 +46,21 @@ class UserProvider extends StateNotifier<UserProviderState> {
       throw Exception('User is not logged in');
     }
 
+    if (password.isEmpty) {
+      return;
+    }
+
     await authService.setPassword(password);
     await usersDataSource.setRegistered(state!.id, true);
+  }
+
+  /// Sets the [User.onboarded] property to `true`.
+  Future<void> completeOnboarding() async {
+    if (state == null) {
+      throw Exception('User is not logged in');
+    }
+
+    await usersDataSource.setOnboarded(state!.id, true);
   }
 }
 

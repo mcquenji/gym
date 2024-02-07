@@ -4,6 +4,8 @@ import 'package:gym/app_router.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:gym/features/themes/themes.dart';
 
+final providerContainer = ProviderContainer();
+
 /// The root widget of the application.
 ///
 /// This widget is responsible for routing, sets the application wide theme & language.
@@ -13,7 +15,7 @@ class App extends ConsumerWidget {
   /// This widget is responsible for routing, sets the application wide theme & language.
   App({super.key});
 
-  final _router = AppRouter();
+  final _router = AppRouter(providerContainer);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

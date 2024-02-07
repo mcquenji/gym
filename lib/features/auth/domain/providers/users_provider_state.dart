@@ -7,21 +7,15 @@ import 'package:riverpod/riverpod.dart';
 /// Note: Manipulating user information is not possible.
 class UsersProvider extends Notifier<UsersProviderState> {
   late UsersDataSource usersDataSource;
-  bool _isInitialized = false;
 
   @override
   UsersProviderState build() {
-    if (!_isInitialized) {
-      _isInitialized = true;
-      state = {};
-    }
-
     usersDataSource = ref.watch(usersDataSourceProvider);
     ref.watch(collectionProvider("users")); // watch the collection for changes
 
     fetchUsers();
 
-    return state;
+    return stateOrNull ?? {};
   }
 
   Future<void> fetchUsers() async {

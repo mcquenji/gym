@@ -14,11 +14,12 @@ void main() async {
 
   if (kDebugMode) {
     FirebaseAuth.instance.useAuthEmulator("localhost", 9099);
-    FirebaseFirestore.instance.useFirestoreEmulator("localhost", 9099);
+    FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080);
   }
 
   runApp(
     ProviderScope(
+      // parent: providerContainer,
       child: App(),
     ),
   );

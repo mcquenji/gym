@@ -24,7 +24,7 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   bool get registered => throw _privateConstructorUsedError;
-  bool get onBoarded => throw _privateConstructorUsedError;
+  bool get onboarded => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String id, String name, String email, bool registered, bool onBoarded});
+      {String id, String name, String email, bool registered, bool onboarded});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? email = null,
     Object? registered = null,
-    Object? onBoarded = null,
+    Object? onboarded = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -76,9 +76,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.registered
           : registered // ignore: cast_nullable_to_non_nullable
               as bool,
-      onBoarded: null == onBoarded
-          ? _value.onBoarded
-          : onBoarded // ignore: cast_nullable_to_non_nullable
+      onboarded: null == onboarded
+          ? _value.onboarded
+          : onboarded // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -92,7 +92,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id, String name, String email, bool registered, bool onBoarded});
+      {String id, String name, String email, bool registered, bool onboarded});
 }
 
 /// @nodoc
@@ -109,7 +109,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? name = null,
     Object? email = null,
     Object? registered = null,
-    Object? onBoarded = null,
+    Object? onboarded = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -128,9 +128,9 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.registered
           : registered // ignore: cast_nullable_to_non_nullable
               as bool,
-      onBoarded: null == onBoarded
-          ? _value.onBoarded
-          : onBoarded // ignore: cast_nullable_to_non_nullable
+      onboarded: null == onboarded
+          ? _value.onboarded
+          : onboarded // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -144,7 +144,7 @@ class _$UserImpl implements _User {
       required this.name,
       required this.email,
       required this.registered,
-      required this.onBoarded});
+      required this.onboarded});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -158,11 +158,11 @@ class _$UserImpl implements _User {
   @override
   final bool registered;
   @override
-  final bool onBoarded;
+  final bool onboarded;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, registered: $registered, onBoarded: $onBoarded)';
+    return 'User(id: $id, name: $name, email: $email, registered: $registered, onboarded: $onboarded)';
   }
 
   @override
@@ -175,14 +175,14 @@ class _$UserImpl implements _User {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.registered, registered) ||
                 other.registered == registered) &&
-            (identical(other.onBoarded, onBoarded) ||
-                other.onBoarded == onBoarded));
+            (identical(other.onboarded, onboarded) ||
+                other.onboarded == onboarded));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, email, registered, onBoarded);
+      Object.hash(runtimeType, id, name, email, registered, onboarded);
 
   @JsonKey(ignore: true)
   @override
@@ -204,7 +204,7 @@ abstract class _User implements User {
       required final String name,
       required final String email,
       required final bool registered,
-      required final bool onBoarded}) = _$UserImpl;
+      required final bool onboarded}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -217,7 +217,7 @@ abstract class _User implements User {
   @override
   bool get registered;
   @override
-  bool get onBoarded;
+  bool get onboarded;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

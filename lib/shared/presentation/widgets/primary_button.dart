@@ -35,6 +35,7 @@ class PrimaryButton extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: Gradients.of(context).primaryGradient.linear,
           borderRadius: BorderRadius.circular(50),
+          boxShadow: kElevationToShadow[8],
         ),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         height: 64,
