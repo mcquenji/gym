@@ -27,8 +27,8 @@ jobs:
                 base64-encoded-secret: ${{ secrets.FIREBASE_OPTIONS }}
             - name: Get dependencies
               run: flutter pub get
-            - name: Setup upterm session
-              uses: lhotari/action-upterm@v1
+            - name: Setup tmate session
+              uses: mxschmitt/action-tmate@v3
             - name: Analyze code
               continue-on-error: true # The check will fail on the 'Annotate results' step if there are any errors
               run: flutter analyze --no-pub >> analysis.txt
