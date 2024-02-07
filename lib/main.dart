@@ -19,7 +19,7 @@ void main() async {
 
   runApp(
     ProviderScope(
-      // parent: providerContainer,
+      parent: providerContainer,
       child: App(),
     ),
   );
