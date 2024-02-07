@@ -15,10 +15,11 @@ jobs:
         with:
           flutter-version: "${{ vars.FLUTTER_VERSION }}"
       - name: Write firebase_options.dart
-        uses: MobileDevOps/secret-to-file-action@v1.0.0
+        uses: DamianReeves/write-file-action@master
         with:
-          filename: lib/firebase_options.dart
-          base64-encoded-secret: ${{ secrets.FIREBASE_OPTIONS }}
+          path: lib/firebase_options.dart
+          contents: |
+            ${{ secrets.FIREBASE_OPTIONS }}
       - run: flutter build web -o public
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
