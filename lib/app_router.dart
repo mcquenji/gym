@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gym/features/auth/auth.dart';
 
 part 'app_router.gr.dart';
 
@@ -78,9 +80,7 @@ part 'app_router.gr.dart';
 ///     ];
 /// ```
 ///
-/// 6. If you want the rote to appear in the sidebar, see [Sidebar].
-///
-/// 7. For subroutes, just do the same and for the path use `parent-path/subroute-path`:
+/// 6. For subroutes, just do the same and for the path use `parent-path/subroute-path`:
 ///
 /// ```dart
 /// @override
@@ -96,11 +96,59 @@ part 'app_router.gr.dart';
 ///     ];
 /// ```
 ///
-/// This is particularly useful when using the [Sidebar]. Consider having a main route like /admin accessible from the [Sidebar], and under this main route, there might be additional pages not directly linked in the sidebar—subroutes. These subroutes, like /admin/sub-page, can be accessed through the main /admin route. To maintain a consistent navigation experience, the sidebar should highlight the admin item as active, even when navigating its subroutes.
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends _$AppRouter {
+  final ProviderContainer ref;
+
+  AppRouter(this.ref);
+
   @override
-  List<AutoRoute> get routes => [];
+  List<AutoRoute> get routes => [
+        CustomRoute(
+          page: LoginRoute.page,
+          path: '/login',
+          initial: true,
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        ),
+        CustomRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: ChangePasswordRoute.page,
+          path: '/change-password',
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        ),
+        CustomRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: OnboardingRoute.page,
+          path: '/onboarding',
+          children: [
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: OnboardingAlsRoute.page,
+              path: 'als',
+            ),
+            CustomRoute(
+              page: OnboardingCompetitionRoute.page,
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              path: 'competition',
+            ),
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: OnboardingMonthlyPicsRoute.page,
+              path: 'monthly-pics',
+            ),
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: OnboardingTrackYourGoalsRoute.page,
+              path: '',
+            ),
+          ],
+          transitionsBuilder: TransitionsBuilders.slideTop,
+        )
+      ];
 }
 
 /// Implements [CustomRoute] with some default settings.
