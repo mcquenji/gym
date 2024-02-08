@@ -1,1 +1,1 @@
-// TODO Implement this library.
+export 'avatar_generator_service.dart';

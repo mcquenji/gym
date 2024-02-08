@@ -1,5 +1,9 @@
+import 'package:gym/shared/domain/domain.dart';
+
 /// A service responsible for authentication.
-abstract class AuthService {
+abstract class AuthService extends Service {
+  AuthService() : super("AuthService");
+
   /// Logs in the user with the provided [email] and [password].
   ///
   /// Throws an [Eexception] if login fails.
