@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
+import 'package:gym/features/onboarding/onboarding.dart';
 
 part 'app_router.gr.dart';
 
