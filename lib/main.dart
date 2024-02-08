@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +21,10 @@ void main() async {
   runApp(
     ProviderScope(
       parent: providerContainer,
-      child: App(),
+      child: DevicePreview(
+        enabled: kDebugMode,
+        builder: (_) => App(),
+      ),
     ),
   );
 }
