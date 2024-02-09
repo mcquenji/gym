@@ -48,7 +48,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     var user = ref.watch(userProvider);
 
     if (user != null) {
-      // TODO: Go to the home screen
+      context.pushRoute(const OnboardingRoute());
     }
 
     return Scaffold(

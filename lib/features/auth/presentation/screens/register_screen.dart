@@ -25,8 +25,34 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
   final repeatPasswordController = TextEditingController();
 
   bool showPassword = false;
-
   bool passwordMatch = true;
+  bool registering = false;
+
+  Future<void> register() async {
+    if (registering) return;
+    if (!passwordMatch) return;
+    if (usernameController.text.isEmpty) return;
+    if (emailController.text.isEmpty) return;
+    if (passwordController.text.length < 6) return;
+    if (widget.referralCode == null && ref.read(usersProvider).isNotEmpty) {
+      return;
+    }
+
+    setState(() {
+      registering = true;
+    });
+
+    await ref.read(usersProvider.notifier).registerUser(
+          email: emailController.text,
+          password: passwordController.text,
+          referralCode: widget.referralCode,
+          name: usernameController.text,
+        );
+
+    if (mounted) {
+      context.pushRoute(const OnboardingRoute());
+    }
+  }
 
   @override
   void initState() {
@@ -50,19 +76,30 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var user = ref.watch(userProvider);
+
+    if (user != null) {
+      context.pushRoute(const OnboardingRoute());
+    }
+
     var authService = ref.read(authServiceProvider);
     var users = ref.read(usersProvider);
+
+    final allowRegisterWithoutReferral =
+        widget.referralCode == null && users.isEmpty;
 
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
-        child: widget.referralCode == null
+        child: widget.referralCode == null && !allowRegisterWithoutReferral
             ? InvalidCode(
                 title: l10n.register_invalidCode,
                 message: l10n.register_invalidCode_message,
               )
             : FutureBuilder(
-                future: authService.verifyReferralCode(widget.referralCode!),
+                future: allowRegisterWithoutReferral
+                    ? Future.value(true)
+                    : authService.verifyReferralCode(widget.referralCode!),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return InvalidCode(
@@ -86,6 +123,13 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
                     );
                   }
 
+                  final passwordErrorText = passwordMatch
+                      ? passwordController.text.length < 6 &&
+                              passwordController.text.isNotEmpty
+                          ? l10n.resetPassword_passwordTooShort
+                          : null
+                      : l10n.resetPassword_passwordsDontMatch;
+
                   return Column(
                     children: [
                       Expanded(
@@ -93,33 +137,39 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // TODO: Replace with avatar of the user who referred
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundColor: theme.primaryColor,
-                              child: Icon(
-                                IconlyLight.profile,
-                                color: theme.primaryColorDark,
+                            if (!allowRegisterWithoutReferral)
+                              CircleAvatar(
+                                radius: 50,
+                                backgroundColor: theme.primaryColor,
+                                child: Icon(
+                                  IconlyLight.profile,
+                                  color: theme.primaryColorDark,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 20),
-                            Text(
-                              // TODO: Replace with the name of the user who referred
-                              l10n.register_invitedBy(widget.referralCode!),
-                              style: theme.textTheme.bodySmall,
-                            ),
-                            const SizedBox(height: 16),
+                            if (!allowRegisterWithoutReferral)
+                              const SizedBox(height: 20),
+                            if (!allowRegisterWithoutReferral)
+                              Text(
+                                // TODO: Replace with the name of the user who referred
+                                l10n.register_invitedBy(widget.referralCode!),
+                                style: theme.textTheme.bodySmall,
+                              ),
+                            if (!allowRegisterWithoutReferral)
+                              const SizedBox(height: 16),
                             Text(
                               l10n.register_title,
                               style: theme.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              l10n.register_subtitle(users.length),
-                              style: theme.textTheme.bodyMedium,
-                              textAlign: TextAlign.center,
-                            ),
+                            if (!allowRegisterWithoutReferral)
+                              const SizedBox(height: 8),
+                            if (!allowRegisterWithoutReferral)
+                              Text(
+                                l10n.register_subtitle(users.length),
+                                style: theme.textTheme.bodyMedium,
+                                textAlign: TextAlign.center,
+                              ),
                             const SizedBox(height: 30),
                             TextField(
                               controller: emailController,
@@ -150,6 +200,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
                                         : IconlyLight.show,
                                   ),
                                 ),
+                                errorText: passwordErrorText,
                               ),
                               obscureText: !showPassword,
                             ),
@@ -167,6 +218,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
                                         : IconlyLight.show,
                                   ),
                                 ),
+                                errorText: passwordErrorText,
                               ),
                               obscureText: !showPassword,
                             ),
@@ -174,7 +226,9 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
                         ),
                       ),
                       PrimaryButton(
-                        onPressed: () {}, // TODO: actually register
+                        loading: registering,
+                        onPressed: register,
+                        leading: const Icon(IconlyBold.login),
                         child: Text(l10n.register_submit),
                       ),
                     ],

@@ -45,4 +45,12 @@ abstract class AuthService extends Service {
   ///
   /// Throws an [Exception] if no user is authenticated.
   Future<String> generateReferralCode();
+
+  /// Registers a the first user with the provided [email] and [password] without a referral code.
+  /// No referral code is required.
+  ///
+  /// Throws an [Exception] if the app already one or more users.
+  ///
+  /// Returns the id of the newly created user.
+  Future<String> registerFirstUser(String email, String password);
 }

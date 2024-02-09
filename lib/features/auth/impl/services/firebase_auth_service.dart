@@ -5,8 +5,9 @@ import 'package:gym/features/auth/domain/domain.dart';
 /// An implementation of [AuthService] that uses Firebase Authentication.
 class FirebaseAuthService extends AuthService {
   final String referralsCollection;
+  final String usersCollection;
 
-  FirebaseAuthService(this.referralsCollection);
+  FirebaseAuthService(this.referralsCollection, this.usersCollection);
 
   @override
   String? getCurrentUserId() {
@@ -188,5 +189,30 @@ class FirebaseAuthService extends AuthService {
     log.fine("Referral code saved to database");
 
     return code;
+  }
+
+  @override
+  Future<String> registerFirstUser(String email, String password) async {
+    log.fine("Registering first user with email $email");
+
+    var collection =
+        await FirebaseFirestore.instance.collection(usersCollection).get();
+
+    if (collection.docs.isEmpty) {
+      log.fine("No users found. Registering first user");
+
+      var creds = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      log.fine("First user registered");
+
+      return creds.user!.uid;
+    } else {
+      log.fine("Users found. Aborting registration");
+
+      throw Exception("App already has one or more users");
+    }
   }
 }

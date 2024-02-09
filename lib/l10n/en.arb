@@ -11,6 +11,7 @@
     "resetPassword_title": "Seems like you forgot your password!",
     "resetPassword_subtitle": "Choose A New Password",
     "resetPassword_passwordsDontMatch": "Passwords don't match",
+    "resetPassword_passwordTooShort": "Password must be at least 6 characters long",
     "resetPassword_password": "New password",
     "resetPassword_repeatPassword": "Repeat password",
     "resetPassword_invalidCode": "Oops",
@@ -47,7 +48,7 @@
     "register_invalidCode": "Oops",
     "register_invalidCode_message": "Seems your referral code is invalid or expired. Try asking your friend for a new one.",
     "register_submit": "Register",
-    "register_username": "Email",
+    "register_username": "Username",
     "global_next": "Next",
     "global_error_loadingSVG": "Error loading SVG"
 }

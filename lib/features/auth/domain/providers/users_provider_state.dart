@@ -32,14 +32,24 @@ class UsersProvider extends Notifier<UsersProviderState> {
 
   /// Registers a new user with the given [email], [password], [referralCode] and [name].
   ///
-  /// Note: The user will not be logged in after registration.
+  /// This will also log the user in with the newly created account.
   Future<void> registerUser({
     required String email,
     required String password,
-    required String referralCode,
+    String? referralCode,
     required String name,
   }) async {
-    var id = await authService.registerUser(referralCode, email, password);
+    String id = "";
+
+    if (referralCode == null) {
+      if (state.isEmpty) {
+        id = await authService.registerFirstUser(email, password);
+      } else {
+        throw Exception("A referral code is required to register a new user");
+      }
+    } else {
+      id = await authService.registerUser(referralCode, email, password);
+    }
 
     var user = User(
       id: id,
@@ -49,6 +59,8 @@ class UsersProvider extends Notifier<UsersProviderState> {
     );
 
     await usersDataSource.write(user);
+
+    await ref.read(userProvider.notifier).login(email, password);
   }
 }
 
