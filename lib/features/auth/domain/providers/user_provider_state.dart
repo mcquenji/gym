@@ -48,6 +48,10 @@ class UserProvider extends Notifier<UserProviderState> {
 
     await usersDataSource.setOnboarded(state!.id, true);
   }
+
+  Future<void> createReferralCode() async {
+    await authService.generateReferralCode();
+  }
 }
 
 typedef UserProviderState = User?;

@@ -3,5 +3,5 @@ import 'package:gym/features/auth/impl/impl.dart';
 import 'package:riverpod/riverpod.dart';
 
 final authServiceProvider = Provider<AuthService>(
-  (ref) => FirebaseAuthService(),
+  (ref) => FirebaseAuthService("referrals"),
 );

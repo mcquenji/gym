@@ -51,6 +51,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingTrackYourGoalsScreen(),
       );
     },
+    RegisterRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterRouteArgs>(
+          orElse: () => const RegisterRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RegisterScreen(
+          key: args.key,
+          inviteCode: args.inviteCode,
+        ),
+      );
+    },
     ResetPasswordRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<ResetPasswordRouteArgs>(
@@ -149,6 +160,44 @@ class OnboardingTrackYourGoalsRoute extends PageRouteInfo<void> {
   static const String name = 'OnboardingTrackYourGoalsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RegisterScreen]
+class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
+  RegisterRoute({
+    Key? key,
+    String? inviteCode,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RegisterRoute.name,
+          args: RegisterRouteArgs(
+            key: key,
+            inviteCode: inviteCode,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterRoute';
+
+  static const PageInfo<RegisterRouteArgs> page =
+      PageInfo<RegisterRouteArgs>(name);
+}
+
+class RegisterRouteArgs {
+  const RegisterRouteArgs({
+    this.key,
+    this.inviteCode,
+  });
+
+  final Key? key;
+
+  final String? inviteCode;
+
+  @override
+  String toString() {
+    return 'RegisterRouteArgs{key: $key, inviteCode: $inviteCode}';
+  }
 }
 
 /// generated route for

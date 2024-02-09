@@ -61,41 +61,6 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
     });
   }
 
-  Widget invalidCode() {
-    return Column(
-      children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Assets.auth.invalidCode.themedSvg(context),
-              const SizedBox(height: 20),
-              Text(
-                context.l10n.resetPassword_invalidCode,
-                style: context.theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                context.l10n.resetPassword_invalidCode_message,
-                style: context.theme.textTheme.bodySmall,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-        PrimaryButton(
-          onPressed: () {
-            context.pushRoute(const LoginRoute());
-          },
-          leading: const Icon(IconlyLight.login),
-          child: Text(context.l10n.resetPassword_invalidCode_login),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     var authService = ref.watch(authServiceProvider);
@@ -115,7 +80,10 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: widget.resetCode == null
-            ? invalidCode()
+            ? InvalidCode(
+                title: l10n.resetPassword_invalidCode,
+                message: l10n.resetPassword_invalidCode_message,
+              )
             : FutureBuilder(
                 future:
                     authService.veryfyPasswordResetCode(widget.resetCode ?? ""),
@@ -129,7 +97,10 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                   }
 
                   if (!(snapshot.data ?? false)) {
-                    return invalidCode();
+                    return InvalidCode(
+                      title: l10n.resetPassword_invalidCode,
+                      message: l10n.resetPassword_invalidCode_message,
+                    );
                   }
 
                   return Column(
