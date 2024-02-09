@@ -56,7 +56,7 @@ class FirebaseAuthService extends AuthService {
       String code, String email, String password) async {
     log.fine("Registering user with email $email");
 
-    if (!await veryfyReferralCode(code)) {
+    if (!await verifyReferralCode(code)) {
       log.fine("Invalid referral code. Aborting");
 
       throw Exception("Invalid referral code");
@@ -68,9 +68,17 @@ class FirebaseAuthService extends AuthService {
         password: password,
       );
 
-      log.fine("Email $email registered with id ${user.user?.uid}");
+      final id = user.user!.uid;
 
-      return user.user!.uid;
+      log.fine(
+          "Email $email registered with id $id. Invalidating referral code.");
+
+      await FirebaseFirestore.instance
+          .collection(referralsCollection)
+          .doc(code)
+          .update({"referredUserId": id});
+
+      return id;
     } catch (e) {
       log.fine("Failed to register user with email $email", e);
 
@@ -100,7 +108,7 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<bool> veryfyPasswordResetCode(String code) async {
+  Future<bool> verifyPasswordResetCode(String code) async {
     log.fine("Verifying password reset code");
 
     try {
@@ -124,7 +132,7 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<bool> veryfyReferralCode(String code) async {
+  Future<bool> verifyReferralCode(String code) async {
     log.fine("Verifying registration code");
 
     var doc = await FirebaseFirestore.instance
@@ -142,7 +150,7 @@ class FirebaseAuthService extends AuthService {
 
     var referral = Referral.fromJson(doc.data()!);
 
-    if (referral.referredUserId != null) {
+    if (referral.referredUserId == null) {
       log.fine("Referral code $code is invalid. It has already been used.");
 
       return false;

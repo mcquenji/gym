@@ -35,7 +35,7 @@
         }
     },
     "register_title": "Create an Account",
-    "register_subtitle": "And get jacked with together with {users} other users!",
+    "register_subtitle": "And get jacked together with {users} other users!",
     "@register_subtitle": {
         "description": "register_subtitle",
         "placeholders": {
@@ -44,6 +44,10 @@
             }
         }
     },
+    "register_invalidCode": "Oops",
+    "register_invalidCode_message": "Seems your referral code is invalid or expired. Try asking your friend for a new one.",
+    "register_submit": "Register",
+    "register_username": "Email",
     "global_next": "Next",
     "global_error_loadingSVG": "Error loading SVG"
 }

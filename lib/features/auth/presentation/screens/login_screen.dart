@@ -80,7 +80,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       prefixIcon: const Icon(IconlyLight.message),
                       errorText: attemptedLogin ? l10n.login_invalid : null,
                     ),
-                    autofillHints: const [AutofillHints.email],
+                    autofillHints: const [
+                      AutofillHints.email,
+                      AutofillHints.username,
+                    ],
                   ),
                   const SizedBox(height: 15),
                   TextField(

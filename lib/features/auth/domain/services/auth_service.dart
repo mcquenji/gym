@@ -33,10 +33,10 @@ abstract class AuthService extends Service {
   String? getCurrentUserId();
 
   /// Verifies the provided [code] is a valid password reset code.
-  Future<bool> veryfyPasswordResetCode(String code);
+  Future<bool> verifyPasswordResetCode(String code);
 
   /// Verifies the provided [code] is a valid registration code.
-  Future<bool> veryfyReferralCode(String code);
+  Future<bool> verifyReferralCode(String code);
 
   /// Sends a password reset email to the user with the provided [email].
   Future<void> sendPasswordResetEmail(String email);

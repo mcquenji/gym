@@ -52,13 +52,15 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     RegisterRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
       final args = routeData.argsAs<RegisterRouteArgs>(
-          orElse: () => const RegisterRouteArgs());
+          orElse: () => RegisterRouteArgs(
+              referralCode: queryParams.optString('referral')));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: RegisterScreen(
           key: args.key,
-          inviteCode: args.inviteCode,
+          referralCode: args.referralCode,
         ),
       );
     },
@@ -167,14 +169,15 @@ class OnboardingTrackYourGoalsRoute extends PageRouteInfo<void> {
 class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
   RegisterRoute({
     Key? key,
-    String? inviteCode,
+    String? referralCode,
     List<PageRouteInfo>? children,
   }) : super(
           RegisterRoute.name,
           args: RegisterRouteArgs(
             key: key,
-            inviteCode: inviteCode,
+            referralCode: referralCode,
           ),
+          rawQueryParams: {'referral': referralCode},
           initialChildren: children,
         );
 
@@ -187,16 +190,16 @@ class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
 class RegisterRouteArgs {
   const RegisterRouteArgs({
     this.key,
-    this.inviteCode,
+    this.referralCode,
   });
 
   final Key? key;
 
-  final String? inviteCode;
+  final String? referralCode;
 
   @override
   String toString() {
-    return 'RegisterRouteArgs{key: $key, inviteCode: $inviteCode}';
+    return 'RegisterRouteArgs{key: $key, referralCode: $referralCode}';
   }
 }
 

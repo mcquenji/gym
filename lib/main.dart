@@ -19,6 +19,8 @@ void main() async {
     FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080);
   }
 
+  Logger.root.level = Level.ALL;
+
   Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
       print(record);

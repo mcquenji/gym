@@ -86,8 +86,15 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
               )
             : FutureBuilder(
                 future:
-                    authService.veryfyPasswordResetCode(widget.resetCode ?? ""),
+                    authService.verifyPasswordResetCode(widget.resetCode ?? ""),
                 builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return InvalidCode(
+                      title: l10n.resetPassword_invalidCode,
+                      message: l10n.resetPassword_invalidCode_message,
+                    );
+                  }
+
                   if (!snapshot.hasData) {
                     return const Center(
                       child: CircularProgressIndicator(
@@ -133,7 +140,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                                     : null,
                               ),
                               obscureText: !showPassword,
-                              autofillHints: const [AutofillHints.email],
+                              autofillHints: const [AutofillHints.newPassword],
                             ),
                             const SizedBox(height: 15),
                             TextField(
@@ -147,7 +154,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                                     : null,
                               ),
                               obscureText: !showPassword,
-                              autofillHints: const [AutofillHints.password],
+                              autofillHints: const [AutofillHints.newPassword],
                             ),
                             const SizedBox(height: 30),
                           ],

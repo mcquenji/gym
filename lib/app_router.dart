@@ -113,6 +113,11 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: TransitionsBuilders.slideBottom,
         ),
         CustomRoute(
+          page: RegisterRoute.page,
+          path: '/register',
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        ),
+        CustomRoute(
           page: ResetPasswordRoute.page,
           path: '/reset-password',
           transitionsBuilder: TransitionsBuilders.slideBottom,
