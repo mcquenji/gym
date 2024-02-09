@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gradient_circular_progress_indicator/gradient_circular_progress_indicator.dart';
-import 'package:gym/app_router.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/shared/shared.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

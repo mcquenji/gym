@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
+import 'package:gym/features/onboarding/onboarding.dart';
+import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 
@@ -104,49 +106,63 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        CustomRoute(
+        DefaultRoute(
           page: LoginRoute.page,
           path: '/login',
           initial: true,
-          transitionsBuilder: TransitionsBuilders.slideBottom,
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
         ),
-        CustomRoute(
-          guards: [
-            AuthGuard(ref),
-          ],
-          page: ChangePasswordRoute.page,
-          path: '/change-password',
-          transitionsBuilder: TransitionsBuilders.slideBottom,
+        DefaultRoute(
+          page: RegisterRoute.page,
+          path: '/register',
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
         ),
-        CustomRoute(
+        DefaultRoute(
+          page: ResetPasswordRoute.page,
+          path: '/reset-password',
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+        ),
+        DefaultRoute(
           guards: [
             AuthGuard(ref),
           ],
           page: OnboardingRoute.page,
           path: '/onboarding',
           children: [
-            CustomRoute(
-              transitionsBuilder: TransitionsBuilders.slideLeft,
+            DefaultRoute(
+              guards: [
+                AuthGuard(ref),
+              ],
+              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
               page: OnboardingAlsRoute.page,
               path: 'als',
             ),
-            CustomRoute(
+            DefaultRoute(
+              guards: [
+                AuthGuard(ref),
+              ],
               page: OnboardingCompetitionRoute.page,
-              transitionsBuilder: TransitionsBuilders.slideLeft,
+              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
               path: 'competition',
             ),
-            CustomRoute(
-              transitionsBuilder: TransitionsBuilders.slideLeft,
+            DefaultRoute(
+              guards: [
+                AuthGuard(ref),
+              ],
+              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
               page: OnboardingMonthlyPicsRoute.page,
               path: 'monthly-pics',
             ),
-            CustomRoute(
-              transitionsBuilder: TransitionsBuilders.slideLeft,
+            DefaultRoute(
+              guards: [
+                AuthGuard(ref),
+              ],
+              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
               page: OnboardingTrackYourGoalsRoute.page,
               path: '',
             ),
           ],
-          transitionsBuilder: TransitionsBuilders.slideTop,
+          transitionsBuilder: TransitionsBuilders.slideTop.cool,
         )
       ];
 }
@@ -154,6 +170,32 @@ class AppRouter extends _$AppRouter {
 /// Implements [CustomRoute] with some default settings.
 class DefaultRoute extends CustomRoute {
   /// Implements [CustomRoute] with some default settings.
-  DefaultRoute({required super.page, required super.path, super.initial})
-      : super(transitionsBuilder: TransitionsBuilders.noTransition);
+  DefaultRoute({
+    required super.page,
+    required super.path,
+    super.initial,
+    super.guards,
+    super.transitionsBuilder,
+    super.children,
+  }) : super(durationInMilliseconds: 800);
+}
+
+extension CoolerRouteTransitions on RouteTransitionsBuilder {
+  RouteTransitionsBuilder get cool => (BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child) {
+        animation = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutExpo,
+        );
+
+        return FadeTransition(
+          opacity: Tween<double>(
+            begin: 0.2,
+            end: 1.0,
+          ).animate(animation),
+          child: this.call(context, animation, secondaryAnimation, child),
+        );
+      };
 }

@@ -15,12 +15,6 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    ChangePasswordRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ChangePasswordScreen(),
-      );
-    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -57,21 +51,33 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingTrackYourGoalsScreen(),
       );
     },
+    RegisterRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<RegisterRouteArgs>(
+          orElse: () => RegisterRouteArgs(
+              referralCode: queryParams.optString('referral')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RegisterScreen(
+          key: args.key,
+          referralCode: args.referralCode,
+        ),
+      );
+    },
+    ResetPasswordRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<ResetPasswordRouteArgs>(
+          orElse: () => ResetPasswordRouteArgs(
+              resetCode: queryParams.optString('oobCode')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ResetPasswordScreen(
+          key: args.key,
+          resetCode: args.resetCode,
+        ),
+      );
+    },
   };
-}
-
-/// generated route for
-/// [ChangePasswordScreen]
-class ChangePasswordRoute extends PageRouteInfo<void> {
-  const ChangePasswordRoute({List<PageRouteInfo>? children})
-      : super(
-          ChangePasswordRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ChangePasswordRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -156,4 +162,82 @@ class OnboardingTrackYourGoalsRoute extends PageRouteInfo<void> {
   static const String name = 'OnboardingTrackYourGoalsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RegisterScreen]
+class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
+  RegisterRoute({
+    Key? key,
+    String? referralCode,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RegisterRoute.name,
+          args: RegisterRouteArgs(
+            key: key,
+            referralCode: referralCode,
+          ),
+          rawQueryParams: {'referral': referralCode},
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterRoute';
+
+  static const PageInfo<RegisterRouteArgs> page =
+      PageInfo<RegisterRouteArgs>(name);
+}
+
+class RegisterRouteArgs {
+  const RegisterRouteArgs({
+    this.key,
+    this.referralCode,
+  });
+
+  final Key? key;
+
+  final String? referralCode;
+
+  @override
+  String toString() {
+    return 'RegisterRouteArgs{key: $key, referralCode: $referralCode}';
+  }
+}
+
+/// generated route for
+/// [ResetPasswordScreen]
+class ResetPasswordRoute extends PageRouteInfo<ResetPasswordRouteArgs> {
+  ResetPasswordRoute({
+    Key? key,
+    String? resetCode,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ResetPasswordRoute.name,
+          args: ResetPasswordRouteArgs(
+            key: key,
+            resetCode: resetCode,
+          ),
+          rawQueryParams: {'oobCode': resetCode},
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPasswordRoute';
+
+  static const PageInfo<ResetPasswordRouteArgs> page =
+      PageInfo<ResetPasswordRouteArgs>(name);
+}
+
+class ResetPasswordRouteArgs {
+  const ResetPasswordRouteArgs({
+    this.key,
+    this.resetCode,
+  });
+
+  final Key? key;
+
+  final String? resetCode;
+
+  @override
+  String toString() {
+    return 'ResetPasswordRouteArgs{key: $key, resetCode: $resetCode}';
+  }
 }

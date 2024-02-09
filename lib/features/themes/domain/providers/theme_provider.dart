@@ -54,8 +54,7 @@ final themeProvider = Provider<ThemeData>((ref) {
       prefixIconColor: greyscale.grey1,
       suffixIconColor: greyscale.grey1,
       contentPadding: const EdgeInsets.symmetric(
-        vertical: 25,
-        horizontal: 32,
+        vertical: 15,
       ),
     ),
   );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gym/app_router.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/shared/shared.dart';
 
@@ -49,7 +48,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     var user = ref.watch(userProvider);
 
     if (user != null) {
-      context.router.push(const ChangePasswordRoute());
+      context.pushRoute(const OnboardingRoute());
     }
 
     return Scaffold(
@@ -81,7 +80,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       prefixIcon: const Icon(IconlyLight.message),
                       errorText: attemptedLogin ? l10n.login_invalid : null,
                     ),
-                    autofillHints: const [AutofillHints.email],
+                    autofillHints: const [
+                      AutofillHints.email,
+                      AutofillHints.username,
+                    ],
                   ),
                   const SizedBox(height: 15),
                   TextField(

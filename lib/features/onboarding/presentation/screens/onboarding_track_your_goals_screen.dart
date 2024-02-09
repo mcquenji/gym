@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/features/auth/auth.dart';
+import 'package:gym/features/onboarding/onboarding.dart';
 import 'package:gym/shared/shared.dart';
 
 @RoutePage()
@@ -9,7 +9,7 @@ class OnboardingTrackYourGoalsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnboardingPage(
-      image: Assets.svg.login.onboarding.trackYourGoals,
+      image: Assets.onboarding.trackYourGoals,
       title: context.l10n.onboarding_tracking_title,
       text: context.l10n.onboarding_tracking_message,
     );

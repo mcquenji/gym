@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/firebase_options.dart';
+import 'package:logging/logging.dart';
 import 'app.dart';
 
 void main() async {
@@ -17,6 +18,14 @@ void main() async {
     FirebaseAuth.instance.useAuthEmulator("localhost", 9099);
     FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080);
   }
+
+  Logger.root.level = Level.ALL;
+
+  Logger.root.onRecord.listen((record) {
+    if (kDebugMode) {
+      print(record);
+    }
+  });
 
   runApp(
     ProviderScope(
