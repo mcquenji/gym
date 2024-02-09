@@ -65,23 +65,40 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<void> setPassword(String password) async {
-    log.fine("Changing password for current user");
-
-    if (!isUserLoggedIn()) {
-      log.severe("No user is currently logged in");
-
-      throw Exception('User is not logged in');
-    }
+  Future<void> resetPassword(String code, String password) async {
+    log.fine("Attempting to reset password");
 
     try {
-      await FirebaseAuth.instance.currentUser!.updatePassword(password);
+      await FirebaseAuth.instance.confirmPasswordReset(
+        code: code,
+        newPassword: password,
+      );
 
-      log.fine("Successfully changed password for current user");
+      log.fine("Password reset successfull");
     } catch (e) {
-      log.severe("Failed to change password for current user", e);
+      log.severe(
+        "Failed to change password for current user. This is possibly because the provided reset code is invalid.",
+        e,
+      );
 
       rethrow;
+    }
+  }
+
+  @override
+  Future<bool> veryfyPasswordResetCode(String code) async {
+    log.fine("Verifying password reset code");
+
+    try {
+      await FirebaseAuth.instance.verifyPasswordResetCode(code);
+
+      log.fine("Password reset code is valid");
+
+      return true;
+    } catch (e) {
+      log.severe("Password reset code is invalid", e);
+
+      return false;
     }
   }
 }

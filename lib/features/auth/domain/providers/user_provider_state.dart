@@ -40,20 +40,6 @@ class UserProvider extends Notifier<UserProviderState> {
     }
   }
 
-  /// Completes the current user's registration.
-  Future<void> completeRegistration(String password) async {
-    if (state == null) {
-      throw Exception('User is not logged in');
-    }
-
-    if (password.isEmpty) {
-      return;
-    }
-
-    await authService.setPassword(password);
-    await usersDataSource.setRegistered(state!.id, true);
-  }
-
   /// Sets the [User.onboarded] property to `true`.
   Future<void> completeOnboarding() async {
     if (state == null) {

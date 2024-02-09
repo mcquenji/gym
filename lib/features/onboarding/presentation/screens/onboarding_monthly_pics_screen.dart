@@ -9,7 +9,7 @@ class OnboardingMonthlyPicsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnboardingPage(
-      image: Assets.svg.login.onboarding.monhtlyPics,
+      image: Assets.onboarding.monhtlyPics,
       title: context.l10n.onboarding_monthlyPics_title,
       text: context.l10n.onboarding_monthlyPics_message,
     );

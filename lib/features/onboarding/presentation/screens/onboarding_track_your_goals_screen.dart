@@ -9,7 +9,7 @@ class OnboardingTrackYourGoalsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnboardingPage(
-      image: Assets.svg.login.onboarding.trackYourGoals,
+      image: Assets.onboarding.trackYourGoals,
       title: context.l10n.onboarding_tracking_title,
       text: context.l10n.onboarding_tracking_message,
     );

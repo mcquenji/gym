@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gym/app_router.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/shared/shared.dart';
 
@@ -49,7 +48,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     var user = ref.watch(userProvider);
 
     if (user != null) {
-      context.router.push(const ChangePasswordRoute());
+      // TODO: Go to the home screen
     }
 
     return Scaffold(

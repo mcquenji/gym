@@ -9,7 +9,7 @@ class OnboardingAlsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnboardingPage(
-      image: Assets.svg.login.onboarding.als,
+      image: Assets.onboarding.als,
       title: context.l10n.onboarding_als_title,
       text: context.l10n.onboarding_als_message,
     );
