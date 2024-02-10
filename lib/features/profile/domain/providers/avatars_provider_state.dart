@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:gym/features/auth/auth.dart';
-import 'package:gym/shared/shared.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class AvatarsProvider extends AsyncNotifier<AvatarsProviderState> {
+  final String path;
+
+  AvatarsProvider(this.path);
+
   @override
   FutureOr<AvatarsProviderState> build() async {
     // Watch users so we update the list of avatar urls when a new user is created
@@ -12,7 +16,7 @@ class AvatarsProvider extends AsyncNotifier<AvatarsProviderState> {
 
     var storage = FirebaseStorage.instance;
 
-    var avatars = await storage.ref('avatars').listAll();
+    var avatars = await storage.ref(path).listAll();
 
     var urls = <String, String>{};
 

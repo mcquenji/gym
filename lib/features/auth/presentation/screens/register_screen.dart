@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
+import 'package:gym/features/profile/profile.dart';
 import 'package:gym/shared/shared.dart';
 
 @RoutePage()
@@ -136,15 +136,11 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // TODO: Replace with avatar of the user who referred
                             if (!allowRegisterWithoutReferral)
-                              CircleAvatar(
-                                radius: 50,
-                                backgroundColor: theme.primaryColor,
-                                child: Icon(
-                                  IconlyLight.profile,
-                                  color: theme.primaryColorDark,
-                                ),
+                              Avatar(
+                                size: 50,
+                                // TODO: referral.userId
+                                userId: widget.referralCode,
                               ),
                             if (!allowRegisterWithoutReferral)
                               const SizedBox(height: 20),
