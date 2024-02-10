@@ -21,54 +21,58 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: image.themedSvg(
-              context,
-              alignment: Alignment.topCenter,
-              fit: BoxFit.fitWidth,
-              clipBehavior: Clip.none,
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              child: image.themedSvg(
+                context,
+                alignment: Alignment.topCenter,
+                fit: BoxFit.fitWidth,
+                clipBehavior: Clip.none,
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 50),
-                Text(
-                  title,
-                  style: context.theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-                    .animate()
-                    .slideY(
+          const SizedBox(height: 200),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: context.theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                      .animate()
+                      .slideY(
+                          duration: 400.ms,
+                          begin: .5,
+                          end: 0,
+                          curve: Curves.easeOutCubic,
+                          delay: 500.ms)
+                      .fadeIn(
+                          duration: 400.ms,
+                          curve: Curves.easeOutCubic,
+                          delay: 500.ms),
+                  const SizedBox(height: 20),
+                  Text(text)
+                      .animate()
+                      .slideY(
                         duration: 400.ms,
                         begin: .5,
                         end: 0,
+                        delay: 650.ms,
                         curve: Curves.easeOutCubic,
-                        delay: 500.ms)
-                    .fadeIn(
+                      )
+                      .fadeIn(
                         duration: 400.ms,
+                        delay: 650.ms,
                         curve: Curves.easeOutCubic,
-                        delay: 500.ms),
-                const SizedBox(height: 20),
-                Text(text)
-                    .animate()
-                    .slideY(
-                      duration: 400.ms,
-                      begin: .5,
-                      end: 0,
-                      delay: 650.ms,
-                      curve: Curves.easeOutCubic,
-                    )
-                    .fadeIn(
-                      duration: 400.ms,
-                      delay: 650.ms,
-                      curve: Curves.easeOutCubic,
-                    ),
-              ],
+                      ),
+                ],
+              ),
             ),
           ),
         ],
