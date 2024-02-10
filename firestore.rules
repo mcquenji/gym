@@ -14,7 +14,12 @@ service cloud.firestore {
     match /referrals/{referralId} {
       allow read: if true;
 
-      allow update: if recource.data.referredUserId == null &&  request.resource.data.referredUserId != resource.data.referredUserId && request.resource.data.diff(resource.data).affectedKeys().size() == 1;
+      // only allow write if the referral code is not used and the user is authenticated and the user is not trying to update any other field
+      allow update: if request.auth != null && get(/referrals/$(referralId)).data.referredUser == null && request.resource.data.keys().hasOnly(['referredUser']);
+    }
+
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }
 }
