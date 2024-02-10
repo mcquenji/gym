@@ -128,6 +128,7 @@ class AppRouter extends _$AppRouter {
           ],
           page: OnboardingRoute.page,
           path: '/onboarding',
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
           children: [
             DefaultRoute(
               guards: [
@@ -162,7 +163,6 @@ class AppRouter extends _$AppRouter {
               path: '',
             ),
           ],
-          transitionsBuilder: TransitionsBuilders.slideTop.cool,
         )
       ];
 }
@@ -181,10 +181,13 @@ class DefaultRoute extends CustomRoute {
 }
 
 extension CoolerRouteTransitions on RouteTransitionsBuilder {
-  RouteTransitionsBuilder get cool => (BuildContext context,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-          Widget child) {
+  /// Spices up the transition.
+  RouteTransitionsBuilder get cool => (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+      ) {
         animation = CurvedAnimation(
           parent: animation,
           curve: Curves.easeOutExpo,
