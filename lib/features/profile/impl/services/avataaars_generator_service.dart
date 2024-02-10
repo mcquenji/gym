@@ -223,6 +223,7 @@ class AvataaarsGeneratorService extends AvatarGeneratorService {
 
     log.fine("Avatar generated successfully");
 
-    return response.body!;
+    // Replace the circle color with `currentColor`, so we can theme it.
+    return response.body!.replaceAll("#65C9FF", "currentColor");
   }
 }
