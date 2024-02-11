@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+
+// Screen imports
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/features/onboarding/onboarding.dart';
-import 'package:flutter/material.dart';
+import 'package:gym/features/profile/profile.dart';
 
 part 'app_router.gr.dart';
 
@@ -163,7 +166,15 @@ class AppRouter extends _$AppRouter {
               path: '',
             ),
           ],
-        )
+        ),
+        DefaultRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: CompleteProfileRoute.page,
+          path: '/complete-profile',
+          transitionsBuilder: TransitionsBuilders.slideLeft.cool,
+        ),
       ];
 }
 

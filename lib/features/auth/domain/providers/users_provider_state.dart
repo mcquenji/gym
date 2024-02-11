@@ -13,7 +13,7 @@ class UsersProvider extends Notifier<UsersProviderState> {
   UsersProviderState build() {
     usersDataSource = ref.watch(usersDataSourceProvider);
     authService = ref.watch(authServiceProvider);
-    ref.watch(collectionProvider("users")); // watch the collection for changes
+    ref.watch(collectionWatcher("users")); // watch the collection for changes
 
     fetchUsers();
 
