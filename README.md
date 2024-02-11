@@ -45,4 +45,4 @@ On every push to `main` the app is automatically deployed to Firebase hosting.
 
 ## Register the first user
 
-The app is built in an invite-only manner. However, the first user can register without an invitation code (i.e. referral from now on). So it is recommended that you register yourself first here `https://<your-domain>/#/register` and then invite your friends.
+The app is built in an invite-only manner. However, the first user can register without an invitation code (i.e. referral from now on). So it is recommended that you register yourself first at `https://<your-domain>/#/register` and then invite your friends.
