@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -20,19 +21,30 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
   final TextEditingController bodyFatController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
-  final TextEditingController dateOfBirthController = TextEditingController();
 
   DateTime? dateOfBirth;
 
   void pickDateOfBirth() async {
-    var dateOfBirth = await showDatePicker(
+    DateTime? dateOfBirth;
+
+    updateDoB(DateTime date) => dateOfBirth = date;
+
+    await showModalBottomSheet<DateTime>(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      builder: (context) {
+        return CupertinoDatePicker(
+          onDateTimeChanged: updateDoB,
+          maximumDate: DateTime.now(),
+          initialDateTime: this.dateOfBirth ??
+              DateTime.now().subtract(
+                const Duration(days: 365 * 18), // ~18 years
+              ),
+          mode: CupertinoDatePickerMode.date,
+        );
+      },
     );
 
-    if (dateOfBirth != null) {
+    if (dateOfBirth != null && mounted) {
       setState(() {
         this.dateOfBirth = dateOfBirth;
       });
@@ -138,9 +150,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
               ),
             ),
             PrimaryButton(
-              onPressed: () {
-                context.router.push(const OnboardingRoute());
-              },
+              onPressed: () {}, // TODO: complete profile
               trailing: const Icon(IconlyLight.arrowRight2),
               child: Text(l10n.completeProfile_submit),
             ),
