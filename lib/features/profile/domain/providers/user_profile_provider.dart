@@ -4,10 +4,14 @@ import 'package:gym/shared/shared.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+final userProfileProvider =
+    NotifierProvider<UserProfileProvider, UserProfileProviderState>(
+  () => UserProfileProvider("users"),
+);
+
 /// Provides the profile of the current user.
 ///
 /// If the user is not logged in, or no profile has been set up yet, this provider will return `null`.
-
 class UserProfileProvider extends Notifier<UserProfileProviderState> {
   final String usersCollection;
 
@@ -36,6 +40,9 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
 
     return state;
   }
+
+  Future<void> createUserProfile(DateTime dateOfBirth, double weight,
+      double height, double bodyFat) async {}
 }
 
 typedef UserProfileProviderState = UserProfile?;

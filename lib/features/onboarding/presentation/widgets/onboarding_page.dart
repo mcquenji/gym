@@ -42,35 +42,9 @@ class OnboardingPage extends StatelessWidget {
                   Text(
                     title,
                     style: context.theme.textTheme.headlineSmall.bold,
-                  )
-                      .animate()
-                      .slideY(
-                        duration: 400.ms,
-                        begin: .5,
-                        end: 0,
-                        curve: Curves.easeOutCubic,
-                        delay: 500.ms,
-                      )
-                      .fadeIn(
-                        duration: 400.ms,
-                        curve: Curves.easeOutCubic,
-                        delay: 500.ms,
-                      ),
+                  ).animate().sleek(delay: 500.ms),
                   const SizedBox(height: 20),
-                  Text(text)
-                      .animate()
-                      .slideY(
-                        duration: 400.ms,
-                        begin: .5,
-                        end: 0,
-                        delay: 650.ms,
-                        curve: Curves.easeOutCubic,
-                      )
-                      .fadeIn(
-                        duration: 400.ms,
-                        delay: 650.ms,
-                        curve: Curves.easeOutCubic,
-                      ),
+                  Text(text).animate().sleek(delay: 650.ms),
                 ],
               ),
             ),
