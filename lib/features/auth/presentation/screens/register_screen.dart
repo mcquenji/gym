@@ -91,7 +91,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
-        child: widget.referralCode == null && !allowRegisterWithoutReferral
+        child: widget.referralCode == null && !allowRegisterWithoutReferral && !registering
             ? InvalidCode(
                 title: l10n.register_invalidCode,
                 message: l10n.register_invalidCode_message,
