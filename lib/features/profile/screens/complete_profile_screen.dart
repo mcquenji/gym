@@ -29,7 +29,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
 
     updateDoB(DateTime date) => dateOfBirth = date;
 
-    await showModalBottomSheet<DateTime>(
+    await showModalBottomSheet(
       context: context,
       builder: (context) {
         return CupertinoDatePicker(
