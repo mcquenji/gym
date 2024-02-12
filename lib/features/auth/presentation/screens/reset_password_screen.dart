@@ -122,9 +122,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                             const SizedBox(height: 8),
                             Text(
                               l10n.resetPassword_subtitle,
-                              style: theme.textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: theme.textTheme.headlineSmall.bold,
                             ),
                             const SizedBox(height: 60),
                             TextField(

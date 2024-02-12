@@ -23,9 +23,7 @@ class InvalidCode extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 title,
-                style: context.theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: context.theme.textTheme.headlineMedium.bold,
               ),
               const SizedBox(height: 10),
               Text(

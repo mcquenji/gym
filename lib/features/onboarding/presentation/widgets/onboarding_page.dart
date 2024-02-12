@@ -41,9 +41,7 @@ class OnboardingPage extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: context.theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.theme.textTheme.headlineSmall.bold,
                   )
                       .animate()
                       .slideY(

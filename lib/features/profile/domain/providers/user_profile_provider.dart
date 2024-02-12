@@ -26,7 +26,7 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
     }
 
     // watch the users collection for changes
-    ref.watch(collectionWatcher("$usersCollection/${user!.id}"));
+    ref.watch(collection("$usersCollection/${user!.id}"));
     userProfileDataSource = ref.watch(userProfileDataSourceProvider);
     user = ref.watch(userProvider);
 

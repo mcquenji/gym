@@ -67,9 +67,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 8),
                   Text(
                     l10n.login_welcome_subtitle,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: theme.textTheme.headlineSmall?.bold,
                   ),
                   const SizedBox(height: 60),
                   TextField(

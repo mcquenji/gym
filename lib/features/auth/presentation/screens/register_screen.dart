@@ -27,6 +27,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
   bool showPassword = false;
   bool passwordMatch = true;
   bool registering = false;
+  bool error = false;
 
   Future<void> register() async {
     if (registering) return;
@@ -42,7 +43,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
       registering = true;
     });
 
-    await ref.read(usersProvider.notifier).registerUser(
+    error = !await ref.read(usersProvider.notifier).registerUser(
           email: emailController.text,
           password: passwordController.text,
           referralCode: widget.referralCode,
@@ -50,7 +51,9 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
         );
 
     if (mounted) {
-      context.pushRoute(const OnboardingRoute());
+      setState(() {
+        registering = false;
+      });
     }
   }
 
@@ -91,146 +94,147 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
-        child: widget.referralCode == null && !allowRegisterWithoutReferral && !registering
-            ? InvalidCode(
+        child: FutureBuilder(
+          future: allowRegisterWithoutReferral
+              ? Future.value(true)
+              : widget.referralCode == null
+                  ? Future.value(false)
+                  : registering
+                      ? Future.value(true)
+                      : error
+                          ? Future.value(true)
+                          : authService
+                              .verifyReferralCode(widget.referralCode!),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return InvalidCode(
                 title: l10n.register_invalidCode,
                 message: l10n.register_invalidCode_message,
-              )
-            : FutureBuilder(
-                future: allowRegisterWithoutReferral
-                    ? Future.value(true)
-                    : authService.verifyReferralCode(widget.referralCode!),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return InvalidCode(
-                      title: l10n.register_invalidCode,
-                      message: l10n.register_invalidCode_message,
-                    );
-                  }
+              );
+            }
 
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        strokeCap: StrokeCap.round,
-                      ),
-                    );
-                  }
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  strokeCap: StrokeCap.round,
+                ),
+              );
+            }
 
-                  if (!(snapshot.data ?? false)) {
-                    return InvalidCode(
-                      title: l10n.register_invalidCode,
-                      message: l10n.register_invalidCode_message,
-                    );
-                  }
+            if (!(snapshot.data ?? false)) {
+              return InvalidCode(
+                title: l10n.register_invalidCode,
+                message: l10n.register_invalidCode_message,
+              );
+            }
 
-                  final passwordErrorText = passwordMatch
-                      ? passwordController.text.length < 6 &&
-                              passwordController.text.isNotEmpty
-                          ? l10n.resetPassword_passwordTooShort
-                          : null
-                      : l10n.resetPassword_passwordsDontMatch;
+            final passwordErrorText = passwordMatch
+                ? passwordController.text.length < 6 &&
+                        passwordController.text.isNotEmpty
+                    ? l10n.resetPassword_passwordTooShort
+                    : null
+                : l10n.resetPassword_passwordsDontMatch;
 
-                  return Column(
+            return Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            if (!allowRegisterWithoutReferral)
-                              Avatar(
-                                size: 50,
-                                // TODO: referral.userId
-                                userId: widget.referralCode,
-                              ),
-                            if (!allowRegisterWithoutReferral)
-                              const SizedBox(height: 20),
-                            if (!allowRegisterWithoutReferral)
-                              Text(
-                                // TODO: Replace with the name of the user who referred
-                                l10n.register_invitedBy(widget.referralCode!),
-                                style: theme.textTheme.bodySmall,
-                              ),
-                            if (!allowRegisterWithoutReferral)
-                              const SizedBox(height: 16),
-                            Text(
-                              l10n.register_title,
-                              style: theme.textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                            if (!allowRegisterWithoutReferral)
-                              const SizedBox(height: 8),
-                            if (!allowRegisterWithoutReferral)
-                              Text(
-                                l10n.register_subtitle(users.length),
-                                style: theme.textTheme.bodyMedium,
-                                textAlign: TextAlign.center,
-                              ),
-                            const SizedBox(height: 30),
-                            TextField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                hintText: l10n.login_email,
-                                prefixIcon: const Icon(IconlyLight.message),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            TextField(
-                              controller: usernameController,
-                              decoration: InputDecoration(
-                                hintText: l10n.register_username,
-                                prefixIcon: const Icon(IconlyLight.profile),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            TextField(
-                              controller: passwordController,
-                              decoration: InputDecoration(
-                                hintText: l10n.login_password,
-                                prefixIcon: const Icon(IconlyLight.lock),
-                                suffixIcon: GestureDetector(
-                                  onTap: toggleShowPassword,
-                                  child: Icon(
-                                    showPassword
-                                        ? IconlyLight.hide
-                                        : IconlyLight.show,
-                                  ),
-                                ),
-                                errorText: passwordErrorText,
-                              ),
-                              obscureText: !showPassword,
-                            ),
-                            const SizedBox(height: 16),
-                            TextField(
-                              controller: repeatPasswordController,
-                              decoration: InputDecoration(
-                                hintText: l10n.resetPassword_repeatPassword,
-                                prefixIcon: const Icon(IconlyLight.lock),
-                                suffixIcon: GestureDetector(
-                                  onTap: toggleShowPassword,
-                                  child: Icon(
-                                    showPassword
-                                        ? IconlyLight.hide
-                                        : IconlyLight.show,
-                                  ),
-                                ),
-                                errorText: passwordErrorText,
-                              ),
-                              obscureText: !showPassword,
-                            ),
-                          ],
+                      if (!allowRegisterWithoutReferral)
+                        Avatar(
+                          size: 50,
+                          // TODO: referral.userId
+                          userId: widget.referralCode,
+                        ),
+                      if (!allowRegisterWithoutReferral)
+                        const SizedBox(height: 20),
+                      if (!allowRegisterWithoutReferral)
+                        Text(
+                          // TODO: Replace with the name of the user who referred
+                          l10n.register_invitedBy(widget.referralCode!),
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      if (!allowRegisterWithoutReferral)
+                        const SizedBox(height: 16),
+                      Text(
+                        l10n.register_title,
+                        style: theme.textTheme.titleLarge.bold,
+                      ),
+                      if (!allowRegisterWithoutReferral)
+                        const SizedBox(height: 8),
+                      if (!allowRegisterWithoutReferral)
+                        Text(
+                          l10n.register_subtitle(users.length),
+                          style: theme.textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      const SizedBox(height: 30),
+                      TextField(
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          hintText: l10n.login_email,
+                          prefixIcon: const Icon(IconlyLight.message),
+                          errorText: error ? l10n.register_error : null,
                         ),
                       ),
-                      PrimaryButton(
-                        loading: registering,
-                        onPressed: register,
-                        leading: const Icon(IconlyBold.login),
-                        child: Text(l10n.register_submit),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          hintText: l10n.register_username,
+                          prefixIcon: const Icon(IconlyLight.profile),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          hintText: l10n.login_password,
+                          prefixIcon: const Icon(IconlyLight.lock),
+                          suffixIcon: GestureDetector(
+                            onTap: toggleShowPassword,
+                            child: Icon(
+                              showPassword
+                                  ? IconlyLight.hide
+                                  : IconlyLight.show,
+                            ),
+                          ),
+                          errorText: passwordErrorText,
+                        ),
+                        obscureText: !showPassword,
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: repeatPasswordController,
+                        decoration: InputDecoration(
+                          hintText: l10n.resetPassword_repeatPassword,
+                          prefixIcon: const Icon(IconlyLight.lock),
+                          suffixIcon: GestureDetector(
+                            onTap: toggleShowPassword,
+                            child: Icon(
+                              showPassword
+                                  ? IconlyLight.hide
+                                  : IconlyLight.show,
+                            ),
+                          ),
+                          errorText: passwordErrorText,
+                        ),
+                        obscureText: !showPassword,
                       ),
                     ],
-                  );
-                },
-              ),
+                  ),
+                ),
+                PrimaryButton(
+                  loading: registering,
+                  onPressed: register,
+                  leading: const Icon(IconlyBold.login),
+                  child: Text(l10n.register_submit),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

@@ -49,6 +49,27 @@
     "register_invalidCode_message": "Seems your referral code is invalid or expired. Try asking your friend for a new one.",
     "register_submit": "Register",
     "register_username": "Username",
+    "register_error": "Invalid email adress",
+    "completeProfile_title": "Let's Complete Your Profile",
+    "completeProfile_subtitle": "Please fill out the fields below",
+    "completeProfile_submit": "Confirm",
+    "completeProfile_dateOfBirth": "Date of Birth",
+    "completeProfile_bodyFat": "Body Fat Percentage",
+    "completeProfile_bodyFat_optional": "* Body Fat Percentage is an optional metric. If you don't have a device for measurement, you can leave this field empty.",
+    "completeProfile_height": "Height",
+    "completeProfile_height_unit": "cm",
+    "completeProfile_weight": "Weight",
+    "completeProfile_weight_unit": "KG",
+    "profileComplete": "Welcome, {name}!",
+    "@profileComplete": {
+        "description": "Profile complete",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "profileComplete_subtitle": "You're all set now, so hit the gym 💪💪",
     "global_next": "Next",
     "global_error_loadingSVG": "Error loading SVG"
 }

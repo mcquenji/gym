@@ -22,7 +22,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     OnboardingMonthlyPicsRoute(),
   ];
 
-  int currentIndex = 0;
   double progress = 0;
 
   late AnimationController _controller;
@@ -37,45 +36,53 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
       vsync: this,
     );
 
-    currentIndex = onboardingRoutes.indexWhere(
-      (r) => context.router.isRouteActive(r.routeName),
-    );
+    var currentIndex = getCurrentIndex();
 
     if (currentIndex == -1) {
       context.router.push(onboardingRoutes.first);
       currentIndex = 0;
     }
 
-    animateProgress();
+    animateProgress(currentIndex);
   }
 
-  void animateProgress() {
+  int getCurrentIndex() {
+    return onboardingRoutes.indexWhere(
+      (r) => context.router.isRouteActive(r.routeName),
+    );
+  }
+
+  void animateProgress(int currentIndex) {
     _animation = Tween<double>(
       begin: progress,
       end: (currentIndex + 1) / (onboardingRoutes.length),
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     _animation.addListener(() {
-      setState(() {
-        progress = _animation.value;
-      });
+      progress = _animation.value;
     });
 
     _controller.forward(from: 0);
   }
 
   void next() {
-    if (currentIndex + 1 < onboardingRoutes.length) {
-      setState(() {
-        currentIndex++;
-      });
+    var currentIndex = getCurrentIndex();
 
+    if (currentIndex == -1) {
+      context.router.push(onboardingRoutes.first);
+      currentIndex = 0;
+    }
+
+    if (currentIndex + 1 < onboardingRoutes.length) {
+      currentIndex++;
       context.router.push(onboardingRoutes[currentIndex]);
 
-      animateProgress();
+      animateProgress(currentIndex);
     } else {
       var controller = ref.read(userProvider.notifier);
 
@@ -98,11 +105,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
         child: Stack(
           alignment: Alignment.center,
           children: [
-            GradientCircularProgressIndicator(
-              progress: progress,
-              gradient: Gradients.of(context).primaryGradient.linear,
-              size: 75,
-              stroke: 3,
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (context, _) => GradientCircularProgressIndicator(
+                progress: _animation.value,
+                gradient: Gradients.of(context).primaryGradient.linear,
+                size: 75,
+                stroke: 3,
+              ),
             ),
             Container(
               width: 60,
@@ -120,5 +130,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
   }
 }

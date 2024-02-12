@@ -13,7 +13,7 @@ class UsersProvider extends Notifier<UsersProviderState> {
   UsersProviderState build() {
     usersDataSource = ref.watch(usersDataSourceProvider);
     authService = ref.watch(authServiceProvider);
-    ref.watch(collectionWatcher("users")); // watch the collection for changes
+    ref.watch(collection("users")); // watch the collection for changes
 
     fetchUsers();
 
@@ -33,7 +33,9 @@ class UsersProvider extends Notifier<UsersProviderState> {
   /// Registers a new user with the given [email], [password], [referralCode] and [name].
   ///
   /// This will also log the user in with the newly created account.
-  Future<void> registerUser({
+  ///
+  /// Returns `true` if the user was successfully registered. `false` otherwise.
+  Future<bool> registerUser({
     required String email,
     required String password,
     String? referralCode,
@@ -41,14 +43,18 @@ class UsersProvider extends Notifier<UsersProviderState> {
   }) async {
     String id = "";
 
-    if (referralCode == null) {
-      if (state.isEmpty) {
-        id = await authService.registerFirstUser(email, password);
+    try {
+      if (referralCode == null) {
+        if (state.isEmpty) {
+          id = await authService.registerFirstUser(email, password);
+        } else {
+          throw Exception("A referral code is required to register a new user");
+        }
       } else {
-        throw Exception("A referral code is required to register a new user");
+        id = await authService.registerUser(referralCode, email, password);
       }
-    } else {
-      id = await authService.registerUser(referralCode, email, password);
+    } catch (e) {
+      return false;
     }
 
     var user = User(
@@ -61,6 +67,8 @@ class UsersProvider extends Notifier<UsersProviderState> {
     await usersDataSource.write(user);
 
     await ref.read(userProvider.notifier).login(email, password);
+
+    return true;
   }
 }
 
