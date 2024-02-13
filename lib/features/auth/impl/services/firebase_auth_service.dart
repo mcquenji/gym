@@ -29,6 +29,9 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> login(String email, String password) async {
+    email = email.trim();
+    password = password.trim();
+
     log.fine("Logging in user with email $email");
 
     try {
@@ -55,6 +58,9 @@ class FirebaseAuthService extends AuthService {
   @override
   Future<String> registerUser(
       String code, String email, String password) async {
+    email = email.trim();
+    password = password.trim();
+
     log.fine("Registering user with email $email");
 
     if (!await verifyReferralCode(code)) {
@@ -89,6 +95,8 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> resetPassword(String code, String password) async {
+    password = password.trim();
+
     log.fine("Attempting to reset password");
 
     try {
