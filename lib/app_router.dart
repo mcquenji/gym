@@ -173,7 +173,7 @@ class AppRouter extends _$AppRouter {
           ],
           page: CompleteProfileRoute.page,
           path: '/complete-profile',
-          transitionsBuilder: TransitionsBuilders.slideLeft.cool,
+          transitionsBuilder: TransitionsBuilders.noTransition,
         ),
       ];
 }

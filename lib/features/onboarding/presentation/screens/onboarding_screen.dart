@@ -47,9 +47,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
   }
 
   int getCurrentIndex() {
-    return onboardingRoutes.indexWhere(
+    var index = onboardingRoutes.indexWhere(
       (r) => context.router.isRouteActive(r.routeName),
     );
+
+    return index >= 0 ? index : 0;
   }
 
   void animateProgress(int currentIndex) {
@@ -72,11 +74,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
 
   void next() {
     var currentIndex = getCurrentIndex();
-
-    if (currentIndex == -1) {
-      context.router.push(onboardingRoutes.first);
-      currentIndex = 0;
-    }
 
     if (currentIndex + 1 < onboardingRoutes.length) {
       currentIndex++;

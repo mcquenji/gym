@@ -53,6 +53,8 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final stagger = AnimationStagger(increment: 50.ms, delay: 300.ms);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -65,12 +67,12 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                   Text(
                     l10n.completeProfile_title,
                     style: theme.textTheme.titleLarge.bold,
-                  ).animate().sleek(delay: 500.ms, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
                   const SizedBox(height: 8),
                   Text(
                     l10n.completeProfile_subtitle,
                     style: theme.textTheme.bodyLarge,
-                  ).animate().sleek(delay: 600.ms, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
                   const SizedBox(height: 24),
                   GestureDetector(
                     onTap: pickDateOfBirth,
@@ -99,7 +101,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                         ],
                       ),
                     ),
-                  ).animate().sleek(delay: 700.ms, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: heightController,
@@ -111,7 +113,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                         l10n.completeProfile_height_unit,
                       ),
                     ),
-                  ).animate().sleek(delay: 800.ms, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: weightController,
@@ -126,7 +128,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                         l10n.completeProfile_weight_unit,
                       ),
                     ),
-                  ).animate().sleek(delay: 900.ms, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: bodyFatController,
@@ -138,14 +140,14 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                       hintText: l10n.completeProfile_bodyFat,
                       prefixIcon: const Icon(IconlyLight.graph),
                     ),
-                  ).animate().sleek(delay: 1000.ms, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
                   const SizedBox(height: 16),
                   Text(
                     l10n.completeProfile_bodyFat_optional,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.greyscale.grey1,
                     ),
-                  ).animate().sleek(delay: 1100.ms, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
                 ],
               ),
             ),
@@ -153,7 +155,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
               onPressed: () {}, // TODO: complete profile
               trailing: const Icon(IconlyLight.arrowRight2),
               child: Text(l10n.completeProfile_submit),
-            ).animate().sleek(delay: 1200.ms, duration: 1.seconds),
+            ).animate().sleek(stagger: stagger, duration: 1.seconds),
           ],
         ),
       ),
