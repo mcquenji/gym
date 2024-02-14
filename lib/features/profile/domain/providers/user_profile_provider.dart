@@ -20,16 +20,24 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
   UserProfileProviderState build() {
     user = ref.watch(userProvider);
     userProfileDataSource = ref.watch(userProfileDataSourceProvider);
+    var userDataService = ref.watch(userDataServiceProvider);
 
     if (user == null) {
       return null;
     }
 
     // watch the users collection for changes
-    ref.watch(
-        collection(userProfileDataSource.getUserDataCollectionPath(user!.id)));
+    ref.watch(collection(userDataService.getUserDataCollectionPath(user!.id)));
+
+    _fetchUserProfile();
 
     return stateOrNull;
+  }
+
+  Future _fetchUserProfile() async {
+    var userProfile = await userProfileDataSource.getUserProfile(user!.id);
+
+    state = userProfile;
   }
 
   Future<void> createUserProfile({

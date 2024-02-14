@@ -13,15 +13,21 @@ class StdUserProfileDataSource extends UserProfileDataSource {
   /// The name of the sub-collection that contains the user's data.
   final String subCollectionName;
 
+  final UserDataService userDataService;
+
   StdUserProfileDataSource(
-      this.usersCollection, this.subCollectionName, this.documentName);
+    this.userDataService,
+    this.usersCollection,
+    this.subCollectionName,
+    this.documentName,
+  );
 
   @override
   Future<UserProfile?> getUserProfile(String userId) async {
     log.info('Retrieving user profile for user $userId');
 
     var doc = await FirebaseFirestore.instance
-        .collection(getUserDataCollectionPath(userId))
+        .collection(userDataService.getUserDataCollectionPath(userId))
         .doc(documentName)
         .get();
 
@@ -41,7 +47,7 @@ class StdUserProfileDataSource extends UserProfileDataSource {
 
     try {
       await FirebaseFirestore.instance
-          .collection(getUserDataCollectionPath(userProfile.id))
+          .collection(userDataService.getUserDataCollectionPath(userProfile.id))
           .doc(documentName)
           .set(userProfile.toJson());
 
@@ -51,10 +57,5 @@ class StdUserProfileDataSource extends UserProfileDataSource {
           'Error writing user profile for user ${userProfile.id}. Does the user exist?',
           e);
     }
-  }
-
-  @override
-  String getUserDataCollectionPath(String userId) {
-    return '$usersCollection/$userId/$subCollectionName';
   }
 }
