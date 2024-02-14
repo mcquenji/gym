@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
+import 'package:gym/features/onboarding/onboarding.dart';
 import 'package:gym/features/profile/profile.dart';
 import 'package:gym/shared/shared.dart';
 
@@ -97,10 +98,10 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
         child: FutureBuilder(
           future: allowRegisterWithoutReferral
               ? Future.value(true)
-              : widget.referralCode == null
-                  ? Future.value(false)
-                  : registering
-                      ? Future.value(true)
+              : registering
+                  ? Future.value(true)
+                  : widget.referralCode == null
+                      ? Future.value(false)
                       : error
                           ? Future.value(true)
                           : authService

@@ -5,6 +5,7 @@ import 'package:gym/shared/shared.dart';
 ///
 /// Watch this provider to be notified of changes in a collection.
 final collection =
-    ChangeNotifierProvider.family<CollectionWatcher, String>((ref, id) {
+    ChangeNotifierProvider.family<CollectionWatcher, CollectionWatcherID>(
+        (ref, id) {
   return CollectionWatcher(id);
 });

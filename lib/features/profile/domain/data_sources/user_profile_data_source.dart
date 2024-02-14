@@ -12,4 +12,7 @@ abstract class UserProfileDataSource extends DataSource {
 
   /// Updates the user's profile.
   Future<void> write(UserProfile userProfile);
+
+  /// Returns the path to the user's sub-collection where user data is stored.
+  String getUserDataCollectionPath(String userId);
 }

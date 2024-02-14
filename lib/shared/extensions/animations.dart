@@ -4,7 +4,7 @@ import 'package:gym/shared/shared.dart';
 extension AnimationExt on Animate {
   Animate sleek({
     Duration? delay,
-    Duration duration = const Duration(milliseconds: 400),
+    Duration duration = const Duration(seconds: 1),
     Curve? curve = Curves.easeOutExpo,
     double? begin,
     double? end,

@@ -129,10 +129,18 @@ class AppRouter extends _$AppRouter {
           guards: [
             AuthGuard(ref),
           ],
+          maintainState: true,
           page: OnboardingRoute.page,
           path: '/onboarding',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
           children: [
+            DefaultRoute(
+              guards: [
+                AuthGuard(ref),
+              ],
+              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
+              page: OnboardingTrackYourGoalsRoute.page,
+              path: '',
+            ),
             DefaultRoute(
               guards: [
                 AuthGuard(ref),
@@ -157,14 +165,6 @@ class AppRouter extends _$AppRouter {
               page: OnboardingMonthlyPicsRoute.page,
               path: 'monthly-pics',
             ),
-            DefaultRoute(
-              guards: [
-                AuthGuard(ref),
-              ],
-              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
-              page: OnboardingTrackYourGoalsRoute.page,
-              path: '',
-            ),
           ],
         ),
         DefaultRoute(
@@ -188,6 +188,7 @@ class DefaultRoute extends CustomRoute {
     super.guards,
     super.transitionsBuilder,
     super.children,
+    super.maintainState,
   }) : super(durationInMilliseconds: 800);
 }
 

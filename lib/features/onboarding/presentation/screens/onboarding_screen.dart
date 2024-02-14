@@ -15,7 +15,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     with SingleTickerProviderStateMixin {
-  final List<PageRouteInfo> onboardingRoutes = const [
+  static const onboardingRoutes = [
     OnboardingTrackYourGoalsRoute(),
     OnboardingCompetitionRoute(),
     OnboardingAlsRoute(),
@@ -37,11 +37,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     );
 
     var currentIndex = getCurrentIndex();
-
-    if (currentIndex == -1) {
-      context.router.push(onboardingRoutes.first);
-      currentIndex = 0;
-    }
 
     animateProgress(currentIndex);
   }
@@ -72,7 +67,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     _controller.forward(from: 0);
   }
 
-  void next() {
+  void next() async {
     var currentIndex = getCurrentIndex();
 
     if (currentIndex + 1 < onboardingRoutes.length) {
@@ -83,7 +78,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     } else {
       var controller = ref.read(userProvider.notifier);
 
-      controller.completeOnboarding();
+      await controller.completeOnboarding();
     }
   }
 
@@ -93,6 +88,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
 
     if (user?.onboarded ?? false) {
       context.router.push(const CompleteProfileRoute());
+      return const Scaffold();
     }
 
     return Scaffold(

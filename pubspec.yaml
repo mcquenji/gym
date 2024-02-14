@@ -12,6 +12,7 @@ dependencies:
   cloud_firestore: 4.14.0
   device_preview: ^1.1.0
   dio: ^5.4.0
+  either_dart: ^1.0.0
   firebase_auth: 4.16.0
   firebase_core: 2.24.2
   firebase_core_web: 2.10.0

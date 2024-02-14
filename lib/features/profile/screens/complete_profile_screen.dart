@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gym/features/profile/domain/domain.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/shared/shared.dart';
@@ -23,6 +24,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
   final TextEditingController heightController = TextEditingController();
 
   DateTime? dateOfBirth;
+  bool creatingProfile = false;
 
   void pickDateOfBirth() async {
     DateTime? dateOfBirth;
@@ -31,6 +33,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
 
     await showModalBottomSheet(
       context: context,
+      showDragHandle: true,
       builder: (context) {
         return CupertinoDatePicker(
           onDateTimeChanged: updateDoB,
@@ -51,8 +54,45 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
     }
   }
 
+  Future<void> createProfile() async {
+    if (creatingProfile) return;
+
+    if (dateOfBirth == null) return;
+    if (weightController.text.isEmpty) return;
+    if (heightController.text.isEmpty) return;
+
+    setState(() {
+      creatingProfile = true;
+    });
+
+    final controller = ref.read(userProfileProvider.notifier);
+
+    await controller.createUserProfile(
+      dateOfBirth: dateOfBirth!,
+      weight: double.parse(weightController.text),
+      height: int.parse(heightController.text),
+      bodyFat: bodyFatController.text.isEmpty
+          ? null
+          : double.parse(bodyFatController.text),
+    );
+
+    if (mounted) {
+      setState(() {
+        creatingProfile = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    var profile = ref.watch(userProfileProvider);
+
+    if (profile != null) {
+      // Go to dashboard.
+
+      return const Scaffold();
+    }
+
     final stagger = AnimationStagger(increment: 50.ms, delay: 300.ms);
 
     return Scaffold(
@@ -67,12 +107,12 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                   Text(
                     l10n.completeProfile_title,
                     style: theme.textTheme.titleLarge.bold,
-                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 8),
                   Text(
                     l10n.completeProfile_subtitle,
                     style: theme.textTheme.bodyLarge,
-                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 24),
                   GestureDetector(
                     onTap: pickDateOfBirth,
@@ -101,11 +141,14 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                         ],
                       ),
                     ),
-                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: heightController,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d{0,3}')),
+                    ],
                     decoration: InputDecoration(
                       hintText: l10n.completeProfile_height,
                       prefixIcon: const Icon(Ionicons.body_outline),
@@ -113,7 +156,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                         l10n.completeProfile_height_unit,
                       ),
                     ),
-                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: weightController,
@@ -128,7 +171,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                         l10n.completeProfile_weight_unit,
                       ),
                     ),
-                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: bodyFatController,
@@ -139,23 +182,25 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     decoration: InputDecoration(
                       hintText: l10n.completeProfile_bodyFat,
                       prefixIcon: const Icon(IconlyLight.graph),
+                      suffix: const Text("%"),
                     ),
-                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 16),
                   Text(
                     l10n.completeProfile_bodyFat_optional,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.greyscale.grey1,
                     ),
-                  ).animate().sleek(stagger: stagger, duration: 1.seconds),
+                  ).animate().sleek(stagger: stagger),
                 ],
               ),
             ),
             PrimaryButton(
-              onPressed: () {}, // TODO: complete profile
+              loading: creatingProfile,
+              onPressed: createProfile,
               trailing: const Icon(IconlyLight.arrowRight2),
               child: Text(l10n.completeProfile_submit),
-            ).animate().sleek(stagger: stagger, duration: 1.seconds),
+            ).animate().sleek(stagger: stagger),
           ],
         ),
       ),
