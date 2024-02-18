@@ -49,3 +49,6 @@ lib/firebase_options.dart
 
 # fvm
 .fvm/flutter_sdk
+
+# artifacts
+extracted_enums.txt
