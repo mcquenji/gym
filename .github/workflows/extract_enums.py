@@ -1,10 +1,16 @@
 import requests
-from tqdm import tqdm
 
 """
 This script extracts all enums present in https://github.com/yuhonas/free-exercise-db and outputs them to a file called extracted_enums.txt.
 
 The file contains all enum classes as valid dart code.
+
+The script will issue warnings if an exercise has a null value for any of the following fields:
+    - level
+    - equipment
+    - force
+    - category
+    - mechanic
 """
 
 print("Downloading exercises.json...")
@@ -27,14 +33,25 @@ def sanitize_name(name: str) -> str:
     return name
 
 
-bar = tqdm(total=len(exercises), desc="Extracting enums")
-
 muscle_groups = set()
 levels = set()
 equipment = set()
 force = set()
 categories = set()
 mechanics = set()
+
+levels_has_null = False
+equipment_has_null = False
+force_has_null = False
+categories_has_null = False
+mechanics_has_null = False
+
+
+def print_warning(field: str):
+    print(
+        f"Warning: {field} is not present in all exercises, you may have to update the model to handle a possible null value"
+    )
+
 
 for i in range(len(exercises)):
     exercise = exercises[i]
@@ -45,13 +62,31 @@ for i in range(len(exercises)):
     for muscle_group in exercise["secondaryMuscles"]:
         muscle_groups.add(sanitize_name(muscle_group))
 
+    if exercise["level"] == None and not levels_has_null:
+        levels_has_null = True
+        print("Level has null value, you may have to update the model to handle this")
+
+    if exercise["equipment"] == None and not equipment_has_null:
+        equipment_has_null = True
+        print_warning("equipment")
+
+    if exercise["force"] == None and not force_has_null:
+        force_has_null = True
+        print_warning("force")
+
+    if exercise["category"] == None and not categories_has_null:
+        categories_has_null = True
+        print_warning("category")
+
+    if exercise["mechanic"] == None and not mechanics_has_null:
+        mechanics_has_null = True
+        print_warning("mechanic")
+
     levels.add(sanitize_name(exercise["level"]))
     equipment.add(sanitize_name(exercise["equipment"]))
     force.add(sanitize_name(exercise["force"]))
     categories.add(sanitize_name(exercise["category"]))
     mechanics.add(sanitize_name(exercise["mechanic"]))
-
-    bar.update(1)
 
 
 def remove_empty(s: set) -> set:
