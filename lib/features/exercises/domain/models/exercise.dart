@@ -12,8 +12,8 @@ class Exercise with _$Exercise {
     /// The name of the exercise, providing a quick reference to the type of activity.
     required String name,
 
-    /// Detailed information about how to perform the exercise, its benefits, and any necessary precautions.
-    required String description,
+    /// Detailed information about how to perform the exercise, in order.
+    required List<String> instructions,
 
     /// The level of difficulty of the exercise, helping users identify if it's suitable for their fitness level.
     required ExerciseLevel level,
@@ -25,10 +25,10 @@ class Exercise with _$Exercise {
     required List<String> images,
 
     /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
-    @Default({}) Set<MuscleGroup> primaryMuscleGroups,
+    @Default({}) Set<MuscleGroup> primaryMuscles,
 
     /// A set of secondary muscle groups that the exercise also engages, supplementing the primary targets, with a default of an empty set.
-    @Default({}) Set<MuscleGroup> secondaryMuscleGroups,
+    @Default({}) Set<MuscleGroup> secondaryMuscles,
 
     /// Optional. Specifies the equipment required to perform the exercise, if any.
     ExerciseEquipment? equipment,
@@ -52,6 +52,7 @@ enum MuscleGroup {
   abdominals,
 
   /// The muscle group in the middle back area.
+  @JsonValue("middle back")
   middleBack,
 
   /// The muscle group of the inner thigh.
@@ -64,6 +65,7 @@ enum MuscleGroup {
   quadriceps,
 
   /// The muscle group in the lower back area.
+  @JsonValue("lower back")
   lowerBack,
 
   /// The muscle group in the back that extends from the lower half of the ribs to the spine.
@@ -121,6 +123,7 @@ enum ExerciseEquipment {
   bands,
 
   /// Exercises that use an exercise ball.
+  @JsonValue("exercise ball")
   exerciseBall,
 
   /// Exercises that require a specific machine.
@@ -130,6 +133,7 @@ enum ExerciseEquipment {
   dumbbell,
 
   /// Exercises that use an EZ curl bar.
+  @JsonValue("e-z curl bar")
   eZCurlBar,
 
   /// Exercises that do not fit into the other categories.
@@ -139,12 +143,15 @@ enum ExerciseEquipment {
   barbell,
 
   /// Exercises that can be performed with body weight only.
+  @JsonValue("body only")
   bodyOnly,
 
   /// Exercises that use a foam roller.
+  @JsonValue("foam roll")
   foamRoll,
 
   /// Exercises that use a medicine ball.
+  @JsonValue("medicine ball")
   medicineBall,
 
   /// Exercises that use kettlebells.
@@ -178,6 +185,7 @@ enum ExerciseCategory {
   cardio,
 
   /// Exercises associated with Olympic weightlifting.
+  @JsonValue("olympic weightlifting")
   olympicWeightlifting,
 
   /// Exercises that involve jump training or plyometrics.

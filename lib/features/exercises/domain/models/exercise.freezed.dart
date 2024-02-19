@@ -26,8 +26,8 @@ mixin _$Exercise {
   /// The name of the exercise, providing a quick reference to the type of activity.
   String get name => throw _privateConstructorUsedError;
 
-  /// Detailed information about how to perform the exercise, its benefits, and any necessary precautions.
-  String get description => throw _privateConstructorUsedError;
+  /// Detailed information about how to perform the exercise, in order.
+  List<String> get instructions => throw _privateConstructorUsedError;
 
   /// The level of difficulty of the exercise, helping users identify if it's suitable for their fitness level.
   ExerciseLevel get level => throw _privateConstructorUsedError;
@@ -39,12 +39,10 @@ mixin _$Exercise {
   List<String> get images => throw _privateConstructorUsedError;
 
   /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
-  Set<MuscleGroup> get primaryMuscleGroups =>
-      throw _privateConstructorUsedError;
+  Set<MuscleGroup> get primaryMuscles => throw _privateConstructorUsedError;
 
   /// A set of secondary muscle groups that the exercise also engages, supplementing the primary targets, with a default of an empty set.
-  Set<MuscleGroup> get secondaryMuscleGroups =>
-      throw _privateConstructorUsedError;
+  Set<MuscleGroup> get secondaryMuscles => throw _privateConstructorUsedError;
 
   /// Optional. Specifies the equipment required to perform the exercise, if any.
   ExerciseEquipment? get equipment => throw _privateConstructorUsedError;
@@ -69,12 +67,12 @@ abstract class $ExerciseCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String description,
+      List<String> instructions,
       ExerciseLevel level,
       ExerciseCategory category,
       List<String> images,
-      Set<MuscleGroup> primaryMuscleGroups,
-      Set<MuscleGroup> secondaryMuscleGroups,
+      Set<MuscleGroup> primaryMuscles,
+      Set<MuscleGroup> secondaryMuscles,
       ExerciseEquipment? equipment,
       ExerciseForce? force,
       ExerciseMechanic? mechanic});
@@ -95,12 +93,12 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? instructions = null,
     Object? level = null,
     Object? category = null,
     Object? images = null,
-    Object? primaryMuscleGroups = null,
-    Object? secondaryMuscleGroups = null,
+    Object? primaryMuscles = null,
+    Object? secondaryMuscles = null,
     Object? equipment = freezed,
     Object? force = freezed,
     Object? mechanic = freezed,
@@ -114,10 +112,10 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
+      instructions: null == instructions
+          ? _value.instructions
+          : instructions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -130,13 +128,13 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      primaryMuscleGroups: null == primaryMuscleGroups
-          ? _value.primaryMuscleGroups
-          : primaryMuscleGroups // ignore: cast_nullable_to_non_nullable
+      primaryMuscles: null == primaryMuscles
+          ? _value.primaryMuscles
+          : primaryMuscles // ignore: cast_nullable_to_non_nullable
               as Set<MuscleGroup>,
-      secondaryMuscleGroups: null == secondaryMuscleGroups
-          ? _value.secondaryMuscleGroups
-          : secondaryMuscleGroups // ignore: cast_nullable_to_non_nullable
+      secondaryMuscles: null == secondaryMuscles
+          ? _value.secondaryMuscles
+          : secondaryMuscles // ignore: cast_nullable_to_non_nullable
               as Set<MuscleGroup>,
       equipment: freezed == equipment
           ? _value.equipment
@@ -165,12 +163,12 @@ abstract class _$$ExerciseImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      String description,
+      List<String> instructions,
       ExerciseLevel level,
       ExerciseCategory category,
       List<String> images,
-      Set<MuscleGroup> primaryMuscleGroups,
-      Set<MuscleGroup> secondaryMuscleGroups,
+      Set<MuscleGroup> primaryMuscles,
+      Set<MuscleGroup> secondaryMuscles,
       ExerciseEquipment? equipment,
       ExerciseForce? force,
       ExerciseMechanic? mechanic});
@@ -189,12 +187,12 @@ class __$$ExerciseImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? instructions = null,
     Object? level = null,
     Object? category = null,
     Object? images = null,
-    Object? primaryMuscleGroups = null,
-    Object? secondaryMuscleGroups = null,
+    Object? primaryMuscles = null,
+    Object? secondaryMuscles = null,
     Object? equipment = freezed,
     Object? force = freezed,
     Object? mechanic = freezed,
@@ -208,10 +206,10 @@ class __$$ExerciseImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
+      instructions: null == instructions
+          ? _value._instructions
+          : instructions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -224,13 +222,13 @@ class __$$ExerciseImplCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      primaryMuscleGroups: null == primaryMuscleGroups
-          ? _value._primaryMuscleGroups
-          : primaryMuscleGroups // ignore: cast_nullable_to_non_nullable
+      primaryMuscles: null == primaryMuscles
+          ? _value._primaryMuscles
+          : primaryMuscles // ignore: cast_nullable_to_non_nullable
               as Set<MuscleGroup>,
-      secondaryMuscleGroups: null == secondaryMuscleGroups
-          ? _value._secondaryMuscleGroups
-          : secondaryMuscleGroups // ignore: cast_nullable_to_non_nullable
+      secondaryMuscles: null == secondaryMuscles
+          ? _value._secondaryMuscles
+          : secondaryMuscles // ignore: cast_nullable_to_non_nullable
               as Set<MuscleGroup>,
       equipment: freezed == equipment
           ? _value.equipment
@@ -254,18 +252,19 @@ class _$ExerciseImpl implements _Exercise {
   _$ExerciseImpl(
       {required this.id,
       required this.name,
-      required this.description,
+      required final List<String> instructions,
       required this.level,
       required this.category,
       required final List<String> images,
-      final Set<MuscleGroup> primaryMuscleGroups = const {},
-      final Set<MuscleGroup> secondaryMuscleGroups = const {},
+      final Set<MuscleGroup> primaryMuscles = const {},
+      final Set<MuscleGroup> secondaryMuscles = const {},
       this.equipment,
       this.force,
       this.mechanic})
-      : _images = images,
-        _primaryMuscleGroups = primaryMuscleGroups,
-        _secondaryMuscleGroups = secondaryMuscleGroups;
+      : _instructions = instructions,
+        _images = images,
+        _primaryMuscles = primaryMuscles,
+        _secondaryMuscles = secondaryMuscles;
 
   factory _$ExerciseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExerciseImplFromJson(json);
@@ -278,9 +277,16 @@ class _$ExerciseImpl implements _Exercise {
   @override
   final String name;
 
-  /// Detailed information about how to perform the exercise, its benefits, and any necessary precautions.
+  /// Detailed information about how to perform the exercise, in order.
+  final List<String> _instructions;
+
+  /// Detailed information about how to perform the exercise, in order.
   @override
-  final String description;
+  List<String> get instructions {
+    if (_instructions is EqualUnmodifiableListView) return _instructions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_instructions);
+  }
 
   /// The level of difficulty of the exercise, helping users identify if it's suitable for their fitness level.
   @override
@@ -302,29 +308,27 @@ class _$ExerciseImpl implements _Exercise {
   }
 
   /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
-  final Set<MuscleGroup> _primaryMuscleGroups;
+  final Set<MuscleGroup> _primaryMuscles;
 
   /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
   @override
   @JsonKey()
-  Set<MuscleGroup> get primaryMuscleGroups {
-    if (_primaryMuscleGroups is EqualUnmodifiableSetView)
-      return _primaryMuscleGroups;
+  Set<MuscleGroup> get primaryMuscles {
+    if (_primaryMuscles is EqualUnmodifiableSetView) return _primaryMuscles;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_primaryMuscleGroups);
+    return EqualUnmodifiableSetView(_primaryMuscles);
   }
 
   /// A set of secondary muscle groups that the exercise also engages, supplementing the primary targets, with a default of an empty set.
-  final Set<MuscleGroup> _secondaryMuscleGroups;
+  final Set<MuscleGroup> _secondaryMuscles;
 
   /// A set of secondary muscle groups that the exercise also engages, supplementing the primary targets, with a default of an empty set.
   @override
   @JsonKey()
-  Set<MuscleGroup> get secondaryMuscleGroups {
-    if (_secondaryMuscleGroups is EqualUnmodifiableSetView)
-      return _secondaryMuscleGroups;
+  Set<MuscleGroup> get secondaryMuscles {
+    if (_secondaryMuscles is EqualUnmodifiableSetView) return _secondaryMuscles;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_secondaryMuscleGroups);
+    return EqualUnmodifiableSetView(_secondaryMuscles);
   }
 
   /// Optional. Specifies the equipment required to perform the exercise, if any.
@@ -341,7 +345,7 @@ class _$ExerciseImpl implements _Exercise {
 
   @override
   String toString() {
-    return 'Exercise(id: $id, name: $name, description: $description, level: $level, category: $category, images: $images, primaryMuscleGroups: $primaryMuscleGroups, secondaryMuscleGroups: $secondaryMuscleGroups, equipment: $equipment, force: $force, mechanic: $mechanic)';
+    return 'Exercise(id: $id, name: $name, instructions: $instructions, level: $level, category: $category, images: $images, primaryMuscles: $primaryMuscles, secondaryMuscles: $secondaryMuscles, equipment: $equipment, force: $force, mechanic: $mechanic)';
   }
 
   @override
@@ -351,16 +355,16 @@ class _$ExerciseImpl implements _Exercise {
             other is _$ExerciseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other._instructions, _instructions) &&
             (identical(other.level, level) || other.level == level) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality()
-                .equals(other._primaryMuscleGroups, _primaryMuscleGroups) &&
+                .equals(other._primaryMuscles, _primaryMuscles) &&
             const DeepCollectionEquality()
-                .equals(other._secondaryMuscleGroups, _secondaryMuscleGroups) &&
+                .equals(other._secondaryMuscles, _secondaryMuscles) &&
             (identical(other.equipment, equipment) ||
                 other.equipment == equipment) &&
             (identical(other.force, force) || other.force == force) &&
@@ -374,12 +378,12 @@ class _$ExerciseImpl implements _Exercise {
       runtimeType,
       id,
       name,
-      description,
+      const DeepCollectionEquality().hash(_instructions),
       level,
       category,
       const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(_primaryMuscleGroups),
-      const DeepCollectionEquality().hash(_secondaryMuscleGroups),
+      const DeepCollectionEquality().hash(_primaryMuscles),
+      const DeepCollectionEquality().hash(_secondaryMuscles),
       equipment,
       force,
       mechanic);
@@ -402,12 +406,12 @@ abstract class _Exercise implements Exercise {
   factory _Exercise(
       {required final String id,
       required final String name,
-      required final String description,
+      required final List<String> instructions,
       required final ExerciseLevel level,
       required final ExerciseCategory category,
       required final List<String> images,
-      final Set<MuscleGroup> primaryMuscleGroups,
-      final Set<MuscleGroup> secondaryMuscleGroups,
+      final Set<MuscleGroup> primaryMuscles,
+      final Set<MuscleGroup> secondaryMuscles,
       final ExerciseEquipment? equipment,
       final ExerciseForce? force,
       final ExerciseMechanic? mechanic}) = _$ExerciseImpl;
@@ -425,8 +429,8 @@ abstract class _Exercise implements Exercise {
   String get name;
   @override
 
-  /// Detailed information about how to perform the exercise, its benefits, and any necessary precautions.
-  String get description;
+  /// Detailed information about how to perform the exercise, in order.
+  List<String> get instructions;
   @override
 
   /// The level of difficulty of the exercise, helping users identify if it's suitable for their fitness level.
@@ -442,11 +446,11 @@ abstract class _Exercise implements Exercise {
   @override
 
   /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
-  Set<MuscleGroup> get primaryMuscleGroups;
+  Set<MuscleGroup> get primaryMuscles;
   @override
 
   /// A set of secondary muscle groups that the exercise also engages, supplementing the primary targets, with a default of an empty set.
-  Set<MuscleGroup> get secondaryMuscleGroups;
+  Set<MuscleGroup> get secondaryMuscles;
   @override
 
   /// Optional. Specifies the equipment required to perform the exercise, if any.

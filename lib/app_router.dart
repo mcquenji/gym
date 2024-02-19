@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/features/onboarding/onboarding.dart';
 import 'package:gym/features/profile/profile.dart';
+import 'package:gym/features/exercises/exercises.dart';
 
 part 'app_router.gr.dart';
 
@@ -174,6 +175,14 @@ class AppRouter extends _$AppRouter {
           page: CompleteProfileRoute.page,
           path: '/complete-profile',
           transitionsBuilder: TransitionsBuilders.noTransition,
+        ),
+        DefaultRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: SearchExercisesRoute.page,
+          path: '/exercises',
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
         ),
       ];
 }

@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.16"
+  advanced_icon:
+    dependency: "direct main"
+    description:
+      name: advanced_icon
+      sha256: f008efa0593a6c1c6615ec40b1f9a19c1b6403f437b8db17ca8bd708da7e5e53
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   analyzer:
     dependency: transitive
     description:

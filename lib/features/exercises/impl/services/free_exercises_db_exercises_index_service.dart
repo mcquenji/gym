@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:gym/shared/shared.dart';
 import 'package:gym/features/exercises/exercises.dart';
 
@@ -15,8 +17,6 @@ class FreeExercisesDbExercisesIndexService extends ExercisesIndexService {
 
   @override
   Future<List<String>> getExerciseImages(String exerciseId) async {
-    log('Loading image urls for exercise with id $exerciseId');
-
     if (_cachedExercises == null) {
       await getExercises();
     }
@@ -38,8 +38,6 @@ class FreeExercisesDbExercisesIndexService extends ExercisesIndexService {
       );
     }
 
-    log('Found ${images.length} images.');
-
     return images;
   }
 
@@ -55,7 +53,7 @@ class FreeExercisesDbExercisesIndexService extends ExercisesIndexService {
 
     log("No cached exercises found, fetching from the repository");
 
-    final response = await networkService.get<List<Map<String, dynamic>>>(
+    final response = await networkService.get<String>(
       'https://raw.githubusercontent.com/$repoOwner/$repoName/main/dist/exercises.json',
     );
 
@@ -65,7 +63,9 @@ class FreeExercisesDbExercisesIndexService extends ExercisesIndexService {
       throw Exception('Failed to fetch exercises');
     }
 
-    _cachedExercises = response.body;
+    var json = jsonDecode(response.body!) as List<dynamic>;
+
+    _cachedExercises = json.map((e) => e as Map<String, dynamic>).toList();
 
     log('Fetched ${_cachedExercises!.length} exercises from the repository');
 

@@ -83,6 +83,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SearchExercisesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchExercisesScreen(),
+      );
+    },
   };
 }
 
@@ -260,4 +266,18 @@ class ResetPasswordRouteArgs {
   String toString() {
     return 'ResetPasswordRouteArgs{key: $key, resetCode: $resetCode}';
   }
+}
+
+/// generated route for
+/// [SearchExercisesScreen]
+class SearchExercisesRoute extends PageRouteInfo<void> {
+  const SearchExercisesRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchExercisesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchExercisesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -10,16 +10,18 @@ _$ExerciseImpl _$$ExerciseImplFromJson(Map<String, dynamic> json) =>
     _$ExerciseImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      description: json['description'] as String,
+      instructions: (json['instructions'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       level: $enumDecode(_$ExerciseLevelEnumMap, json['level']),
       category: $enumDecode(_$ExerciseCategoryEnumMap, json['category']),
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      primaryMuscleGroups: (json['primaryMuscleGroups'] as List<dynamic>?)
+      primaryMuscles: (json['primaryMuscles'] as List<dynamic>?)
               ?.map((e) => $enumDecode(_$MuscleGroupEnumMap, e))
               .toSet() ??
           const {},
-      secondaryMuscleGroups: (json['secondaryMuscleGroups'] as List<dynamic>?)
+      secondaryMuscles: (json['secondaryMuscles'] as List<dynamic>?)
               ?.map((e) => $enumDecode(_$MuscleGroupEnumMap, e))
               .toSet() ??
           const {},
@@ -34,14 +36,13 @@ Map<String, dynamic> _$$ExerciseImplToJson(_$ExerciseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'description': instance.description,
+      'instructions': instance.instructions,
       'level': _$ExerciseLevelEnumMap[instance.level]!,
       'category': _$ExerciseCategoryEnumMap[instance.category]!,
       'images': instance.images,
-      'primaryMuscleGroups': instance.primaryMuscleGroups
-          .map((e) => _$MuscleGroupEnumMap[e]!)
-          .toList(),
-      'secondaryMuscleGroups': instance.secondaryMuscleGroups
+      'primaryMuscles':
+          instance.primaryMuscles.map((e) => _$MuscleGroupEnumMap[e]!).toList(),
+      'secondaryMuscles': instance.secondaryMuscles
           .map((e) => _$MuscleGroupEnumMap[e]!)
           .toList(),
       'equipment': _$ExerciseEquipmentEnumMap[instance.equipment],
@@ -60,18 +61,18 @@ const _$ExerciseCategoryEnumMap = {
   ExerciseCategory.powerlifting: 'powerlifting',
   ExerciseCategory.strongman: 'strongman',
   ExerciseCategory.cardio: 'cardio',
-  ExerciseCategory.olympicWeightlifting: 'olympicWeightlifting',
+  ExerciseCategory.olympicWeightlifting: 'olympic weightlifting',
   ExerciseCategory.plyometrics: 'plyometrics',
   ExerciseCategory.strength: 'strength',
 };
 
 const _$MuscleGroupEnumMap = {
   MuscleGroup.abdominals: 'abdominals',
-  MuscleGroup.middleBack: 'middleBack',
+  MuscleGroup.middleBack: 'middle back',
   MuscleGroup.adductors: 'adductors',
   MuscleGroup.biceps: 'biceps',
   MuscleGroup.quadriceps: 'quadriceps',
-  MuscleGroup.lowerBack: 'lowerBack',
+  MuscleGroup.lowerBack: 'lower back',
   MuscleGroup.lats: 'lats',
   MuscleGroup.hamstrings: 'hamstrings',
   MuscleGroup.chest: 'chest',
@@ -88,15 +89,15 @@ const _$MuscleGroupEnumMap = {
 const _$ExerciseEquipmentEnumMap = {
   ExerciseEquipment.cable: 'cable',
   ExerciseEquipment.bands: 'bands',
-  ExerciseEquipment.exerciseBall: 'exerciseBall',
+  ExerciseEquipment.exerciseBall: 'exercise ball',
   ExerciseEquipment.machine: 'machine',
   ExerciseEquipment.dumbbell: 'dumbbell',
-  ExerciseEquipment.eZCurlBar: 'eZCurlBar',
+  ExerciseEquipment.eZCurlBar: 'e-z curl bar',
   ExerciseEquipment.other: 'other',
   ExerciseEquipment.barbell: 'barbell',
-  ExerciseEquipment.bodyOnly: 'bodyOnly',
-  ExerciseEquipment.foamRoll: 'foamRoll',
-  ExerciseEquipment.medicineBall: 'medicineBall',
+  ExerciseEquipment.bodyOnly: 'body only',
+  ExerciseEquipment.foamRoll: 'foam roll',
+  ExerciseEquipment.medicineBall: 'medicine ball',
   ExerciseEquipment.kettlebells: 'kettlebells',
 };
 

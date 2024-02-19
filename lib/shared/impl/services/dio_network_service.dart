@@ -19,7 +19,7 @@ class DioNetworkService extends NetworkService {
     var r = await dio.get(url,
         queryParameters: queryParameters, options: Options(headers: headers));
 
-    log("GET request to $url returned ${r.statusCode} ${r.data.toString()}");
+    log("GET request to $url returned with status code ${r.statusCode}: ${r.data.toString().length > 100 ? "[response was truncated due to it's length]" : r.data}");
 
     return HttpResponse(statusCode: r.statusCode, body: r.data);
   }
