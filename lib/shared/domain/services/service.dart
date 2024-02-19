@@ -7,10 +7,14 @@ import 'package:logging/logging.dart';
 /// It provides a logger instance setup for the specific service.
 abstract class Service {
   /// The [Logger] instance for this class.
-  Logger get log => Logger("Service.$_name.$runtimeType");
+  Logger get _log => Logger("Service.$_name.$runtimeType");
 
   final String _name;
 
   /// Creates a new [Service] with the specified name.
   Service(this._name);
+
+  void log(Object? message, [Object? error, StackTrace? stackTrace]) {
+    _log.fine(message, error, stackTrace);
+  }
 }

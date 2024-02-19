@@ -14,13 +14,12 @@ class DioNetworkService extends NetworkService {
   Future<HttpResponse<T>> get<T>(String url,
       {Map<String, String>? headers,
       Map<String, String>? queryParameters}) async {
-    log.fine("Sending GET request to $url");
+    log("Sending GET request to $url");
 
     var r = await dio.get(url,
         queryParameters: queryParameters, options: Options(headers: headers));
 
-    log.fine(
-        "GET request to $url returned ${r.statusCode} ${r.data.toString()}");
+    log("GET request to $url returned ${r.statusCode} ${r.data.toString()}");
 
     return HttpResponse(statusCode: r.statusCode, body: r.data);
   }
@@ -28,11 +27,11 @@ class DioNetworkService extends NetworkService {
   @override
   Future<HttpResponse<T>> post<T>(String url,
       {Map<String, String>? headers, body}) async {
-    log.fine("Sending POST request to $url");
+    log("Sending POST request to $url");
 
     var r = await dio.post(url, data: body, options: Options(headers: headers));
 
-    log.fine("POST request to $url returned ${r.statusCode} [data redacted]}");
+    log("POST request to $url returned ${r.statusCode} [data redacted]}");
 
     return HttpResponse(statusCode: r.statusCode, body: r.data);
   }
