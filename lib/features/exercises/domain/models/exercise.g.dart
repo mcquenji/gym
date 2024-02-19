@@ -13,6 +13,8 @@ _$ExerciseImpl _$$ExerciseImplFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       level: $enumDecode(_$ExerciseLevelEnumMap, json['level']),
       category: $enumDecode(_$ExerciseCategoryEnumMap, json['category']),
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       primaryMuscleGroups: (json['primaryMuscleGroups'] as List<dynamic>?)
               ?.map((e) => $enumDecode(_$MuscleGroupEnumMap, e))
               .toSet() ??
@@ -35,6 +37,7 @@ Map<String, dynamic> _$$ExerciseImplToJson(_$ExerciseImpl instance) =>
       'description': instance.description,
       'level': _$ExerciseLevelEnumMap[instance.level]!,
       'category': _$ExerciseCategoryEnumMap[instance.category]!,
+      'images': instance.images,
       'primaryMuscleGroups': instance.primaryMuscleGroups
           .map((e) => _$MuscleGroupEnumMap[e]!)
           .toList(),

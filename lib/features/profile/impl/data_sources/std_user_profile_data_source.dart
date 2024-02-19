@@ -24,7 +24,7 @@ class StdUserProfileDataSource extends UserProfileDataSource {
 
   @override
   Future<UserProfile?> getUserProfile(String userId) async {
-    log.info('Retrieving user profile for user $userId');
+    log('Retrieving user profile for user $userId');
 
     var doc = await FirebaseFirestore.instance
         .collection(userDataService.getUserDataCollectionPath(userId))
@@ -32,18 +32,18 @@ class StdUserProfileDataSource extends UserProfileDataSource {
         .get();
 
     if (!doc.exists) {
-      log.warning('User $userId has no profile');
+      log('No profile found for $userId ');
       return null;
     }
 
-    log.info('User profile for user $userId successfully retrieved');
+    log('User profile for user $userId successfully retrieved');
 
     return UserProfile.fromJson(doc.data()!);
   }
 
   @override
   Future<void> write(UserProfile userProfile) async {
-    log.info('Writing user profile for user ${userProfile.id}');
+    log('Writing user profile for user ${userProfile.id}');
 
     try {
       await FirebaseFirestore.instance
@@ -51,10 +51,9 @@ class StdUserProfileDataSource extends UserProfileDataSource {
           .doc(documentName)
           .set(userProfile.toJson());
 
-      log.info('User profile for user ${userProfile.id} successfully written.');
+      log('User profile for user ${userProfile.id} successfully written.');
     } catch (e) {
-      log.severe(
-          'Error writing user profile for user ${userProfile.id}. Does the user exist?',
+      log('Error writing user profile for user ${userProfile.id}. Does the user exist?',
           e);
     }
   }

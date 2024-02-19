@@ -35,6 +35,9 @@ mixin _$Exercise {
   /// A categorization of the exercise which helps in organizing exercises by their nature or the goals they help achieve.
   ExerciseCategory get category => throw _privateConstructorUsedError;
 
+  /// A list of image URLs that provide visual references for the exercise.
+  List<String> get images => throw _privateConstructorUsedError;
+
   /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
   Set<MuscleGroup> get primaryMuscleGroups =>
       throw _privateConstructorUsedError;
@@ -69,6 +72,7 @@ abstract class $ExerciseCopyWith<$Res> {
       String description,
       ExerciseLevel level,
       ExerciseCategory category,
+      List<String> images,
       Set<MuscleGroup> primaryMuscleGroups,
       Set<MuscleGroup> secondaryMuscleGroups,
       ExerciseEquipment? equipment,
@@ -94,6 +98,7 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
     Object? description = null,
     Object? level = null,
     Object? category = null,
+    Object? images = null,
     Object? primaryMuscleGroups = null,
     Object? secondaryMuscleGroups = null,
     Object? equipment = freezed,
@@ -121,6 +126,10 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as ExerciseCategory,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       primaryMuscleGroups: null == primaryMuscleGroups
           ? _value.primaryMuscleGroups
           : primaryMuscleGroups // ignore: cast_nullable_to_non_nullable
@@ -159,6 +168,7 @@ abstract class _$$ExerciseImplCopyWith<$Res>
       String description,
       ExerciseLevel level,
       ExerciseCategory category,
+      List<String> images,
       Set<MuscleGroup> primaryMuscleGroups,
       Set<MuscleGroup> secondaryMuscleGroups,
       ExerciseEquipment? equipment,
@@ -182,6 +192,7 @@ class __$$ExerciseImplCopyWithImpl<$Res>
     Object? description = null,
     Object? level = null,
     Object? category = null,
+    Object? images = null,
     Object? primaryMuscleGroups = null,
     Object? secondaryMuscleGroups = null,
     Object? equipment = freezed,
@@ -209,6 +220,10 @@ class __$$ExerciseImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as ExerciseCategory,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       primaryMuscleGroups: null == primaryMuscleGroups
           ? _value._primaryMuscleGroups
           : primaryMuscleGroups // ignore: cast_nullable_to_non_nullable
@@ -242,12 +257,14 @@ class _$ExerciseImpl implements _Exercise {
       required this.description,
       required this.level,
       required this.category,
+      required final List<String> images,
       final Set<MuscleGroup> primaryMuscleGroups = const {},
       final Set<MuscleGroup> secondaryMuscleGroups = const {},
       this.equipment,
       this.force,
       this.mechanic})
-      : _primaryMuscleGroups = primaryMuscleGroups,
+      : _images = images,
+        _primaryMuscleGroups = primaryMuscleGroups,
         _secondaryMuscleGroups = secondaryMuscleGroups;
 
   factory _$ExerciseImpl.fromJson(Map<String, dynamic> json) =>
@@ -272,6 +289,17 @@ class _$ExerciseImpl implements _Exercise {
   /// A categorization of the exercise which helps in organizing exercises by their nature or the goals they help achieve.
   @override
   final ExerciseCategory category;
+
+  /// A list of image URLs that provide visual references for the exercise.
+  final List<String> _images;
+
+  /// A list of image URLs that provide visual references for the exercise.
+  @override
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
 
   /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
   final Set<MuscleGroup> _primaryMuscleGroups;
@@ -313,7 +341,7 @@ class _$ExerciseImpl implements _Exercise {
 
   @override
   String toString() {
-    return 'Exercise(id: $id, name: $name, description: $description, level: $level, category: $category, primaryMuscleGroups: $primaryMuscleGroups, secondaryMuscleGroups: $secondaryMuscleGroups, equipment: $equipment, force: $force, mechanic: $mechanic)';
+    return 'Exercise(id: $id, name: $name, description: $description, level: $level, category: $category, images: $images, primaryMuscleGroups: $primaryMuscleGroups, secondaryMuscleGroups: $secondaryMuscleGroups, equipment: $equipment, force: $force, mechanic: $mechanic)';
   }
 
   @override
@@ -328,6 +356,7 @@ class _$ExerciseImpl implements _Exercise {
             (identical(other.level, level) || other.level == level) &&
             (identical(other.category, category) ||
                 other.category == category) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality()
                 .equals(other._primaryMuscleGroups, _primaryMuscleGroups) &&
             const DeepCollectionEquality()
@@ -348,6 +377,7 @@ class _$ExerciseImpl implements _Exercise {
       description,
       level,
       category,
+      const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(_primaryMuscleGroups),
       const DeepCollectionEquality().hash(_secondaryMuscleGroups),
       equipment,
@@ -375,6 +405,7 @@ abstract class _Exercise implements Exercise {
       required final String description,
       required final ExerciseLevel level,
       required final ExerciseCategory category,
+      required final List<String> images,
       final Set<MuscleGroup> primaryMuscleGroups,
       final Set<MuscleGroup> secondaryMuscleGroups,
       final ExerciseEquipment? equipment,
@@ -404,6 +435,10 @@ abstract class _Exercise implements Exercise {
 
   /// A categorization of the exercise which helps in organizing exercises by their nature or the goals they help achieve.
   ExerciseCategory get category;
+  @override
+
+  /// A list of image URLs that provide visual references for the exercise.
+  List<String> get images;
   @override
 
   /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.

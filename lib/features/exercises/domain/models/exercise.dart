@@ -21,6 +21,9 @@ class Exercise with _$Exercise {
     /// A categorization of the exercise which helps in organizing exercises by their nature or the goals they help achieve.
     required ExerciseCategory category,
 
+    /// A list of image URLs that provide visual references for the exercise.
+    required List<String> images,
+
     /// A set of the primary muscle groups that the exercise primarily targets, with a default of an empty set.
     @Default({}) Set<MuscleGroup> primaryMuscleGroups,
 
