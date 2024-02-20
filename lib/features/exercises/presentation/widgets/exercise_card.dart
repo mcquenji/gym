@@ -69,13 +69,7 @@ class ExerciseCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: context.theme.cardColor,
-        boxShadow: [
-          BoxShadow(
-            color: context.theme.colorScheme.onSurface.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
+        boxShadow: context.theme.shadows.defaultShadow,
       ),
       padding: const EdgeInsets.all(16),
       child: wrapper(context, content),

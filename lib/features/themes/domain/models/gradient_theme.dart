@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:gym/features/themes/themes.dart';
 
-class Gradients extends ThemeExtension<Gradients> {
+class GradientTheme extends ThemeExtension<GradientTheme> {
   final GradientThemeData primaryGradient;
   final GradientThemeData secondaryGradient;
 
-  Gradients({
+  GradientTheme({
     required this.primaryGradient,
     required this.secondaryGradient,
   });
 
   @override
-  ThemeExtension<Gradients> copyWith(
+  ThemeExtension<GradientTheme> copyWith(
       {GradientThemeData? primary, GradientThemeData? secondary}) {
-    return Gradients(
+    return GradientTheme(
       primaryGradient: primary ?? primaryGradient,
       secondaryGradient: secondary ?? secondaryGradient,
     );
   }
 
   @override
-  ThemeExtension<Gradients> lerp(
-      covariant ThemeExtension<Gradients>? other, double t) {
+  ThemeExtension<GradientTheme> lerp(
+      covariant ThemeExtension<GradientTheme>? other, double t) {
     if (other == null) return this;
 
-    if (other is Gradients) {
-      return Gradients(
+    if (other is GradientTheme) {
+      return GradientTheme(
         primaryGradient:
             GradientThemeData.lerp(primaryGradient, other.primaryGradient, t),
         secondaryGradient: GradientThemeData.lerp(
@@ -36,6 +36,6 @@ class Gradients extends ThemeExtension<Gradients> {
     return this;
   }
 
-  static Gradients of(BuildContext context) =>
-      Theme.of(context).extension<Gradients>()!;
+  static GradientTheme of(BuildContext context) =>
+      Theme.of(context).extension<GradientTheme>()!;
 }

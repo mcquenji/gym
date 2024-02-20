@@ -19,8 +19,8 @@ class UserProvider extends Notifier<UserProviderState> {
     return null;
   }
 
-  void logout() {
-    authService.logout();
+  Future<void> logout() async {
+    await authService.logout();
     state = null;
   }
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gym/features/themes/themes.dart';
+import 'package:gym/shared/shared.dart';
 import 'package:riverpod/riverpod.dart';
 
 /// Provides the current [ThemeData] based on the device's theme mode.
 final themeProvider = Provider<ThemeData>((ref) {
-  var gradients = ref.watch(gradientsProvider);
   var colorScheme = ref.watch(colorSchemeProvider);
   var textTheme = ref.watch(textThemeProvider);
   var greyscale = ref.watch(greyscaleProvider);
@@ -15,7 +15,8 @@ final themeProvider = Provider<ThemeData>((ref) {
     textTheme: textTheme,
     colorScheme: colorScheme,
     extensions: [
-      gradients,
+      ref.watch(gradientsProvider),
+      ref.watch(shadowThemeProvider),
       greyscale,
     ],
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -58,5 +59,22 @@ final themeProvider = Provider<ThemeData>((ref) {
         horizontal: 16,
       ),
     ),
+    splashFactory: NoSplash.splashFactory,
+    splashColor: Colors.transparent,
+    popupMenuTheme: PopupMenuThemeData(
+      labelTextStyle: MaterialStateProperty.all(
+        textTheme.bodyMedium,
+      ),
+      color: colorScheme.surface,
+      textStyle: textTheme.bodyMedium.bold,
+      position: PopupMenuPosition.under,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 8,
+      shadowColor: greyscale.grey3.withOpacity(0.3),
+      surfaceTintColor: colorScheme.surface,
+    ),
+    shadowColor: greyscale.grey3.withOpacity(0.3),
   );
 });

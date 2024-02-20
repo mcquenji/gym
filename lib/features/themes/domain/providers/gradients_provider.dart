@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gym/features/themes/themes.dart';
 import 'package:riverpod/riverpod.dart';
 
-final gradientsProvider = Provider<Gradients>((ref) {
-  return Gradients(
+final gradientsProvider = Provider<GradientTheme>((ref) {
+  return GradientTheme(
     primaryGradient: GradientThemeData(
       startColor: const Color(0xFF9DCEFF),
       endColor: const Color(0xFF92A3FD),

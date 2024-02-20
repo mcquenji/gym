@@ -1,11 +1,14 @@
+import 'package:advanced_icon/advanced_icon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/shared/shared.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage<Exercise>()
+@RoutePage<Exercise?>()
 class SearchExercisesScreen extends ConsumerStatefulWidget {
-  const SearchExercisesScreen({super.key});
+  const SearchExercisesScreen({super.key, this.title});
+
+  final String? title;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -29,6 +32,7 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
     var exercises = ref.watch(exercisesProvider);
 
     return Scaffold(
+      appBar: widget.title != null ? TitleBar(title: widget.title!) : null,
       body: exercises.when(
         data: (exercises) {
           final matchingExercises = exercises.where((exercise) {
@@ -45,11 +49,21 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
                   left: 30,
                   right: 30,
                 ),
-                child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    // TODO: hintText: 'Search exercises',
-                    prefixIcon: Icon(Icons.search),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: context.theme.shadows.defaultShadow,
+                  ),
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      // TODO: hintText: 'Search exercises',
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: AdvancedIcon(
+                        icon: IconlyLight.filter,
+                        gradient:
+                            context.theme.gradients.primaryGradient.linear,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -64,8 +78,13 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
                   itemCount: matchingExercises.length,
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 16),
-                  itemBuilder: (context, index) => ExerciseCard(
-                    exercise: matchingExercises[index],
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      context.router.pop(matchingExercises[index]);
+                    },
+                    child: ExerciseCard(
+                      exercise: matchingExercises[index],
+                    ),
                   ),
                 ),
               ),

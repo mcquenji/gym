@@ -84,9 +84,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SearchExercisesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      final args = routeData.argsAs<SearchExercisesRouteArgs>(
+          orElse: () => const SearchExercisesRouteArgs());
+      return AutoRoutePage<Exercise?>(
         routeData: routeData,
-        child: const SearchExercisesScreen(),
+        child: SearchExercisesScreen(
+          key: args.key,
+          title: args.title,
+        ),
       );
     },
   };
@@ -270,14 +275,38 @@ class ResetPasswordRouteArgs {
 
 /// generated route for
 /// [SearchExercisesScreen]
-class SearchExercisesRoute extends PageRouteInfo<void> {
-  const SearchExercisesRoute({List<PageRouteInfo>? children})
-      : super(
+class SearchExercisesRoute extends PageRouteInfo<SearchExercisesRouteArgs> {
+  SearchExercisesRoute({
+    Key? key,
+    String? title,
+    List<PageRouteInfo>? children,
+  }) : super(
           SearchExercisesRoute.name,
+          args: SearchExercisesRouteArgs(
+            key: key,
+            title: title,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SearchExercisesRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<SearchExercisesRouteArgs> page =
+      PageInfo<SearchExercisesRouteArgs>(name);
+}
+
+class SearchExercisesRouteArgs {
+  const SearchExercisesRouteArgs({
+    this.key,
+    this.title,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  @override
+  String toString() {
+    return 'SearchExercisesRouteArgs{key: $key, title: $title}';
+  }
 }
