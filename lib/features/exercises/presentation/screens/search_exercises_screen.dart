@@ -56,7 +56,7 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
                   child: TextField(
                     controller: searchController,
                     decoration: InputDecoration(
-                      // TODO: hintText: 'Search exercises',
+                      hintText: context.l10n.searchExercises_placeholder,
                       prefixIcon: const Icon(Icons.search),
                       suffixIcon: AdvancedIcon(
                         icon: IconlyLight.filter,
