@@ -3,18 +3,23 @@ import 'package:flutter/material.dart';
 class ShadowTheme extends ThemeExtension<ShadowTheme> {
   final Shadows buttonShadow;
   final Shadows defaultShadow;
+  final Shadows longPressShadow;
 
   ShadowTheme({
     required this.buttonShadow,
     required this.defaultShadow,
+    required this.longPressShadow,
   });
 
   @override
   ThemeExtension<ShadowTheme> copyWith(
-      {Shadows? buttonShadow, Shadows? defaultShadow}) {
+      {Shadows? buttonShadow,
+      Shadows? defaultShadow,
+      Shadows? longPressShadow}) {
     return ShadowTheme(
       buttonShadow: buttonShadow ?? this.buttonShadow,
       defaultShadow: defaultShadow ?? this.defaultShadow,
+      longPressShadow: longPressShadow ?? this.longPressShadow,
     );
   }
 
@@ -27,12 +32,14 @@ class ShadowTheme extends ThemeExtension<ShadowTheme> {
       return ShadowTheme(
         buttonShadow: lerpShadow(buttonShadow, [], t),
         defaultShadow: lerpShadow(defaultShadow, [], t),
+        longPressShadow: lerpShadow(longPressShadow, [], t),
       );
     }
 
     return ShadowTheme(
       buttonShadow: lerpShadow(buttonShadow, other.buttonShadow, t),
       defaultShadow: lerpShadow(defaultShadow, other.defaultShadow, t),
+      longPressShadow: lerpShadow(longPressShadow, other.longPressShadow, t),
     );
   }
 

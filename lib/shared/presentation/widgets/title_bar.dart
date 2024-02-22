@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/shared/shared.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class TitleBar extends ConsumerWidget implements PreferredSizeWidget {
   const TitleBar({super.key, required this.title});
@@ -21,13 +22,19 @@ class TitleBar extends ConsumerWidget implements PreferredSizeWidget {
             onTap: () => Navigator.of(context).pop(),
             child: _icon(IconlyBold.arrowLeft2, context),
           ),
-          Text(
-            title,
-            style: context.theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w900,
-              fontSize: 18,
+          const SizedBox(width: 16),
+          Expanded(
+            child: TextScroll(
+              title,
+              style: context.theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w900,
+                fontSize: 18,
+              ),
+              delayBefore: 5.seconds,
+              pauseBetween: 5.seconds,
             ),
           ),
+          const SizedBox(width: 16),
           PopupMenuButton(
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuIcon(

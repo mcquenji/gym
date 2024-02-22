@@ -2,6 +2,7 @@ import 'package:advanced_icon/advanced_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/shared/shared.dart';
+import 'package:list_ext/list_ext.dart';
 
 class ExerciseCard extends StatefulWidget {
   const ExerciseCard({
@@ -26,7 +27,11 @@ class ExerciseCard extends StatefulWidget {
 }
 
 class _ExerciseCardState extends State<ExerciseCard> {
-  void showContextMenu() {
+  bool isContextMenuOpen = false;
+
+  void showContextMenu() async {
+    if (isContextMenuOpen) return;
+
     final PopupMenuThemeData popupMenuTheme = PopupMenuTheme.of(context);
     final RenderBox button = context.findRenderObject()! as RenderBox;
     final RenderBox overlay =
@@ -49,7 +54,11 @@ class _ExerciseCardState extends State<ExerciseCard> {
       Offset.zero & overlay.size,
     );
 
-    showMenu(
+    setState(() {
+      isContextMenuOpen = true;
+    });
+
+    await showMenu(
       context: context,
       position: position,
       items: <PopupMenuEntry>[
@@ -57,7 +66,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
         if (widget.actions.isNotEmpty) const PopupMenuDivider(),
         PopupMenuIcon(
           icon: IconlyBroken.infoCircle,
-          label: context.l10n.exercises_details,
+          label: context.l10n.exercisesDetails_contextMenu,
           iconGradient: context.theme.gradients.primaryGradient.linear,
           onTap: () {
             context.router.push(
@@ -69,6 +78,12 @@ class _ExerciseCardState extends State<ExerciseCard> {
         ),
       ],
     );
+
+    if (mounted) {
+      setState(() {
+        isContextMenuOpen = false;
+      });
+    }
   }
 
   @override
@@ -123,7 +138,9 @@ class _ExerciseCardState extends State<ExerciseCard> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: context.theme.cardColor,
-          boxShadow: context.theme.shadows.defaultShadow,
+          boxShadow: isContextMenuOpen
+              ? context.theme.shadows.longPressShadow
+              : context.theme.shadows.defaultShadow,
         ),
         padding: const EdgeInsets.all(16),
         child: widget.wrapper(context, content),

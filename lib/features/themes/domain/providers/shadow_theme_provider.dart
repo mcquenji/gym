@@ -13,6 +13,13 @@ final shadowThemeProvider = Provider<ShadowTheme>((ref) {
         offset: const Offset(0, 5),
       ),
     ],
+    longPressShadow: [
+      BoxShadow(
+        color: colorScheme.onSurface.withOpacity(0.15),
+        blurRadius: 20,
+        offset: const Offset(0, 5),
+      ),
+    ],
     buttonShadow: kElevationToShadow[8]!,
   );
 });

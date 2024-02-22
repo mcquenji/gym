@@ -37,6 +37,7 @@ dependencies:
   logging: ^1.2.0
   riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
+  text_scroll: ^0.2.0
 
 dev_dependencies:
   auto_route_generator: ^7.3.2
