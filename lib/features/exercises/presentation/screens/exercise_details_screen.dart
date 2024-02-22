@@ -29,7 +29,7 @@ class ExerciseDetailsScreen extends ConsumerWidget {
         child: exercises.when(
           data: (exercises) {
             final stagger = AnimationStagger(
-              delay: 100.ms,
+              delay: 200.ms,
               increment: 50.ms,
               duration: 2.seconds,
             );
@@ -45,20 +45,12 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                       autoPlayCurve: Curves.easeOutCubic,
                       viewportFraction: 1,
                       height: MediaQuery.of(context).size.height * 0.26,
-                      clipBehavior: Clip.none,
-                      aspectRatio: 1 / 2,
                     ),
                     items: exercise!.images
                         .map(
-                          (e) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: context.theme.shadows.buttonShadow,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(e, fit: BoxFit.cover),
-                            ),
+                          (e) => ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(e, fit: BoxFit.cover),
                           ),
                         )
                         .toList(),
