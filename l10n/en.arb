@@ -73,6 +73,7 @@
     "searchExercises_placeholder": "Search for exercises",
     "exercisesDetails_contextMenu": "How to",
     "exercisesDetails_instructions": "Instructions",
+    "exercisesDetails_showAll": "show all",
     "global_next": "Next",
     "global_error_loadingSVG": "Error loading SVG",
     "global_logout": "Logout"

@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/shared/shared.dart';
 import 'package:gym/features/exercises/exercises.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ionicons/ionicons.dart';
 
 @RoutePage()
 class ExerciseDetailsScreen extends ConsumerWidget {
@@ -57,8 +56,86 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                     .toList(),
               ),
               const SizedBox(height: 20),
-              Text(
-                "${exercise.level.name} | ${exercise.force?.name} | ${exercise.category.name} | ${exercise.mechanic?.name} | ${exercise.equipment?.name} | ${exercise.primaryMuscles.map((e) => e.name).join(", ")} | ${exercise.secondaryMuscles.map((e) => e.name).join(", ")}",
+              Padding(
+                padding: const PaddingHorizontal(15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (exercise.primaryMuscles.isNotEmpty) ...[
+                          _info(
+                            IconlyBroken.category,
+                            exercise.primaryMuscles.first.name,
+                            context,
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                        if (exercise.equipment != null) ...[
+                          _info(
+                            Ionicons.barbell,
+                            exercise.equipment!.name,
+                            context,
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                        if (exercise.force != null) ...[
+                          _info(
+                            IconlyLight.discovery,
+                            exercise.force!.name,
+                            context,
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                        _info(
+                          Ionicons.fitness,
+                          exercise.category.name,
+                          context,
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _info(IconlyLight.heart, exercise.level.name, context),
+                        const SizedBox(height: 8),
+                        if (exercise.mechanic != null) ...[
+                          _info(
+                            IconlyLight.show,
+                            exercise.mechanic!.name,
+                            context,
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                        if (exercise.secondaryMuscles.isNotEmpty) ...[
+                          _info(
+                            IconlyLight.moreSquare,
+                            exercise.secondaryMuscles.first.name,
+                            context,
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    // TODO: Show all muscles in bottom sheet
+                  },
+                  child: Text(
+                    context.l10n.exercisesDetails_showAll,
+                    style: context.theme.textTheme.bodyMedium?.copyWith(
+                      color: context.theme.greyscale.grey2,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               Text(
@@ -100,6 +177,25 @@ class ExerciseDetailsScreen extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _info(IconData icon, String text, BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AdvancedIcon(
+          icon: icon,
+          gradient: context.theme.gradients.secondaryGradient.linear,
+        ),
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: context.theme.textTheme.bodyMedium?.copyWith(
+            color: context.theme.greyscale.grey2,
+          ),
+        ),
+      ],
     );
   }
 }
