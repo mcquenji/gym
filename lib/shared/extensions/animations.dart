@@ -19,11 +19,11 @@ extension AnimationExt on Animate {
       begin: 0.5,
       end: 0.0,
       curve: curve,
-      duration: duration,
+      duration: stagger?.duration ?? duration,
       delay: delay ?? stagger?.add(),
     ).fadeIn(
       curve: curve,
-      duration: duration,
+      duration: stagger?.duration ?? duration,
       delay: delay ?? stagger?.add(),
     );
   }
@@ -36,9 +36,13 @@ class AnimationStagger {
   /// The duration to wait between each animation.
   final Duration increment;
 
+  /// The duration for each animation.
+  final Duration? duration;
+
   AnimationStagger({
     this.delay = const Duration(milliseconds: 0),
     this.increment = const Duration(milliseconds: 100),
+    this.duration,
   });
 
   int animations = 0;
