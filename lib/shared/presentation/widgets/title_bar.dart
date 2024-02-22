@@ -24,14 +24,19 @@ class TitleBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
           const SizedBox(width: 16),
           Expanded(
-            child: TextScroll(
-              title,
-              style: context.theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w900,
-                fontSize: 18,
+            child: Center(
+              child: TextScroll(
+                title,
+                style: context.theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                ),
+                delayBefore: 5.seconds,
+                pauseBetween: 2.seconds,
+                textAlign: TextAlign.center,
+                velocity: const Velocity(pixelsPerSecond: Offset(20, 0)),
+                intervalSpaces: 4,
               ),
-              delayBefore: 5.seconds,
-              pauseBetween: 5.seconds,
             ),
           ),
           const SizedBox(width: 16),
