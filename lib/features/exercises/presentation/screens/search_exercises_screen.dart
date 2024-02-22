@@ -35,20 +35,15 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
       appBar: widget.title != null ? TitleBar(title: widget.title!) : null,
       body: exercises.when(
         data: (exercises) {
-          final matchingExercises = exercises.where((exercise) {
-            final query = searchController.text.toLowerCase();
-
-            return exercise.name.toLowerCase().contains(query);
-          }).toList();
+          final matchingExercises = exercises.filterBy(
+            name: searchController.text.toLowerCase(),
+          );
 
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  top: 30,
-                  left: 30,
-                  right: 30,
-                ),
+                padding:
+                    const PaddingAll().Top(widget.title != null ? null : 50),
                 child: Container(
                   decoration: BoxDecoration(
                     boxShadow: context.theme.shadows.defaultShadow,
@@ -67,14 +62,9 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
               Expanded(
                 child: ListView.separated(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    bottom: 30,
-                  ),
+                  padding: const PaddingLeft().Right().Bottom(),
                   itemCount: matchingExercises.length,
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 16),

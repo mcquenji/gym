@@ -93,7 +93,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const PaddingAll(),
         child: FutureBuilder(
           future: allowRegisterWithoutReferral
               ? Future.value(true)

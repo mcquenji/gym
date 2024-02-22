@@ -76,7 +76,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const PaddingAll(),
         child: widget.resetCode == null
             ? InvalidCode(
                 title: l10n.resetPassword_invalidCode,

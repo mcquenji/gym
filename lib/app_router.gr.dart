@@ -21,6 +21,19 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompleteProfileScreen(),
       );
     },
+    ExerciseDetailsRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ExerciseDetailsRouteArgs>(
+          orElse: () =>
+              ExerciseDetailsRouteArgs(id: pathParams.getString('exerciseId')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ExerciseDetailsScreen(
+          key: args.key,
+          id: args.id,
+        ),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -109,6 +122,45 @@ class CompleteProfileRoute extends PageRouteInfo<void> {
   static const String name = 'CompleteProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ExerciseDetailsScreen]
+class ExerciseDetailsRoute extends PageRouteInfo<ExerciseDetailsRouteArgs> {
+  ExerciseDetailsRoute({
+    Key? key,
+    required String id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ExerciseDetailsRoute.name,
+          args: ExerciseDetailsRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'exerciseId': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'ExerciseDetailsRoute';
+
+  static const PageInfo<ExerciseDetailsRouteArgs> page =
+      PageInfo<ExerciseDetailsRouteArgs>(name);
+}
+
+class ExerciseDetailsRouteArgs {
+  const ExerciseDetailsRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'ExerciseDetailsRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

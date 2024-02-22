@@ -13,7 +13,7 @@ class TitleBar extends ConsumerWidget implements PreferredSizeWidget {
     final userController = ref.watch(userProvider.notifier);
 
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30, top: 50),
+      padding: const PaddingLeft().Right().Top(50),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,23 +29,14 @@ class TitleBar extends ConsumerWidget implements PreferredSizeWidget {
             ),
           ),
           PopupMenuButton(
-            itemBuilder: (context) => [
-              PopupMenuItem(
+            itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuIcon(
                 onTap: () async {
                   userController.logout();
                   context.router.push(const LoginRoute());
                 },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(
-                      IconlyLight.logout,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(context.l10n.global_logout),
-                  ],
-                ),
+                icon: IconlyLight.logout,
+                label: context.l10n.global_logout,
               ),
             ],
             icon: _icon(Icons.more_horiz, context),

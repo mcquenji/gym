@@ -71,6 +71,7 @@
     },
     "profileComplete_subtitle": "You're all set now, so hit the gym 💪💪",
     "searchExercises_placeholder": "Search for exercises",
+    "exercises_details": "How to",
     "global_next": "Next",
     "global_error_loadingSVG": "Error loading SVG",
     "global_logout": "Logout"

@@ -52,7 +52,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const PaddingAll(),
         child: Column(
           children: [
             Expanded(

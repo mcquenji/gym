@@ -3,21 +3,73 @@ import 'package:flutter/material.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/shared/shared.dart';
 
-class ExerciseCard extends StatelessWidget {
+class ExerciseCard extends StatefulWidget {
   const ExerciseCard({
     super.key,
     required this.exercise,
     this.subtitle,
     this.wrapper = _defaultWrapper,
     this.trailing,
+    this.actions = const [],
   });
 
   final Exercise exercise;
   final Widget? subtitle;
   final Widget Function(BuildContext context, Widget child) wrapper;
   final Widget? trailing;
+  final List<PopupMenuItem> actions;
 
   static Widget _defaultWrapper(context, child) => child;
+
+  @override
+  State<ExerciseCard> createState() => _ExerciseCardState();
+}
+
+class _ExerciseCardState extends State<ExerciseCard> {
+  void showContextMenu() {
+    final PopupMenuThemeData popupMenuTheme = PopupMenuTheme.of(context);
+    final RenderBox button = context.findRenderObject()! as RenderBox;
+    final RenderBox overlay =
+        Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
+    final PopupMenuPosition popupMenuPosition =
+        popupMenuTheme.position ?? PopupMenuPosition.over;
+    late Offset offset;
+    switch (popupMenuPosition) {
+      case PopupMenuPosition.over:
+        offset = Offset.zero;
+      case PopupMenuPosition.under:
+        offset = Offset(0, button.size.height + 8);
+    }
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        button.localToGlobal(offset, ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero) + offset,
+            ancestor: overlay),
+      ),
+      Offset.zero & overlay.size,
+    );
+
+    showMenu(
+      context: context,
+      position: position,
+      items: <PopupMenuEntry>[
+        ...widget.actions,
+        if (widget.actions.isNotEmpty) const PopupMenuDivider(),
+        PopupMenuIcon(
+          icon: IconlyBroken.infoCircle,
+          label: context.l10n.exercises_details,
+          iconGradient: context.theme.gradients.primaryGradient.linear,
+          onTap: () {
+            context.router.push(
+              ExerciseDetailsRoute(
+                id: widget.exercise.id,
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +80,7 @@ class ExerciseCard extends StatelessWidget {
           backgroundColor: context.theme.primaryColor,
           radius: 30,
           child: Text(
-            exercise.name[0].toUpperCase(),
+            widget.exercise.name[0].toUpperCase(),
             style: context.theme.textTheme.headlineMedium?.copyWith(
               color: context.theme.colorScheme.onPrimary,
             ),
@@ -40,13 +92,13 @@ class ExerciseCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                exercise.name,
+                widget.exercise.name,
                 style: context.theme.textTheme.titleMedium,
               ),
               const SizedBox(height: 4),
-              subtitle ??
+              widget.subtitle ??
                   Text(
-                    "${exercise.category.name} | ${exercise.primaryMuscles.first.name}",
+                    "${widget.exercise.category.name} | ${widget.exercise.primaryMuscles.first.name}",
                     style: context.theme.textTheme.bodySmall?.copyWith(
                       color:
                           context.theme.colorScheme.onSurface.withOpacity(0.6),
@@ -56,7 +108,7 @@ class ExerciseCard extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        trailing ??
+        widget.trailing ??
             AdvancedIcon(
               icon: IconlyLight.arrowRightCircle,
               gradient: context.theme.gradients.secondaryGradient.linear,
@@ -65,14 +117,17 @@ class ExerciseCard extends StatelessWidget {
       ],
     );
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: context.theme.cardColor,
-        boxShadow: context.theme.shadows.defaultShadow,
+    return GestureDetector(
+      onLongPress: showContextMenu,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: context.theme.cardColor,
+          boxShadow: context.theme.shadows.defaultShadow,
+        ),
+        padding: const EdgeInsets.all(16),
+        child: widget.wrapper(context, content),
       ),
-      padding: const EdgeInsets.all(16),
-      child: wrapper(context, content),
     );
   }
 }

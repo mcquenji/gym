@@ -97,7 +97,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30.0),
+        padding: const PaddingAll(),
         child: Column(
           children: [
             Expanded(
