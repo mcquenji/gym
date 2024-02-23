@@ -154,9 +154,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     decoration: InputDecoration(
                       hintText: l10n.completeProfile_height,
                       prefixIcon: const Icon(Ionicons.body_outline),
-                      suffix: Text(
-                        l10n.completeProfile_height_unit,
-                      ),
+                      suffixText: l10n.completeProfile_height_unit,
                     ),
                   ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 16),
@@ -169,9 +167,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     decoration: InputDecoration(
                       hintText: l10n.completeProfile_weight,
                       prefixIcon: const Icon(Ionicons.scale_outline),
-                      suffix: Text(
-                        l10n.completeProfile_weight_unit,
-                      ),
+                      suffixText: l10n.completeProfile_weight_unit,
                     ),
                   ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 16),
@@ -184,7 +180,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     decoration: InputDecoration(
                       hintText: l10n.completeProfile_bodyFat,
                       prefixIcon: const Icon(IconlyLight.graph),
-                      suffix: const Text("%"),
+                      suffixText: "%",
                     ),
                   ).animate().sleek(stagger: stagger),
                   const SizedBox(height: 16),

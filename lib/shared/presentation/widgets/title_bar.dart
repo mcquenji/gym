@@ -44,8 +44,9 @@ class TitleBar extends ConsumerWidget implements PreferredSizeWidget {
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuIcon(
                 onTap: () async {
-                  userController.logout();
-                  context.router.push(const LoginRoute());
+                  var router = context.router;
+                  await userController.logout();
+                  router.push(const LoginRoute());
                 },
                 icon: IconlyLight.logout,
                 label: context.l10n.global_logout,

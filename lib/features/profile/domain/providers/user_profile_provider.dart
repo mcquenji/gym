@@ -62,6 +62,55 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
 
     state = userProfile;
   }
+
+  Future<void> setDateOfBirth(DateTime dateOfBirth) async {
+    if (user == null) {
+      throw Exception("User is not logged in");
+    }
+
+    final profile = state!
+        .copyWith(dateOfBirthTimestamp: dateOfBirth.millisecondsSinceEpoch);
+
+    await userProfileDataSource.write(profile);
+
+    state = profile;
+  }
+
+  Future<void> setWeight(double weight) async {
+    if (user == null) {
+      throw Exception("User is not logged in");
+    }
+
+    final profile = state!.copyWith(weight: weight);
+
+    await userProfileDataSource.write(profile);
+
+    state = profile;
+  }
+
+  Future<void> setHeight(int height) async {
+    if (user == null) {
+      throw Exception("User is not logged in");
+    }
+
+    final profile = state!.copyWith(height: height);
+
+    await userProfileDataSource.write(profile);
+
+    state = profile;
+  }
+
+  Future<void> setBodyFat(double? bodyFat) async {
+    if (user == null) {
+      throw Exception("User is not logged in");
+    }
+
+    final profile = state!.copyWith(bodyFatPercentage: bodyFat);
+
+    await userProfileDataSource.write(profile);
+
+    state = profile;
+  }
 }
 
 typedef UserProfileProviderState = UserProfile?;

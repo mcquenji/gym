@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/features/profile/profile.dart';
 import 'package:gym/shared/shared.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 @RoutePage()
@@ -15,6 +18,117 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
+  void updateDoB() async {
+    final profile = ref.read(userProfileProvider);
+    final controller = ref.read(userProfileProvider.notifier);
+
+    if (profile == null) {
+      return;
+    }
+
+    DateTime? dateOfBirth;
+
+    updateDoB(DateTime date) => dateOfBirth = date;
+
+    await showModalBottomSheet(
+      useRootNavigator: true,
+      context: context,
+      showDragHandle: true,
+      builder: (context) {
+        return CupertinoDatePicker(
+          onDateTimeChanged: updateDoB,
+          maximumDate: DateTime.now(),
+          initialDateTime: profile.dateOfBirth,
+          mode: CupertinoDatePickerMode.date,
+        );
+      },
+    );
+    if (dateOfBirth != null) {
+      await controller.setDateOfBirth(dateOfBirth!);
+    }
+  }
+
+  Future<String?> showInputSheet({
+    required String initialValue,
+    required List<TextInputFormatter> formatters,
+    required IconData icon,
+    required String placeholder,
+    String? unit,
+  }) async {
+    String? input;
+
+    await showModalBottomSheet(
+      useRootNavigator: true,
+      context: context,
+      showDragHandle: true,
+      builder: (context) {
+        return Padding(
+          padding: const PaddingAll().Bottom(50).Top(0),
+          child: TextField(
+            controller: TextEditingController(text: initialValue),
+            inputFormatters: formatters,
+            onChanged: (value) => input = value,
+            decoration: InputDecoration(
+              hintText: placeholder,
+              prefixIcon: Icon(icon),
+              suffixText: unit,
+            ),
+          ),
+        );
+      },
+    );
+
+    return input != null && input!.isNotEmpty ? input : null;
+  }
+
+  updateWeight() async {
+    final profile = ref.read(userProfileProvider);
+    final controller = ref.read(userProfileProvider.notifier);
+
+    if (profile == null) {
+      return;
+    }
+
+    final weight = await showInputSheet(
+      initialValue: profile.weight.toString(),
+      formatters: [
+        DecimalTextInputFormatter(1),
+        DecimalTextInputFormatter.digitsOnly,
+      ],
+      icon: Ionicons.scale_outline,
+      placeholder: l10n.completeProfile_weight,
+      unit: l10n.completeProfile_weight_unit,
+    );
+
+    if (weight != null) {
+      await controller.setWeight(double.parse(weight));
+    }
+  }
+
+  updateHeight() async {
+    final profile = ref.read(userProfileProvider);
+    final controller = ref.read(userProfileProvider.notifier);
+
+    if (profile == null) {
+      return;
+    }
+
+    final height = await showInputSheet(
+      initialValue: profile.height.toString(),
+      formatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        FilteringTextInputFormatter.allow(RegExp(r'^\d{0,3}')),
+      ],
+      icon: Ionicons.body_outline,
+      placeholder: l10n.completeProfile_height,
+      unit: l10n.completeProfile_height_unit,
+    );
+
+    if (height != null) {
+      await controller.setHeight(int.parse(height));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
@@ -76,23 +190,37 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
               children: [
                 Expanded(
                   child: card(
-                    l10n.profile_height_caption,
-                    l10n.profile_height(profile.height),
+                    title: l10n.profile_height_caption,
+                    value: l10n.profile_height(profile.height),
+                    onTap: updateHeight,
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: card(
-                    l10n.profile_weight_caption,
-                    l10n.profile_weight(profile.weight),
+                    title: l10n.profile_weight_caption,
+                    value: l10n.profile_weight(profile.weight),
+                    onTap: updateWeight,
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: card(
-                    l10n.profile_age_caption,
-                    l10n.profile_age(
-                        DateTime.now().year - profile.dateOfBirth.year),
+                    title: l10n.profile_age_caption,
+                    value: l10n.profile_age(() {
+                      DateTime currentDate = DateTime.now();
+                      DateTime dateOfBirth = profile.dateOfBirth;
+                      int age = currentDate.year - dateOfBirth.year;
+
+                      if (currentDate.month < dateOfBirth.month ||
+                          (currentDate.month == dateOfBirth.month &&
+                              currentDate.day < dateOfBirth.day)) {
+                        age--;
+                      }
+
+                      return age;
+                    }()),
+                    onTap: updateDoB,
                   ),
                 ),
               ],
@@ -103,30 +231,37 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  Widget card(String title, String value) {
-    return Container(
-      padding: const PaddingAll(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: theme.colorScheme.surface,
-        boxShadow: theme.shadows.defaultShadow,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GradientText(
-            value,
-            style: theme.textTheme.bodyLarge,
-            colors: theme.gradients.primaryGradient.linear.colors,
-          ),
-          const SizedBox(height: 2),
-          Text(
-            title,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.greyscale.grey1,
+  Widget card({
+    required String title,
+    required String value,
+    VoidCallback? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const PaddingAll(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: theme.colorScheme.surface,
+          boxShadow: theme.shadows.defaultShadow,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GradientText(
+              value,
+              style: theme.textTheme.bodyLarge,
+              colors: theme.gradients.primaryGradient.linear.colors,
             ),
-          ),
-        ],
+            const SizedBox(height: 2),
+            Text(
+              title,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.greyscale.grey1,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
