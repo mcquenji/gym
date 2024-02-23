@@ -63,9 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
           boxShadow: context.theme.shadows.bottomNavBar,
         ),
         child: BottomAppBar(
-          notchMargin: 8,
-          clipBehavior: Clip.antiAlias,
           padding: const PaddingHorizontal(),
+          notchMargin: 5,
           shape: const CircularNotchedRectangle(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 activeIcon: IconlyBold.activity,
                 index: 1,
               ),
-              const SizedBox.shrink(),
               const SizedBox.shrink(),
               navItem(
                 icon: IconlyLight.camera,
@@ -99,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: GestureDetector(
         onTap: () => updateIndex(workoutIndex),
         child: Container(
-          padding: const PaddingAll(25),
+          padding: const PaddingAll(20),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: currentIndex == workoutIndex
