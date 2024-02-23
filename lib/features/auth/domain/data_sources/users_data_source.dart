@@ -6,6 +6,8 @@ abstract class UsersDataSource {
 
   Future<User?> get(String id);
 
+  Future<String> createUserID();
+
   Future<void> write(User user);
 
   Future<void> delete(String id);

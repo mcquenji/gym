@@ -9,6 +9,7 @@ class User with _$User {
     required String id,
     required String name,
     required String email,
+    required bool registered,
     required bool onboarded,
   }) = _User;
 

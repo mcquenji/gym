@@ -9,21 +9,13 @@ class PrimaryButton extends StatelessWidget {
     this.leading,
     this.trailing,
     this.loading = false,
-    this.shrinkWrap = false,
   });
 
   final VoidCallback? onPressed;
   final Widget child;
   final Widget? leading;
   final Widget? trailing;
-
-  /// If true, the button will show a loading indicator instead of the [child].
-  ///
-  /// Tap events will be ignored when this is true, so [onPressed] will not be called.
   final bool loading;
-
-  /// If true, the button will wrap its content tightly and not fill the parent's width.
-  final bool shrinkWrap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,26 +33,27 @@ class PrimaryButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
-          gradient: GradientTheme.of(context).primaryGradient.linear,
+          gradient: Gradients.of(context).primaryGradient.linear,
           borderRadius: BorderRadius.circular(50),
-          boxShadow: context.theme.shadows.buttonShadow,
+          boxShadow: kElevationToShadow[8],
         ),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         height: 64,
-        width: shrinkWrap ? null : double.infinity,
         child: DefaultTextStyle(
           style: context.theme.textTheme.bodyLarge!.copyWith(
             color: context.theme.colorScheme.onPrimary,
             fontWeight: FontWeight.bold,
           ),
           child: loading
-              ? Center(
+              ? Align(
+                  alignment: Alignment.center,
                   child: CircularProgressIndicator(
                     color: context.theme.colorScheme.onPrimary,
                     strokeCap: StrokeCap.round,
                   ),
                 )
               : Row(
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (leading != null) onPrimaryIconTheme(leading!),

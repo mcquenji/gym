@@ -1,12 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-
-// Screen imports
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
-import 'package:gym/features/onboarding/onboarding.dart';
-import 'package:gym/features/profile/profile.dart';
-import 'package:gym/features/exercises/exercises.dart';
 
 part 'app_router.gr.dart';
 
@@ -110,124 +104,56 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        DefaultRoute(
+        CustomRoute(
           page: LoginRoute.page,
           path: '/login',
           initial: true,
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+          transitionsBuilder: TransitionsBuilders.slideBottom,
         ),
-        DefaultRoute(
-          page: RegisterRoute.page,
-          path: '/register',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
-        ),
-        DefaultRoute(
-          page: ResetPasswordRoute.page,
-          path: '/reset-password',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
-        ),
-        DefaultRoute(
+        CustomRoute(
           guards: [
             AuthGuard(ref),
           ],
-          maintainState: true,
+          page: ChangePasswordRoute.page,
+          path: '/change-password',
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        ),
+        CustomRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
           page: OnboardingRoute.page,
           path: '/onboarding',
           children: [
-            DefaultRoute(
-              guards: [
-                AuthGuard(ref),
-              ],
-              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
-              page: OnboardingTrackYourGoalsRoute.page,
-              path: '',
-            ),
-            DefaultRoute(
-              guards: [
-                AuthGuard(ref),
-              ],
-              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
               page: OnboardingAlsRoute.page,
               path: 'als',
             ),
-            DefaultRoute(
-              guards: [
-                AuthGuard(ref),
-              ],
+            CustomRoute(
               page: OnboardingCompetitionRoute.page,
-              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
+              transitionsBuilder: TransitionsBuilders.slideLeft,
               path: 'competition',
             ),
-            DefaultRoute(
-              guards: [
-                AuthGuard(ref),
-              ],
-              transitionsBuilder: TransitionsBuilders.slideLeft.cool,
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
               page: OnboardingMonthlyPicsRoute.page,
               path: 'monthly-pics',
             ),
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: OnboardingTrackYourGoalsRoute.page,
+              path: '',
+            ),
           ],
-        ),
-        DefaultRoute(
-          guards: [
-            AuthGuard(ref),
-          ],
-          page: CompleteProfileRoute.page,
-          path: '/complete-profile',
-          transitionsBuilder: TransitionsBuilders.noTransition,
-        ),
-        DefaultRoute(
-          guards: [
-            AuthGuard(ref),
-          ],
-          page: SearchExercisesRoute.page,
-          path: '/exercises',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
-        ),
-        DefaultRoute(
-          guards: [
-            AuthGuard(ref),
-          ],
-          page: ExerciseDetailsRoute.page,
-          path: '/exercises/:exerciseId',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
-        ),
+          transitionsBuilder: TransitionsBuilders.slideTop,
+        )
       ];
 }
 
 /// Implements [CustomRoute] with some default settings.
 class DefaultRoute extends CustomRoute {
   /// Implements [CustomRoute] with some default settings.
-  DefaultRoute({
-    required super.page,
-    required super.path,
-    super.initial,
-    super.guards,
-    super.transitionsBuilder,
-    super.children,
-    super.maintainState,
-  }) : super(durationInMilliseconds: 800);
-}
-
-extension CoolerRouteTransitions on RouteTransitionsBuilder {
-  /// Spices up the transition.
-  RouteTransitionsBuilder get cool => (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        Widget child,
-      ) {
-        animation = CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeOutExpo,
-        );
-
-        return FadeTransition(
-          opacity: Tween<double>(
-            begin: 0.2,
-            end: 1.0,
-          ).animate(animation),
-          child: this.call(context, animation, secondaryAnimation, child),
-        );
-      };
+  DefaultRoute({required super.page, required super.path, super.initial})
+      : super(transitionsBuilder: TransitionsBuilders.noTransition);
 }
