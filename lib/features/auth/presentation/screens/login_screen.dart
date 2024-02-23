@@ -47,7 +47,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     var user = ref.watch(userProvider);
 
     if (user != null) {
-      context.pushRoute(const OnboardingRoute());
+      context.pushRoute(const HomeRoute());
     }
 
     return Scaffold(
