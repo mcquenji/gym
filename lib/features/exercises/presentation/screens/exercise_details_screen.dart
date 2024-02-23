@@ -143,7 +143,6 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                                 style: context.theme.textTheme.bodyMedium
                                     ?.copyWith(
                                   color: context.theme.greyscale.grey2,
-                                  decoration: TextDecoration.underline,
                                 ),
                               ),
                             ),
