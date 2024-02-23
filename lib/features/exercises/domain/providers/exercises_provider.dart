@@ -41,12 +41,12 @@ extension ExercisesExt on List<Exercise> {
         return false;
       }
       if (secondaryMuscle != null &&
-          !e.secondaryMuscles.contains(primaryMuscle)) {
+          !e.secondaryMuscles.contains(secondaryMuscle)) {
         return false;
       }
 
-      if (primaryMuscles != null &&
-          !e.secondaryMuscles.containsAll(primaryMuscles)) {
+      if (secondaryMuscles != null &&
+          !e.secondaryMuscles.containsAll(secondaryMuscles)) {
         return false;
       }
 

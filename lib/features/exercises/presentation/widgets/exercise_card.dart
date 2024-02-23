@@ -1,8 +1,8 @@
 import 'package:advanced_icon/advanced_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/shared/shared.dart';
-import 'package:list_ext/list_ext.dart';
 
 class ExerciseCard extends StatefulWidget {
   const ExerciseCard({
@@ -90,14 +90,25 @@ class _ExerciseCardState extends State<ExerciseCard> {
   Widget build(BuildContext context) {
     final content = Row(
       children: [
-        // TODO: Image.asset() based on exercise.primaryMuscles.first
-        CircleAvatar(
-          backgroundColor: context.theme.primaryColor,
-          radius: 30,
-          child: Text(
-            widget.exercise.name[0].toUpperCase(),
-            style: context.theme.textTheme.headlineMedium?.copyWith(
-              color: context.theme.colorScheme.onPrimary,
+        ClipOval(
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: theme.gradients.secondaryGradient.linear.colors
+                    .map((e) => e.withOpacity(0.3))
+                    .toList(),
+                begin: theme.gradients.secondaryGradient.linear.begin,
+                end: theme.gradients.secondaryGradient.linear.end,
+                stops: theme.gradients.secondaryGradient.linear.stops,
+                tileMode: theme.gradients.secondaryGradient.linear.tileMode,
+                transform: theme.gradients.secondaryGradient.linear.transform,
+              ),
+            ),
+            child: Center(
+              child: widget.exercise.category.asset.svg(),
             ),
           ),
         ),
@@ -269,6 +280,25 @@ extension ExerciseCategoryExtension on ExerciseCategory {
         return context.l10n.exercises_enumExerciseCategory_plyometrics;
       case ExerciseCategory.strength:
         return context.l10n.exercises_enumExerciseCategory_strength;
+    }
+  }
+
+  SvgGenImage get asset {
+    switch (this) {
+      case ExerciseCategory.stretching:
+        return Assets.exercises.stretching;
+      case ExerciseCategory.powerlifting:
+        return Assets.exercises.powerlifting;
+      case ExerciseCategory.strongman:
+        return Assets.exercises.strongman;
+      case ExerciseCategory.cardio:
+        return Assets.exercises.cardio;
+      case ExerciseCategory.olympicWeightlifting:
+        return Assets.exercises.olympicWeightlifting;
+      case ExerciseCategory.plyometrics:
+        return Assets.exercises.plyometrics;
+      case ExerciseCategory.strength:
+        return Assets.exercises.strength;
     }
   }
 }

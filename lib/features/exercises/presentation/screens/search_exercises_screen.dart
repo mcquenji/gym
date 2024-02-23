@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 @RoutePage<Exercise?>()
 class SearchExercisesScreen extends ConsumerStatefulWidget {
@@ -18,6 +19,14 @@ class SearchExercisesScreen extends ConsumerStatefulWidget {
 class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
   final searchController = TextEditingController();
 
+  MuscleGroup? primaryMuscle;
+  MuscleGroup? secondaryMuscle;
+  ExerciseEquipment? equipment;
+  ExerciseCategory? category;
+  ExerciseForce? force;
+  ExerciseLevel? level;
+  ExerciseMechanic? mechanic;
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +34,122 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
     searchController.addListener(() {
       setState(() {});
     });
+  }
+
+  void showFilterOptions() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      showDragHandle: true,
+      context: context,
+      builder: (context) => Container(
+        width: double.infinity,
+        padding: const PaddingHorizontal().Bottom(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FilterOption(
+                context: context,
+                values: MuscleGroup.values,
+                onChanged: (value) {
+                  setState(() {
+                    primaryMuscle = value;
+                  });
+                },
+                selectedValue: primaryMuscle,
+                localize: (value) => value.localize(context),
+                title: context.l10n.searchExercises_primaryMuscle,
+                icon: IconlyBroken.category,
+              ),
+              const SizedBox(height: 10),
+              FilterOption(
+                context: context,
+                values: MuscleGroup.values,
+                onChanged: (value) {
+                  setState(() {
+                    secondaryMuscle = value;
+                  });
+                },
+                selectedValue: secondaryMuscle,
+                localize: (value) => value.localize(context),
+                title: context.l10n.searchExercises_secondaryMuscle,
+                icon: IconlyLight.moreSquare,
+              ),
+              const SizedBox(height: 10),
+              FilterOption(
+                context: context,
+                values: ExerciseEquipment.values,
+                onChanged: (value) {
+                  setState(() {
+                    equipment = value;
+                  });
+                },
+                selectedValue: equipment,
+                localize: (value) => value.localize(context),
+                title: context.l10n.searchExercises_equipment,
+                icon: Ionicons.barbell,
+              ),
+              const SizedBox(height: 10),
+              FilterOption(
+                context: context,
+                values: ExerciseCategory.values,
+                onChanged: (value) {
+                  setState(() {
+                    category = value;
+                  });
+                },
+                selectedValue: category,
+                localize: (value) => value.localize(context),
+                title: context.l10n.searchExercises_category,
+                icon: Ionicons.fitness,
+              ),
+              const SizedBox(height: 10),
+              FilterOption(
+                context: context,
+                values: ExerciseForce.values,
+                onChanged: (value) {
+                  setState(() {
+                    force = value;
+                  });
+                },
+                selectedValue: force,
+                localize: (value) => value.localize(context),
+                title: context.l10n.searchExercises_force,
+                icon: IconlyLight.discovery,
+              ),
+              const SizedBox(height: 10),
+              FilterOption(
+                context: context,
+                values: ExerciseLevel.values,
+                onChanged: (value) {
+                  setState(() {
+                    level = value;
+                  });
+                },
+                selectedValue: level,
+                localize: (value) => value.localize(context),
+                title: context.l10n.searchExercises_level,
+                icon: IconlyLight.heart,
+              ),
+              const SizedBox(height: 10),
+              FilterOption(
+                context: context,
+                values: ExerciseMechanic.values,
+                onChanged: (value) {
+                  setState(() {
+                    mechanic = value;
+                  });
+                },
+                selectedValue: mechanic,
+                localize: (value) => value.localize(context),
+                title: context.l10n.searchExercises_mechanic,
+                icon: IconlyLight.show,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -37,6 +162,13 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
         data: (exercises) {
           final matchingExercises = exercises.filterBy(
             name: searchController.text.toLowerCase(),
+            mechanic: mechanic,
+            level: level,
+            force: force,
+            category: category,
+            equipment: equipment,
+            primaryMuscle: primaryMuscle,
+            secondaryMuscle: secondaryMuscle,
           );
 
           return Column(
@@ -53,10 +185,13 @@ class _SearchExercisesScreenState extends ConsumerState<SearchExercisesScreen> {
                     decoration: InputDecoration(
                       hintText: context.l10n.searchExercises_placeholder,
                       prefixIcon: const Icon(Icons.search),
-                      suffixIcon: AdvancedIcon(
-                        icon: IconlyLight.filter,
-                        gradient:
-                            context.theme.gradients.primaryGradient.linear,
+                      suffixIcon: GestureDetector(
+                        onTap: showFilterOptions,
+                        child: AdvancedIcon(
+                          icon: IconlyLight.filter,
+                          gradient:
+                              context.theme.gradients.primaryGradient.linear,
+                        ),
                       ),
                     ),
                   ),

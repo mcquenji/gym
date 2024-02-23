@@ -75,5 +75,53 @@ final themeProvider = Provider<ThemeData>((ref) {
       surfaceTintColor: colorScheme.surface,
     ),
     shadowColor: greyscale.grey3.withOpacity(0.3),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: textTheme.bodySmall?.copyWith(
+        color: greyscale.grey1,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: colorScheme.surface,
+        hoverColor: Colors.transparent,
+        focusColor: colorScheme.surface,
+        border: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        hintStyle: textTheme.bodyMedium?.copyWith(
+          color: greyscale.grey2,
+        ),
+        labelStyle: textTheme.bodyMedium?.copyWith(
+          color: greyscale.grey1,
+        ),
+        iconColor: greyscale.grey1,
+        prefixIconColor: greyscale.grey1,
+        suffixIconColor: greyscale.grey1,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 15,
+          horizontal: 16,
+        ),
+      ),
+      menuStyle: MenuStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(colorScheme.surface),
+        elevation: MaterialStateProperty.all(8),
+        shadowColor: MaterialStateProperty.all(
+          greyscale.grey3.withOpacity(0.3),
+        ),
+        surfaceTintColor: MaterialStateProperty.all(colorScheme.surface),
+        side: MaterialStateProperty.all(
+          BorderSide.none,
+        ),
+      ),
+    ),
   );
 });
