@@ -4,22 +4,27 @@ class ShadowTheme extends ThemeExtension<ShadowTheme> {
   final Shadows buttonShadow;
   final Shadows defaultShadow;
   final Shadows longPressShadow;
+  final Shadows bottomNavBar;
 
   ShadowTheme({
     required this.buttonShadow,
     required this.defaultShadow,
     required this.longPressShadow,
+    required this.bottomNavBar,
   });
 
   @override
-  ThemeExtension<ShadowTheme> copyWith(
-      {Shadows? buttonShadow,
-      Shadows? defaultShadow,
-      Shadows? longPressShadow}) {
+  ThemeExtension<ShadowTheme> copyWith({
+    Shadows? buttonShadow,
+    Shadows? defaultShadow,
+    Shadows? longPressShadow,
+    Shadows? bottomNavBar,
+  }) {
     return ShadowTheme(
       buttonShadow: buttonShadow ?? this.buttonShadow,
       defaultShadow: defaultShadow ?? this.defaultShadow,
       longPressShadow: longPressShadow ?? this.longPressShadow,
+      bottomNavBar: bottomNavBar ?? this.bottomNavBar,
     );
   }
 
@@ -33,6 +38,7 @@ class ShadowTheme extends ThemeExtension<ShadowTheme> {
         buttonShadow: lerpShadow(buttonShadow, [], t),
         defaultShadow: lerpShadow(defaultShadow, [], t),
         longPressShadow: lerpShadow(longPressShadow, [], t),
+        bottomNavBar: lerpShadow(bottomNavBar, [], t),
       );
     }
 
@@ -40,6 +46,7 @@ class ShadowTheme extends ThemeExtension<ShadowTheme> {
       buttonShadow: lerpShadow(buttonShadow, other.buttonShadow, t),
       defaultShadow: lerpShadow(defaultShadow, other.defaultShadow, t),
       longPressShadow: lerpShadow(longPressShadow, other.longPressShadow, t),
+      bottomNavBar: lerpShadow(bottomNavBar, other.bottomNavBar, t),
     );
   }
 

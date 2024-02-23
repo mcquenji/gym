@@ -7,6 +7,7 @@ import 'package:gym/features/auth/auth.dart';
 import 'package:gym/features/onboarding/onboarding.dart';
 import 'package:gym/features/profile/profile.dart';
 import 'package:gym/features/exercises/exercises.dart';
+import 'package:gym/shared/shared.dart';
 
 part 'app_router.gr.dart';
 
@@ -113,7 +114,6 @@ class AppRouter extends _$AppRouter {
         DefaultRoute(
           page: LoginRoute.page,
           path: '/login',
-          initial: true,
           transitionsBuilder: TransitionsBuilders.slideBottom.cool,
         ),
         DefaultRoute(
@@ -204,9 +204,19 @@ class AppRouter extends _$AppRouter {
           guards: [
             AuthGuard(ref),
           ],
-          page: ProfileRoute.page,
-          path: '/profile',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+          page: HomeRoute.page,
+          path: '/',
+          initial: true,
+          children: [
+            DefaultRoute(
+              guards: [
+                AuthGuard(ref),
+              ],
+              page: ProfileRoute.page,
+              path: 'profile',
+              transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+            ),
+          ],
         ),
       ];
 }

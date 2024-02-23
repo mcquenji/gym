@@ -20,6 +20,13 @@ final shadowThemeProvider = Provider<ShadowTheme>((ref) {
         offset: const Offset(0, 5),
       ),
     ],
+    bottomNavBar: [
+      BoxShadow(
+        color: colorScheme.onSurface.withOpacity(0.08),
+        blurRadius: 20,
+        offset: const Offset(0, -5),
+      ),
+    ],
     buttonShadow: kElevationToShadow[8]!,
   );
 });

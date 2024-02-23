@@ -7,3 +7,4 @@ export 'package:gym/gen/assets.gen.dart';
 export 'package:gym/app_router.dart';
 export 'package:flutter_iconly/flutter_iconly.dart';
 export 'package:flutter_animate/flutter_animate.dart';
+export 'screens/screens.dart';

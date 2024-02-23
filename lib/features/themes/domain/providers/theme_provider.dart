@@ -123,5 +123,33 @@ final themeProvider = Provider<ThemeData>((ref) {
         ),
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: colorScheme.surface,
+      elevation: 0,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      selectedItemColor: colorScheme.secondary,
+      unselectedItemColor: greyscale.grey3,
+      type: BottomNavigationBarType.fixed,
+      selectedLabelStyle: textTheme.bodySmall?.copyWith(
+        color: colorScheme.primary,
+      ),
+      unselectedLabelStyle: textTheme.bodySmall?.copyWith(
+        color: greyscale.grey3,
+      ),
+      selectedIconTheme: IconThemeData(
+        color: colorScheme.secondary,
+        size: 26,
+      ),
+      unselectedIconTheme: IconThemeData(
+        color: greyscale.grey3,
+        size: 26,
+      ),
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: colorScheme.surface,
+      elevation: 0,
+      shape: const CircularNotchedRectangle(),
+    ),
   );
 });
