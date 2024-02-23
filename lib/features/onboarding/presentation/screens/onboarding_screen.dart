@@ -86,7 +86,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     var user = ref.watch(userProvider);
 
     if (user?.onboarded ?? false) {
-      context.router.push(SearchExercisesRoute());
+      context.router.push(const CompleteProfileRoute());
       return const Scaffold();
     }
 
