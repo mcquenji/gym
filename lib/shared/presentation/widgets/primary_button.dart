@@ -41,9 +41,9 @@ class PrimaryButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
-          gradient: Gradients.of(context).primaryGradient.linear,
+          gradient: GradientTheme.of(context).primaryGradient.linear,
           borderRadius: BorderRadius.circular(50),
-          boxShadow: kElevationToShadow[8],
+          boxShadow: context.theme.shadows.buttonShadow,
         ),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         height: 64,

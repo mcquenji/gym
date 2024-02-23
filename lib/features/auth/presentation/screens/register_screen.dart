@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
-import 'package:gym/features/onboarding/onboarding.dart';
 import 'package:gym/features/profile/profile.dart';
 import 'package:gym/shared/shared.dart';
 
@@ -94,7 +93,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const PaddingAll(),
         child: FutureBuilder(
           future: allowRegisterWithoutReferral
               ? Future.value(true)

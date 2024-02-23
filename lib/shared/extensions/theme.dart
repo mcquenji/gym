@@ -88,6 +88,7 @@ extension TextStyleExt on TextStyle? {
 }
 
 extension ThemeExt on ThemeData {
-  Gradients get gradients => extension<Gradients>()!;
+  GradientTheme get gradients => extension<GradientTheme>()!;
   Greyscale get greyscale => extension<Greyscale>()!;
+  ShadowTheme get shadows => extension<ShadowTheme>()!;
 }

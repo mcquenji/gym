@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_circular_progress_indicator/gradient_circular_progress_indicator.dart';
 import 'package:gym/features/auth/auth.dart';
@@ -87,7 +86,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     var user = ref.watch(userProvider);
 
     if (user?.onboarded ?? false) {
-      context.router.push(const CompleteProfileRoute());
+      context.router.push(SearchExercisesRoute());
       return const Scaffold();
     }
 
@@ -102,7 +101,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
               animation: _controller,
               builder: (context, _) => GradientCircularProgressIndicator(
                 progress: _animation.value,
-                gradient: Gradients.of(context).primaryGradient.linear,
+                gradient: GradientTheme.of(context).primaryGradient.linear,
                 size: 75,
                 stroke: 3,
               ),
@@ -111,7 +110,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                gradient: Gradients.of(context).primaryGradient.linear,
+                gradient: GradientTheme.of(context).primaryGradient.linear,
                 borderRadius: BorderRadius.circular(500),
               ),
               child: Icon(

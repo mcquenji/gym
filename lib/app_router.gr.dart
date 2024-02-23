@@ -21,6 +21,19 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompleteProfileScreen(),
       );
     },
+    ExerciseDetailsRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ExerciseDetailsRouteArgs>(
+          orElse: () =>
+              ExerciseDetailsRouteArgs(id: pathParams.getString('exerciseId')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ExerciseDetailsScreen(
+          key: args.key,
+          id: args.id,
+        ),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -83,6 +96,17 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SearchExercisesRoute.name: (routeData) {
+      final args = routeData.argsAs<SearchExercisesRouteArgs>(
+          orElse: () => const SearchExercisesRouteArgs());
+      return AutoRoutePage<Exercise?>(
+        routeData: routeData,
+        child: SearchExercisesScreen(
+          key: args.key,
+          title: args.title,
+        ),
+      );
+    },
   };
 }
 
@@ -98,6 +122,45 @@ class CompleteProfileRoute extends PageRouteInfo<void> {
   static const String name = 'CompleteProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ExerciseDetailsScreen]
+class ExerciseDetailsRoute extends PageRouteInfo<ExerciseDetailsRouteArgs> {
+  ExerciseDetailsRoute({
+    Key? key,
+    required String id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ExerciseDetailsRoute.name,
+          args: ExerciseDetailsRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'exerciseId': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'ExerciseDetailsRoute';
+
+  static const PageInfo<ExerciseDetailsRouteArgs> page =
+      PageInfo<ExerciseDetailsRouteArgs>(name);
+}
+
+class ExerciseDetailsRouteArgs {
+  const ExerciseDetailsRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'ExerciseDetailsRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
@@ -259,5 +322,43 @@ class ResetPasswordRouteArgs {
   @override
   String toString() {
     return 'ResetPasswordRouteArgs{key: $key, resetCode: $resetCode}';
+  }
+}
+
+/// generated route for
+/// [SearchExercisesScreen]
+class SearchExercisesRoute extends PageRouteInfo<SearchExercisesRouteArgs> {
+  SearchExercisesRoute({
+    Key? key,
+    String? title,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SearchExercisesRoute.name,
+          args: SearchExercisesRouteArgs(
+            key: key,
+            title: title,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchExercisesRoute';
+
+  static const PageInfo<SearchExercisesRouteArgs> page =
+      PageInfo<SearchExercisesRouteArgs>(name);
+}
+
+class SearchExercisesRouteArgs {
+  const SearchExercisesRouteArgs({
+    this.key,
+    this.title,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  @override
+  String toString() {
+    return 'SearchExercisesRouteArgs{key: $key, title: $title}';
   }
 }

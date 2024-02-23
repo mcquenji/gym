@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/features/auth/auth.dart';
-import 'package:gym/features/onboarding/onboarding.dart';
 import 'package:gym/shared/shared.dart';
 
 @RoutePage()
@@ -53,7 +52,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const PaddingAll(),
         child: Column(
           children: [
             Expanded(

@@ -183,7 +183,7 @@ class AvataaarsGeneratorService extends AvatarGeneratorService {
 
   @override
   Future<String> generateAvatar() async {
-    log.fine("Generating avatar");
+    log("Generating avatar");
 
     final topType = topTypes.random;
     final topColor = topColors.random;
@@ -213,7 +213,7 @@ class AvataaarsGeneratorService extends AvatarGeneratorService {
     });
 
     if (response.isNotOk) {
-      log.severe(
+      log(
         "Failed to generate avatar with status code ${response.statusCode}",
         response.body,
       );
@@ -221,7 +221,7 @@ class AvataaarsGeneratorService extends AvatarGeneratorService {
       throw Exception("Failed to generate avatar");
     }
 
-    log.fine("Avatar generated successfully");
+    log("Avatar generated successfully");
 
     // Replace the circle color with `currentColor`, so we can theme it.
     return response.body!.replaceAll("#65C9FF", "currentColor");

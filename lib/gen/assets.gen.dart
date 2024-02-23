@@ -29,6 +29,48 @@ class $AssetsAuthGen {
   List<SvgGenImage> get values => [completeProfile, invalidCode, letsGo];
 }
 
+class $AssetsExercisesGen {
+  const $AssetsExercisesGen();
+
+  /// File path: assets/exercises/cardio.svg
+  SvgGenImage get cardio => const SvgGenImage('assets/exercises/cardio.svg');
+
+  /// File path: assets/exercises/olympic-weightlifting.svg
+  SvgGenImage get olympicWeightlifting =>
+      const SvgGenImage('assets/exercises/olympic-weightlifting.svg');
+
+  /// File path: assets/exercises/plyometrics.svg
+  SvgGenImage get plyometrics =>
+      const SvgGenImage('assets/exercises/plyometrics.svg');
+
+  /// File path: assets/exercises/powerlifting.svg
+  SvgGenImage get powerlifting =>
+      const SvgGenImage('assets/exercises/powerlifting.svg');
+
+  /// File path: assets/exercises/strength.svg
+  SvgGenImage get strength =>
+      const SvgGenImage('assets/exercises/strength.svg');
+
+  /// File path: assets/exercises/stretching.svg
+  SvgGenImage get stretching =>
+      const SvgGenImage('assets/exercises/stretching.svg');
+
+  /// File path: assets/exercises/strongman.svg
+  SvgGenImage get strongman =>
+      const SvgGenImage('assets/exercises/strongman.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        cardio,
+        olympicWeightlifting,
+        plyometrics,
+        powerlifting,
+        strength,
+        stretching,
+        strongman
+      ];
+}
+
 class $AssetsNotFoundGen {
   const $AssetsNotFoundGen();
 
@@ -67,6 +109,7 @@ class Assets {
   Assets._();
 
   static const $AssetsAuthGen auth = $AssetsAuthGen();
+  static const $AssetsExercisesGen exercises = $AssetsExercisesGen();
   static const $AssetsNotFoundGen notFound = $AssetsNotFoundGen();
   static const $AssetsOnboardingGen onboarding = $AssetsOnboardingGen();
 }
