@@ -132,7 +132,7 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 15),
                         if (exercise.primaryMuscles.length > 1 ||
                             exercise.secondaryMuscles.length > 1)
                           Center(
@@ -148,9 +148,6 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                               ),
                             ),
                           ),
-                        if (exercise.primaryMuscles.length > 1 ||
-                            exercise.secondaryMuscles.length > 1)
-                          const SizedBox(height: 20),
                         StickyHeader(
                           header: Container(
                             padding:
