@@ -6,6 +6,7 @@ import 'package:gym/shared/shared.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sticky_headers/sticky_headers/widget.dart';
 
 @RoutePage()
 class ExerciseDetailsScreen extends ConsumerWidget {
@@ -34,135 +35,158 @@ class ExerciseDetailsScreen extends ConsumerWidget {
               duration: 2.seconds,
             );
 
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                      autoPlayCurve: Curves.easeOutCubic,
-                      viewportFraction: 1,
-                      height: MediaQuery.of(context).size.height * 0.26,
-                    ),
-                    items: exercise!.images
-                        .map(
-                          (e) => ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(e, fit: BoxFit.cover),
-                          ),
-                        )
-                        .toList(),
+            return Column(
+              children: [
+                CarouselSlider(
+                  options: CarouselOptions(
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    autoPlayCurve: Curves.easeOutCubic,
+                    viewportFraction: 1,
+                    height: MediaQuery.of(context).size.height * 0.26,
                   ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const PaddingHorizontal(15),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (exercise.primaryMuscles.isNotEmpty) ...[
-                              _info(
-                                IconlyBroken.category,
-                                exercise.primaryMuscles.first.name,
-                                context,
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                            if (exercise.equipment != null) ...[
-                              _info(
-                                Ionicons.barbell,
-                                exercise.equipment!.name,
-                                context,
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                            if (exercise.force != null) ...[
-                              _info(
-                                IconlyLight.discovery,
-                                exercise.force!.name,
-                                context,
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                            _info(
-                              Ionicons.fitness,
-                              exercise.category.name,
-                              context,
-                            ),
-                          ],
+                  items: exercise!.images
+                      .map(
+                        (e) => ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(e, fit: BoxFit.cover),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _info(
-                              IconlyLight.heart,
-                              exercise.level.name,
-                              context,
+                      )
+                      .toList(),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const PaddingHorizontal(15),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (exercise.primaryMuscles.isNotEmpty) ...[
+                                    _info(
+                                      IconlyBroken.category,
+                                      exercise.primaryMuscles.first.name,
+                                      context,
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                  if (exercise.equipment != null) ...[
+                                    _info(
+                                      Ionicons.barbell,
+                                      exercise.equipment!.name,
+                                      context,
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                  if (exercise.force != null) ...[
+                                    _info(
+                                      IconlyLight.discovery,
+                                      exercise.force!.name,
+                                      context,
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                  _info(
+                                    Ionicons.fitness,
+                                    exercise.category.name,
+                                    context,
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _info(
+                                    IconlyLight.heart,
+                                    exercise.level.name,
+                                    context,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  if (exercise.mechanic != null) ...[
+                                    _info(
+                                      IconlyLight.show,
+                                      exercise.mechanic!.name,
+                                      context,
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                  if (exercise.secondaryMuscles.isNotEmpty) ...[
+                                    _info(
+                                      IconlyLight.moreSquare,
+                                      exercise.secondaryMuscles.first.name,
+                                      context,
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              // TODO: Show all muscles in bottom sheet
+                            },
+                            child: Text(
+                              context.l10n.exercisesDetails_showAll,
+                              style:
+                                  context.theme.textTheme.bodyMedium?.copyWith(
+                                color: context.theme.greyscale.grey2,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
-                            const SizedBox(height: 8),
-                            if (exercise.mechanic != null) ...[
-                              _info(
-                                IconlyLight.show,
-                                exercise.mechanic!.name,
-                                context,
-                              ),
-                              const SizedBox(height: 8),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        StickyHeader(
+                          header: Container(
+                            padding: const PaddingAll(15).Left(0).Top(20),
+                            color: context.theme.colorScheme.surface,
+                            width: double.infinity,
+                            child: Text(
+                              context.l10n.exercisesDetails_instructions,
+                              style: context.theme.textTheme.titleLarge.bold,
+                            ).animate().sleek(stagger: stagger),
+                          ),
+                          content: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              for (var i = 0;
+                                  i < exercise.instructions.length;
+                                  i++)
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: "${i + 1}. ",
+                                        style: context
+                                            .theme.textTheme.bodyLarge.bold,
+                                      ),
+                                      TextSpan(
+                                        text: exercise.instructions[i],
+                                        style:
+                                            context.theme.textTheme.bodyMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ).animate().sleek(stagger: stagger),
                             ],
-                            if (exercise.secondaryMuscles.isNotEmpty) ...[
-                              _info(
-                                IconlyLight.moreSquare,
-                                exercise.secondaryMuscles.first.name,
-                                context,
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                          ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        // TODO: Show all muscles in bottom sheet
-                      },
-                      child: Text(
-                        context.l10n.exercisesDetails_showAll,
-                        style: context.theme.textTheme.bodyMedium?.copyWith(
-                          color: context.theme.greyscale.grey2,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    context.l10n.exercisesDetails_instructions,
-                    style: context.theme.textTheme.titleLarge.bold,
-                  ).animate().sleek(stagger: stagger),
-                  for (var i = 0; i < exercise.instructions.length; i++)
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "${i + 1}. ",
-                            style: context.theme.textTheme.bodyLarge.bold,
-                          ),
-                          TextSpan(
-                            text: exercise.instructions[i],
-                            style: context.theme.textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ).animate().sleek(stagger: stagger),
-                ],
-              ),
+                ),
+              ],
             );
           },
           error: (error, _) => Center(
