@@ -17,13 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int workoutIndex = 2;
 
-  Map<int, PageRouteInfo> indexToRoute = {
-    0: const LoginRoute(), // replace with dashboard route when implemented
-    1: const LoginRoute(), // replace with activity route when implemented
-    2: const LoginRoute(), // replace with workout route when implemented
-    3: const LoginRoute(), // replace with monthly photo route when implemented
-    4: const ProfileRoute(),
-  };
+  List<PageRouteInfo> indexToRoute = [
+    const LoginRoute(), // replace with dashboard route when implemented
+    const LoginRoute(), // replace with activity route when implemented
+    const LoginRoute(), // replace with workout route when implemented
+    const LoginRoute(), // replace with monthly photo route when implemented
+    const ProfileRoute(),
+  ];
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     context.router.addListener(() {
       for (var i = 0; i < indexToRoute.length; i++) {
-        if (context.router.isRouteActive(indexToRoute[i]!.routeName)) {
+        if (context.router.isRouteActive(indexToRoute[i].routeName)) {
           setState(() {
             currentIndex = i;
           });
@@ -41,9 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
 
-    currentIndex = indexToRoute.entries
-        .firstWhere((r) => context.router.isRouteActive(r.value.routeName))
-        .key;
+    currentIndex = indexToRoute
+        .indexWhere((r) => context.router.isRouteActive(r.routeName));
   }
 
   void updateIndex(int index) {
@@ -51,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       currentIndex = index;
     });
 
-    context.router.push(indexToRoute[index]!);
+    context.router.push(indexToRoute[index]);
   }
 
   @override
