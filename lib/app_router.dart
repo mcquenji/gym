@@ -171,6 +171,7 @@ class AppRouter extends _$AppRouter {
         DefaultRoute(
           guards: [
             AuthGuard(ref),
+            OnboardedGuard(ref),
           ],
           page: CompleteProfileRoute.page,
           path: '/complete-profile',
@@ -179,22 +180,7 @@ class AppRouter extends _$AppRouter {
         DefaultRoute(
           guards: [
             AuthGuard(ref),
-          ],
-          page: SearchExercisesRoute.page,
-          path: '/exercises',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
-        ),
-        DefaultRoute(
-          guards: [
-            AuthGuard(ref),
-          ],
-          page: ExerciseDetailsRoute.page,
-          path: '/exercises/:exerciseId',
-          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
-        ),
-        DefaultRoute(
-          guards: [
-            AuthGuard(ref),
+            OnboardedGuard(ref),
           ],
           page: SetupCompleteRoute.page,
           path: '/setup-complete',
@@ -203,6 +189,28 @@ class AppRouter extends _$AppRouter {
         DefaultRoute(
           guards: [
             AuthGuard(ref),
+            OnboardedGuard(ref),
+            HasProfileGuard(ref),
+          ],
+          page: SearchExercisesRoute.page,
+          path: '/exercises',
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+        ),
+        DefaultRoute(
+          guards: [
+            AuthGuard(ref),
+            OnboardedGuard(ref),
+            HasProfileGuard(ref),
+          ],
+          page: ExerciseDetailsRoute.page,
+          path: '/exercises/:exerciseId',
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+        ),
+        DefaultRoute(
+          guards: [
+            AuthGuard(ref),
+            OnboardedGuard(ref),
+            HasProfileGuard(ref),
           ],
           page: HomeRoute.page,
           path: '/',
@@ -211,6 +219,8 @@ class AppRouter extends _$AppRouter {
             DefaultRoute(
               guards: [
                 AuthGuard(ref),
+                OnboardedGuard(ref),
+                HasProfileGuard(ref),
               ],
               page: ProfileRoute.page,
               path: 'profile',
