@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gym/features/profile/domain/domain.dart';
+import 'package:gym/features/profile/profile.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/shared/shared.dart';
@@ -88,9 +88,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
     var profile = ref.watch(userProfileProvider);
 
     if (profile != null) {
-      // Go to dashboard.
-
-      return const Scaffold();
+      context.router.push(const SetupCompleteRoute());
     }
 
     final stagger = AnimationStagger(increment: 50.ms, delay: 300.ms);

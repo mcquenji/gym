@@ -70,6 +70,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingTrackYourGoalsScreen(),
       );
     },
+    ProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfileScreen(),
+      );
+    },
     RegisterRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<RegisterRouteArgs>(
@@ -105,6 +111,12 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           title: args.title,
         ),
+      );
+    },
+    SetupCompleteRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SetupCompleteScreen(),
       );
     },
   };
@@ -248,6 +260,20 @@ class OnboardingTrackYourGoalsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ProfileScreen]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [RegisterScreen]
 class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
   RegisterRoute({
@@ -361,4 +387,18 @@ class SearchExercisesRouteArgs {
   String toString() {
     return 'SearchExercisesRouteArgs{key: $key, title: $title}';
   }
+}
+
+/// generated route for
+/// [SetupCompleteScreen]
+class SetupCompleteRoute extends PageRouteInfo<void> {
+  const SetupCompleteRoute({List<PageRouteInfo>? children})
+      : super(
+          SetupCompleteRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SetupCompleteRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

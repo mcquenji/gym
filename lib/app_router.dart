@@ -192,6 +192,22 @@ class AppRouter extends _$AppRouter {
           path: '/exercises/:exerciseId',
           transitionsBuilder: TransitionsBuilders.slideBottom.cool,
         ),
+        DefaultRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: SetupCompleteRoute.page,
+          path: '/setup-complete',
+          transitionsBuilder: TransitionsBuilders.slideLeft.cool,
+        ),
+        DefaultRoute(
+          guards: [
+            AuthGuard(ref),
+          ],
+          page: ProfileRoute.page,
+          path: '/profile',
+          transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+        ),
       ];
 }
 

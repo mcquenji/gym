@@ -60,8 +60,8 @@
     "completeProfile_height_unit": "cm",
     "completeProfile_weight": "Weight",
     "completeProfile_weight_unit": "KG",
-    "profileComplete": "Welcome, {name}!",
-    "@profileComplete": {
+    "setupComplete_title": "Welcome, {name}!",
+    "@setupComplete_title": {
         "description": "Profile complete",
         "placeholders": {
             "name": {
@@ -69,7 +69,8 @@
             }
         }
     },
-    "profileComplete_subtitle": "You're all set now, so hit the gym 💪💪",
+    "setupComplete_btn": "Let's Go!",
+    "setupComplete_subtitle": "You are all set now, let's hit the gym\n💪💪💪",
     "searchExercises_placeholder": "Search for exercises",
     "searchExercises_level": "Level",
     "searchExercises_equipment": "Equipment",
