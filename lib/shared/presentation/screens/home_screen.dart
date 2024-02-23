@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       currentIndex = index;
     });
 
-    // context.router.push(indexToRoute[index]!);
+    context.router.push(indexToRoute[index]!);
   }
 
   @override
@@ -105,12 +105,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 : context.theme.gradients.primaryGradient.linear,
           ),
           child: AdvancedIcon(
-            icon: Ionicons.fitness_outline,
+            icon: Ionicons.barbell,
             color: workoutIndex != currentIndex
                 ? theme.colorScheme.onPrimary
                 : theme.colorScheme.onSecondary,
             size: 35,
-            secondaryIcon: Ionicons.fitness,
+            secondaryIcon: Ionicons.barbell,
             state: workoutIndex == currentIndex
                 ? AdvancedIconState.secondary
                 : AdvancedIconState.primary,
