@@ -5,12 +5,10 @@ import 'package:gym/shared/shared.dart';
 
 extension ThemeContextExt on BuildContext {
   ThemeData get theme => Theme.of(this);
-  Gradients get gradients => Gradients.of(this);
 }
 
 extension ThemeStateExt on State {
   ThemeData get theme => context.theme;
-  Gradients get gradients => context.gradients;
 }
 
 extension ThemedSvgPicture on SvgGenImage {
@@ -75,12 +73,22 @@ extension ThemedSvgPicture on SvgGenImage {
 
   Map<String, String Function(BuildContext)> get _keyWordOverrides => {
         r"${primaryGradientStart}": (BuildContext context) =>
-            context.gradients.primaryGradient.startColor.hex,
+            context.theme.gradients.primaryGradient.startColor.hex,
         r"${primaryGradientEnd}": (BuildContext context) =>
-            context.gradients.primaryGradient.endColor.hex,
+            context.theme.gradients.primaryGradient.endColor.hex,
       };
 }
 
 extension ColorExt on Color {
   String get hex => "#${value.toRadixString(16).substring(2)}";
+}
+
+extension TextStyleExt on TextStyle? {
+  TextStyle? get bold => this?.copyWith(fontWeight: FontWeight.bold);
+}
+
+extension ThemeExt on ThemeData {
+  GradientTheme get gradients => extension<GradientTheme>()!;
+  Greyscale get greyscale => extension<Greyscale>()!;
+  ShadowTheme get shadows => extension<ShadowTheme>()!;
 }

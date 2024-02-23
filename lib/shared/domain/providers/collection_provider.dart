@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gym/shared/shared.dart';
-import 'package:riverpod/riverpod.dart';
 
-/// A provider that listens to a collection in Firestore and updates its state with the latest snapshots.
+/// A provider that listens to changes in a Firestore collection.
 ///
-/// The state is a map of document ids to [DocumentReference]s.
-final collectionProvider = StateNotifierProvider.family<CollectionProvider,
-    Map<String, DocumentReference<Map<String, dynamic>>>, String>((ref, id) {
-  return CollectionProvider(id);
+/// Watch this provider to be notified of changes in a collection.
+final collection =
+    ChangeNotifierProvider.family<CollectionWatcher, CollectionWatcherID>(
+        (ref, id) {
+  return CollectionWatcher(id);
 });

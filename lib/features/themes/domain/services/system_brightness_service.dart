@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-abstract class SystemBrightnessService {
+import 'package:gym/shared/shared.dart';
+
+abstract class SystemBrightnessService extends Service {
+  SystemBrightnessService() : super("SystemBrightness");
+
   Brightness getSystemBrightness();
 
   void registerBrightnessChangeCallback(VoidCallback callback);

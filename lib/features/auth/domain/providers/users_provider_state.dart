@@ -7,11 +7,13 @@ import 'package:riverpod/riverpod.dart';
 /// Note: Manipulating user information is not possible.
 class UsersProvider extends Notifier<UsersProviderState> {
   late UsersDataSource usersDataSource;
+  late AuthService authService;
 
   @override
   UsersProviderState build() {
     usersDataSource = ref.watch(usersDataSourceProvider);
-    ref.watch(collectionProvider("users")); // watch the collection for changes
+    authService = ref.watch(authServiceProvider);
+    ref.watch(collection("users")); // watch the collection for changes
 
     fetchUsers();
 
@@ -26,6 +28,47 @@ class UsersProvider extends Notifier<UsersProviderState> {
 
   UsersProviderState _mapState(List<User> users) {
     return {for (var user in users) user.id: user};
+  }
+
+  /// Registers a new user with the given [email], [password], [referralCode] and [name].
+  ///
+  /// This will also log the user in with the newly created account.
+  ///
+  /// Returns `true` if the user was successfully registered. `false` otherwise.
+  Future<bool> registerUser({
+    required String email,
+    required String password,
+    String? referralCode,
+    required String name,
+  }) async {
+    String id = "";
+
+    try {
+      if (referralCode == null) {
+        if (state.isEmpty) {
+          id = await authService.registerFirstUser(email, password);
+        } else {
+          throw Exception("A referral code is required to register a new user");
+        }
+      } else {
+        id = await authService.registerUser(referralCode, email, password);
+      }
+    } catch (e) {
+      return false;
+    }
+
+    var user = User(
+      id: id,
+      email: email,
+      name: name,
+      onboarded: false,
+    );
+
+    await usersDataSource.write(user);
+
+    await ref.read(userProvider.notifier).login(email, password);
+
+    return true;
   }
 }
 

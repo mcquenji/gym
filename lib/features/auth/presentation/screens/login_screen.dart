@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gym/app_router.dart';
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/shared/shared.dart';
 
@@ -49,12 +47,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     var user = ref.watch(userProvider);
 
     if (user != null) {
-      context.router.push(const ChangePasswordRoute());
+      context.pushRoute(const OnboardingRoute());
     }
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const PaddingAll(),
         child: Column(
           children: [
             Expanded(
@@ -69,9 +67,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 8),
                   Text(
                     l10n.login_welcome_subtitle,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: theme.textTheme.headlineSmall?.bold,
                   ),
                   const SizedBox(height: 60),
                   TextField(
@@ -81,7 +77,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       prefixIcon: const Icon(IconlyLight.message),
                       errorText: attemptedLogin ? l10n.login_invalid : null,
                     ),
-                    autofillHints: const [AutofillHints.email],
+                    autofillHints: const [
+                      AutofillHints.email,
+                      AutofillHints.username,
+                    ],
                   ),
                   const SizedBox(height: 15),
                   TextField(

@@ -15,10 +15,23 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    ChangePasswordRoute.name: (routeData) {
+    CompleteProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ChangePasswordScreen(),
+        child: const CompleteProfileScreen(),
+      );
+    },
+    ExerciseDetailsRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ExerciseDetailsRouteArgs>(
+          orElse: () =>
+              ExerciseDetailsRouteArgs(id: pathParams.getString('exerciseId')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ExerciseDetailsScreen(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     LoginRoute.name: (routeData) {
@@ -57,21 +70,97 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingTrackYourGoalsScreen(),
       );
     },
+    RegisterRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<RegisterRouteArgs>(
+          orElse: () => RegisterRouteArgs(
+              referralCode: queryParams.optString('referral')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RegisterScreen(
+          key: args.key,
+          referralCode: args.referralCode,
+        ),
+      );
+    },
+    ResetPasswordRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<ResetPasswordRouteArgs>(
+          orElse: () => ResetPasswordRouteArgs(
+              resetCode: queryParams.optString('oobCode')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ResetPasswordScreen(
+          key: args.key,
+          resetCode: args.resetCode,
+        ),
+      );
+    },
+    SearchExercisesRoute.name: (routeData) {
+      final args = routeData.argsAs<SearchExercisesRouteArgs>(
+          orElse: () => const SearchExercisesRouteArgs());
+      return AutoRoutePage<Exercise?>(
+        routeData: routeData,
+        child: SearchExercisesScreen(
+          key: args.key,
+          title: args.title,
+        ),
+      );
+    },
   };
 }
 
 /// generated route for
-/// [ChangePasswordScreen]
-class ChangePasswordRoute extends PageRouteInfo<void> {
-  const ChangePasswordRoute({List<PageRouteInfo>? children})
+/// [CompleteProfileScreen]
+class CompleteProfileRoute extends PageRouteInfo<void> {
+  const CompleteProfileRoute({List<PageRouteInfo>? children})
       : super(
-          ChangePasswordRoute.name,
+          CompleteProfileRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ChangePasswordRoute';
+  static const String name = 'CompleteProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ExerciseDetailsScreen]
+class ExerciseDetailsRoute extends PageRouteInfo<ExerciseDetailsRouteArgs> {
+  ExerciseDetailsRoute({
+    Key? key,
+    required String id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ExerciseDetailsRoute.name,
+          args: ExerciseDetailsRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'exerciseId': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'ExerciseDetailsRoute';
+
+  static const PageInfo<ExerciseDetailsRouteArgs> page =
+      PageInfo<ExerciseDetailsRouteArgs>(name);
+}
+
+class ExerciseDetailsRouteArgs {
+  const ExerciseDetailsRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'ExerciseDetailsRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
@@ -156,4 +245,120 @@ class OnboardingTrackYourGoalsRoute extends PageRouteInfo<void> {
   static const String name = 'OnboardingTrackYourGoalsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RegisterScreen]
+class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
+  RegisterRoute({
+    Key? key,
+    String? referralCode,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RegisterRoute.name,
+          args: RegisterRouteArgs(
+            key: key,
+            referralCode: referralCode,
+          ),
+          rawQueryParams: {'referral': referralCode},
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterRoute';
+
+  static const PageInfo<RegisterRouteArgs> page =
+      PageInfo<RegisterRouteArgs>(name);
+}
+
+class RegisterRouteArgs {
+  const RegisterRouteArgs({
+    this.key,
+    this.referralCode,
+  });
+
+  final Key? key;
+
+  final String? referralCode;
+
+  @override
+  String toString() {
+    return 'RegisterRouteArgs{key: $key, referralCode: $referralCode}';
+  }
+}
+
+/// generated route for
+/// [ResetPasswordScreen]
+class ResetPasswordRoute extends PageRouteInfo<ResetPasswordRouteArgs> {
+  ResetPasswordRoute({
+    Key? key,
+    String? resetCode,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ResetPasswordRoute.name,
+          args: ResetPasswordRouteArgs(
+            key: key,
+            resetCode: resetCode,
+          ),
+          rawQueryParams: {'oobCode': resetCode},
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPasswordRoute';
+
+  static const PageInfo<ResetPasswordRouteArgs> page =
+      PageInfo<ResetPasswordRouteArgs>(name);
+}
+
+class ResetPasswordRouteArgs {
+  const ResetPasswordRouteArgs({
+    this.key,
+    this.resetCode,
+  });
+
+  final Key? key;
+
+  final String? resetCode;
+
+  @override
+  String toString() {
+    return 'ResetPasswordRouteArgs{key: $key, resetCode: $resetCode}';
+  }
+}
+
+/// generated route for
+/// [SearchExercisesScreen]
+class SearchExercisesRoute extends PageRouteInfo<SearchExercisesRouteArgs> {
+  SearchExercisesRoute({
+    Key? key,
+    String? title,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SearchExercisesRoute.name,
+          args: SearchExercisesRouteArgs(
+            key: key,
+            title: title,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchExercisesRoute';
+
+  static const PageInfo<SearchExercisesRouteArgs> page =
+      PageInfo<SearchExercisesRouteArgs>(name);
+}
+
+class SearchExercisesRouteArgs {
+  const SearchExercisesRouteArgs({
+    this.key,
+    this.title,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  @override
+  String toString() {
+    return 'SearchExercisesRouteArgs{key: $key, title: $title}';
+  }
 }
