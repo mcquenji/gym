@@ -72,7 +72,8 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                                   if (exercise.primaryMuscles.isNotEmpty) ...[
                                     _info(
                                       IconlyBroken.category,
-                                      exercise.primaryMuscles.first.name,
+                                      exercise.primaryMuscles.first
+                                          .localize(context),
                                       context,
                                     ),
                                     const SizedBox(height: 8),
@@ -80,7 +81,7 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                                   if (exercise.equipment != null) ...[
                                     _info(
                                       Ionicons.barbell,
-                                      exercise.equipment!.name,
+                                      exercise.equipment!.localize(context),
                                       context,
                                     ),
                                     const SizedBox(height: 8),
@@ -88,14 +89,14 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                                   if (exercise.force != null) ...[
                                     _info(
                                       IconlyLight.discovery,
-                                      exercise.force!.name,
+                                      exercise.force!.localize(context),
                                       context,
                                     ),
                                     const SizedBox(height: 8),
                                   ],
                                   _info(
                                     Ionicons.fitness,
-                                    exercise.category.name,
+                                    exercise.category.localize(context),
                                     context,
                                   ),
                                 ],
@@ -105,14 +106,14 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                                 children: [
                                   _info(
                                     IconlyLight.heart,
-                                    exercise.level.name,
+                                    exercise.level.localize(context),
                                     context,
                                   ),
                                   const SizedBox(height: 8),
                                   if (exercise.mechanic != null) ...[
                                     _info(
                                       IconlyLight.show,
-                                      exercise.mechanic!.name,
+                                      exercise.mechanic!.localize(context),
                                       context,
                                     ),
                                     const SizedBox(height: 8),
@@ -120,7 +121,8 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                                   if (exercise.secondaryMuscles.isNotEmpty) ...[
                                     _info(
                                       IconlyLight.moreSquare,
-                                      exercise.secondaryMuscles.first.name,
+                                      exercise.secondaryMuscles.first
+                                          .localize(context),
                                       context,
                                     ),
                                     const SizedBox(height: 8),
@@ -131,25 +133,28 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              // TODO: Show all muscles in bottom sheet
-                            },
-                            child: Text(
-                              context.l10n.exercisesDetails_showAll,
-                              style:
-                                  context.theme.textTheme.bodyMedium?.copyWith(
-                                color: context.theme.greyscale.grey2,
-                                decoration: TextDecoration.underline,
+                        if (exercise.primaryMuscles.length > 1 ||
+                            exercise.secondaryMuscles.length > 1)
+                          Center(
+                            child: GestureDetector(
+                              onTap: () => _showAllMuscles(context, exercise),
+                              child: Text(
+                                context.l10n.exercisesDetails_showAll,
+                                style: context.theme.textTheme.bodyMedium
+                                    ?.copyWith(
+                                  color: context.theme.greyscale.grey2,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
+                        if (exercise.primaryMuscles.length > 1 ||
+                            exercise.secondaryMuscles.length > 1)
+                          const SizedBox(height: 20),
                         StickyHeader(
                           header: Container(
-                            padding: const PaddingAll(15).Left(0).Top(20),
+                            padding:
+                                const PaddingAll(15).Left(0).Top(20).Bottom(0),
                             color: context.theme.colorScheme.surface,
                             width: double.infinity,
                             child: Text(
@@ -160,6 +165,7 @@ class ExerciseDetailsScreen extends ConsumerWidget {
                           content: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              const SizedBox(height: 15),
                               for (var i = 0;
                                   i < exercise.instructions.length;
                                   i++)
@@ -222,6 +228,86 @@ class ExerciseDetailsScreen extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _showAllMuscles(BuildContext context, Exercise exercise) {
+    showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      builder: (context) {
+        return Container(
+          padding: const PaddingAll(),
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                StickyHeader(
+                  header: Container(
+                    color: context.theme.colorScheme.surface,
+                    child: Row(
+                      children: [
+                        AdvancedIcon(
+                          icon: IconlyBroken.category,
+                          gradient:
+                              context.theme.gradients.primaryGradient.linear,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          context.l10n.exercisesDetails_primaryMuscles,
+                          style: context.theme.textTheme.bodyLarge.bold,
+                        ),
+                      ],
+                    ),
+                  ),
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (var muscle in exercise.primaryMuscles) ...[
+                        const SizedBox(height: 8),
+                        Text(muscle.localize(context)),
+                      ]
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                StickyHeader(
+                  header: Container(
+                    color: context.theme.colorScheme.surface,
+                    child: Row(
+                      children: [
+                        AdvancedIcon(
+                          icon: IconlyLight.moreSquare,
+                          gradient:
+                              context.theme.gradients.primaryGradient.linear,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          context.l10n.exercisesDetails_secondaryMuscles,
+                          style: context.theme.textTheme.bodyLarge.bold,
+                        ),
+                      ],
+                    ),
+                  ),
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (var muscle in exercise.secondaryMuscles) ...[
+                        const SizedBox(height: 8),
+                        Text(muscle.localize(context)),
+                      ]
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

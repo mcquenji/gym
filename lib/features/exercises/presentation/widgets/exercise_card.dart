@@ -113,7 +113,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
               const SizedBox(height: 4),
               widget.subtitle ??
                   Text(
-                    "${widget.exercise.category.name} | ${widget.exercise.primaryMuscles.first.name}",
+                    "${widget.exercise.category.localize(context)} | ${widget.exercise.primaryMuscles.first.localize(context)}",
                     style: context.theme.textTheme.bodySmall?.copyWith(
                       color:
                           context.theme.colorScheme.onSurface.withOpacity(0.6),
@@ -146,5 +146,141 @@ class _ExerciseCardState extends State<ExerciseCard> {
         child: widget.wrapper(context, content),
       ),
     );
+  }
+}
+
+// Extension for MuscleGroup enum
+extension MuscleGroupExtension on MuscleGroup {
+  String localize(BuildContext context) {
+    switch (this) {
+      case MuscleGroup.abdominals:
+        return context.l10n.exercises_enumMuscleGroup_abdominals;
+      case MuscleGroup.middleBack:
+        return context.l10n.exercises_enumMuscleGroup_middleBack;
+      case MuscleGroup.adductors:
+        return context.l10n.exercises_enumMuscleGroup_adductors;
+      case MuscleGroup.biceps:
+        return context.l10n.exercises_enumMuscleGroup_biceps;
+      case MuscleGroup.quadriceps:
+        return context.l10n.exercises_enumMuscleGroup_quadriceps;
+      case MuscleGroup.lowerBack:
+        return context.l10n.exercises_enumMuscleGroup_lowerBack;
+      case MuscleGroup.lats:
+        return context.l10n.exercises_enumMuscleGroup_lats;
+      case MuscleGroup.hamstrings:
+        return context.l10n.exercises_enumMuscleGroup_hamstrings;
+      case MuscleGroup.chest:
+        return context.l10n.exercises_enumMuscleGroup_chest;
+      case MuscleGroup.neck:
+        return context.l10n.exercises_enumMuscleGroup_neck;
+      case MuscleGroup.abductors:
+        return context.l10n.exercises_enumMuscleGroup_abductors;
+      case MuscleGroup.glutes:
+        return context.l10n.exercises_enumMuscleGroup_glutes;
+      case MuscleGroup.calves:
+        return context.l10n.exercises_enumMuscleGroup_calves;
+      case MuscleGroup.triceps:
+        return context.l10n.exercises_enumMuscleGroup_triceps;
+      case MuscleGroup.traps:
+        return context.l10n.exercises_enumMuscleGroup_traps;
+      case MuscleGroup.shoulders:
+        return context.l10n.exercises_enumMuscleGroup_shoulders;
+      case MuscleGroup.forearms:
+        return context.l10n.exercises_enumMuscleGroup_forearms;
+    }
+  }
+}
+
+// Extension for ExerciseLevel enum
+extension ExerciseLevelExtension on ExerciseLevel {
+  String localize(BuildContext context) {
+    switch (this) {
+      case ExerciseLevel.beginner:
+        return context.l10n.exercises_enumExerciseLevel_beginner;
+      case ExerciseLevel.intermediate:
+        return context.l10n.exercises_enumExerciseLevel_intermediate;
+      case ExerciseLevel.expert:
+        return context.l10n.exercises_enumExerciseLevel_expert;
+    }
+  }
+}
+
+// Extension for ExerciseEquipment enum
+extension ExerciseEquipmentExtension on ExerciseEquipment {
+  String localize(BuildContext context) {
+    switch (this) {
+      case ExerciseEquipment.cable:
+        return context.l10n.exercises_enumExerciseEquipment_cable;
+      case ExerciseEquipment.bands:
+        return context.l10n.exercises_enumExerciseEquipment_bands;
+      case ExerciseEquipment.exerciseBall:
+        return context.l10n.exercises_enumExerciseEquipment_exerciseBall;
+      case ExerciseEquipment.machine:
+        return context.l10n.exercises_enumExerciseEquipment_machine;
+      case ExerciseEquipment.dumbbell:
+        return context.l10n.exercises_enumExerciseEquipment_dumbbell;
+      case ExerciseEquipment.eZCurlBar:
+        return context.l10n.exercises_enumExerciseEquipment_eZCurlBar;
+      case ExerciseEquipment.other:
+        return context.l10n.exercises_enumExerciseEquipment_other;
+      case ExerciseEquipment.barbell:
+        return context.l10n.exercises_enumExerciseEquipment_barbell;
+      case ExerciseEquipment.bodyOnly:
+        return context.l10n.exercises_enumExerciseEquipment_bodyOnly;
+      case ExerciseEquipment.foamRoll:
+        return context.l10n.exercises_enumExerciseEquipment_foamRoll;
+      case ExerciseEquipment.medicineBall:
+        return context.l10n.exercises_enumExerciseEquipment_medicineBall;
+      case ExerciseEquipment.kettlebells:
+        return context.l10n.exercises_enumExerciseEquipment_kettlebells;
+    }
+  }
+}
+
+// Extension for ExerciseForce enum
+extension ExerciseForceExtension on ExerciseForce {
+  String localize(BuildContext context) {
+    switch (this) {
+      case ExerciseForce.static:
+        return context.l10n.exercises_enumExerciseForce_static;
+      case ExerciseForce.push:
+        return context.l10n.exercises_enumExerciseForce_push;
+      case ExerciseForce.pull:
+        return context.l10n.exercises_enumExerciseForce_pull;
+    }
+  }
+}
+
+// Extension for ExerciseCategory enum
+extension ExerciseCategoryExtension on ExerciseCategory {
+  String localize(BuildContext context) {
+    switch (this) {
+      case ExerciseCategory.stretching:
+        return context.l10n.exercises_enumExerciseCategory_stretching;
+      case ExerciseCategory.powerlifting:
+        return context.l10n.exercises_enumExerciseCategory_powerlifting;
+      case ExerciseCategory.strongman:
+        return context.l10n.exercises_enumExerciseCategory_strongman;
+      case ExerciseCategory.cardio:
+        return context.l10n.exercises_enumExerciseCategory_cardio;
+      case ExerciseCategory.olympicWeightlifting:
+        return context.l10n.exercises_enumExerciseCategory_olympicWeightlifting;
+      case ExerciseCategory.plyometrics:
+        return context.l10n.exercises_enumExerciseCategory_plyometrics;
+      case ExerciseCategory.strength:
+        return context.l10n.exercises_enumExerciseCategory_strength;
+    }
+  }
+}
+
+// Extension for ExerciseMechanic enum
+extension ExerciseMechanicExtension on ExerciseMechanic {
+  String localize(BuildContext context) {
+    switch (this) {
+      case ExerciseMechanic.compound:
+        return context.l10n.exercises_enumExerciseMechanic_compound;
+      case ExerciseMechanic.isolation:
+        return context.l10n.exercises_enumExerciseMechanic_isolation;
+    }
   }
 }
