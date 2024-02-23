@@ -208,9 +208,9 @@ class AppRouter extends _$AppRouter {
         ),
         DefaultRoute(
           guards: [
-            AuthGuard(ref),
-            OnboardedGuard(ref),
-            HasProfileGuard(ref),
+            // AuthGuard(ref),
+            // OnboardedGuard(ref),
+            // HasProfileGuard(ref),
           ],
           page: HomeRoute.page,
           path: '/',
@@ -218,13 +218,24 @@ class AppRouter extends _$AppRouter {
           children: [
             DefaultRoute(
               guards: [
-                AuthGuard(ref),
-                OnboardedGuard(ref),
-                HasProfileGuard(ref),
+                // AuthGuard(ref),
+                // OnboardedGuard(ref),
+                // HasProfileGuard(ref),
               ],
-              page: ProfileRoute.page,
+              page: ProfileWrapperRoute.page,
               path: 'profile',
               transitionsBuilder: TransitionsBuilders.slideBottom.cool,
+              children: [
+                DefaultRoute(
+                  guards: [
+                    // AuthGuard(ref),
+                    // OnboardedGuard(ref),
+                    // HasProfileGuard(ref),
+                  ],
+                  page: ProfileRoute.page,
+                  path: '',
+                ),
+              ],
             ),
           ],
         ),

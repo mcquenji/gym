@@ -91,6 +91,7 @@ class Avatar extends ConsumerWidget {
         child: Icon(
           IconlyBold.danger,
           color: context.theme.colorScheme.error,
+          size: size,
         ),
       ),
     );

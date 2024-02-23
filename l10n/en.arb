@@ -130,6 +130,47 @@
     "exercises_enumExerciseMechanic_compound": "Compound",
     "exercises_enumExerciseMechanic_isolation": "Isolation",
     "global_next": "Next",
+    "profile_title": "Profile",
+    "profile_edit": "Edit",
+    "profile_height": "{height}cm",
+    "@profile_height": {
+        "description": "profile_height",
+        "placeholders": {
+            "height": {
+                "type": "int"
+            }
+        }
+    },
+    "profile_height_caption": "Height",
+    "profile_weight": "{weight}kg",
+    "@profile_weight": {
+        "description": "profile_weight",
+        "placeholders": {
+            "weight": {
+                "type": "double"
+            }
+        }
+    },
+    "profile_weight_caption": "Weight",
+    "@profile_bodyFat": {
+        "description": "profile_bodyFat",
+        "placeholders": {
+            "bodyFat": {
+                "type": "double"
+            }
+        }
+    },
+    "profile_bodyFat": "{bodyFat}% body fat",
+    "profile_age": "{age}yo",
+    "@profile_age": {
+        "description": "profile_age",
+        "placeholders": {
+            "age": {
+                "type": "int"
+            }
+        }
+    },
+    "profile_age_caption": "Age",
     "global_error_loadingSVG": "Error loading SVG",
     "global_logout": "Logout"
 }

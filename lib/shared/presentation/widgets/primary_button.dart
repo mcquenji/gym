@@ -10,12 +10,14 @@ class PrimaryButton extends StatelessWidget {
     this.trailing,
     this.loading = false,
     this.shrinkWrap = false,
+    this.gradient,
   });
 
   final VoidCallback? onPressed;
   final Widget child;
   final Widget? leading;
   final Widget? trailing;
+  final GradientThemeData? gradient;
 
   /// If true, the button will show a loading indicator instead of the [child].
   ///
@@ -41,7 +43,8 @@ class PrimaryButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
-          gradient: GradientTheme.of(context).primaryGradient.linear,
+          gradient:
+              (gradient ?? GradientTheme.of(context).primaryGradient).linear,
           borderRadius: BorderRadius.circular(50),
           boxShadow: context.theme.shadows.buttonShadow,
         ),

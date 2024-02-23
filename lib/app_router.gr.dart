@@ -82,6 +82,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileScreen(),
       );
     },
+    ProfileWrapperRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfileWrapperScreen(),
+      );
+    },
     RegisterRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<RegisterRouteArgs>(
@@ -289,6 +295,20 @@ class ProfileRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProfileWrapperScreen]
+class ProfileWrapperRoute extends PageRouteInfo<void> {
+  const ProfileWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileWrapperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileWrapperRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
