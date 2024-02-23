@@ -30,6 +30,8 @@ class FilterOption<T> extends StatefulWidget {
 class _FilterOptionState<T> extends State<FilterOption<T>> {
   T? selected;
 
+  bool didChange = false;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -38,6 +40,7 @@ class _FilterOptionState<T> extends State<FilterOption<T>> {
         onSelected: (value) {
           setState(() {
             selected = value;
+            didChange = true;
           });
 
           widget.onChanged(value);
@@ -46,15 +49,20 @@ class _FilterOptionState<T> extends State<FilterOption<T>> {
           icon: widget.icon,
           gradient: context.theme.gradients.primaryGradient.linear,
         ),
-        trailingIcon: (selected ?? widget.selectedValue) != null
-            ? AdvancedIcon(
-                icon: Ionicons.checkmark_done,
-                gradient: context.theme.gradients.primaryGradient.linear,
-              )
-            : Icon(
-                IconlyBold.arrowDown2,
-                color: context.theme.greyscale.grey3,
-              ),
+        trailingIcon:
+            (selected ?? (!didChange ? widget.selectedValue : null)) != null
+                ? AdvancedIcon(
+                    icon: Ionicons.checkmark_done,
+                    gradient: context.theme.gradients.primaryGradient.linear,
+                  )
+                : Icon(
+                    IconlyBold.arrowDown2,
+                    color: context.theme.greyscale.grey3,
+                  ),
+        selectedTrailingIcon: Icon(
+          IconlyBold.arrowUp2,
+          color: context.theme.greyscale.grey3,
+        ),
         initialSelection: widget.selectedValue,
         width: constraints.maxWidth,
         dropdownMenuEntries: [
