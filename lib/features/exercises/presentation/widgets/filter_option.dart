@@ -1,6 +1,7 @@
 import 'package:advanced_icon/advanced_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/shared/shared.dart';
+import 'package:ionicons/ionicons.dart';
 
 class FilterOption<T> extends StatefulWidget {
   const FilterOption({
@@ -45,6 +46,15 @@ class _FilterOptionState<T> extends State<FilterOption<T>> {
           icon: widget.icon,
           gradient: context.theme.gradients.primaryGradient.linear,
         ),
+        trailingIcon: (selected ?? widget.selectedValue) != null
+            ? AdvancedIcon(
+                icon: Ionicons.checkmark_done,
+                gradient: context.theme.gradients.primaryGradient.linear,
+              )
+            : Icon(
+                IconlyBold.arrowDown2,
+                color: context.theme.greyscale.grey3,
+              ),
         initialSelection: widget.selectedValue,
         width: constraints.maxWidth,
         dropdownMenuEntries: [

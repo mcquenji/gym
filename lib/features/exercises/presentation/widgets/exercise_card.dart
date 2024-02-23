@@ -1,6 +1,5 @@
 import 'package:advanced_icon/advanced_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/shared/shared.dart';
 
