@@ -6,20 +6,20 @@ import 'package:gym/features/auth/auth.dart';
 import 'package:gym/shared/shared.dart';
 
 @RoutePage()
-class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key});
+class ChangePasswordScreen extends ConsumerStatefulWidget {
+  const ChangePasswordScreen({super.key});
 
   @override
-  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<ChangePasswordScreen> createState() =>
+      _ChangePasswordScreenState();
 }
 
-class _LoginScreenState extends ConsumerState<LoginScreen> {
-  bool attemptedLogin = false;
+class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
   bool showPassword = false;
-  bool loggingIn = false;
+  bool passwordMatch = true;
 
-  final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
 
   toggleShowPassword() {
     setState(() {
@@ -27,30 +27,35 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
   }
 
-  login() async {
+  checkPasswordMatch() {
     setState(() {
-      loggingIn = true;
+      passwordMatch = passwordController.text == repeatPasswordController.text;
     });
+  }
 
-    var user = ref.read(userProvider.notifier);
+  @override
+  void initState() {
+    super.initState();
 
-    await user.login(emailController.text, passwordController.text);
-
-    if (mounted) {
-      setState(() {
-        attemptedLogin = true;
-        loggingIn = false;
-      });
-    }
+    passwordController.addListener(checkPasswordMatch);
+    repeatPasswordController.addListener(checkPasswordMatch);
   }
 
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
+    var controller = ref.watch(userProvider.notifier);
 
-    if (user != null) {
-      context.router.push(const ChangePasswordRoute());
+    if (user!.registered) {
+      context.router.push(const OnboardingRoute());
     }
+
+    var showPasswordBtn = GestureDetector(
+      onTap: toggleShowPassword,
+      child: Icon(
+        showPassword ? IconlyLight.hide : IconlyLight.show,
+      ),
+    );
 
     return Scaffold(
       body: Padding(
@@ -63,43 +68,43 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    l10n.login_welcome,
+                    l10n.changePassword_title,
                     style: theme.textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    l10n.login_welcome_subtitle,
+                    l10n.changePassword_subtitle,
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 60),
                   TextField(
-                    controller: emailController,
+                    controller: passwordController,
                     decoration: InputDecoration(
-                      hintText: l10n.login_email,
-                      prefixIcon: const Icon(IconlyLight.message),
-                      errorText: attemptedLogin ? l10n.login_invalid : null,
+                      hintText: l10n.changePassword_password,
+                      prefixIcon: const Icon(IconlyLight.lock),
+                      suffixIcon: showPasswordBtn,
+                      errorText: !passwordMatch
+                          ? l10n.changePassword_passwordsDontMatch
+                          : null,
                     ),
+                    obscureText: !showPassword,
                     autofillHints: const [AutofillHints.email],
                   ),
                   const SizedBox(height: 15),
                   TextField(
-                    controller: passwordController,
+                    controller: repeatPasswordController,
                     decoration: InputDecoration(
-                      hintText: l10n.login_password,
+                      hintText: l10n.changePassword_repeatPassword,
                       prefixIcon: const Icon(IconlyLight.lock),
-                      suffixIcon: GestureDetector(
-                        onTap: toggleShowPassword,
-                        child: Icon(
-                          showPassword ? IconlyLight.hide : IconlyLight.show,
-                        ),
-                      ),
-                      errorText: attemptedLogin ? l10n.login_invalid : null,
+                      suffixIcon: showPasswordBtn,
+                      errorText: !passwordMatch
+                          ? l10n.changePassword_passwordsDontMatch
+                          : null,
                     ),
                     obscureText: !showPassword,
                     autofillHints: const [AutofillHints.password],
-                    onSubmitted: (_) => login(),
                   ),
                   const SizedBox(height: 30),
                 ],
@@ -108,10 +113,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             SizedBox(
               width: double.infinity,
               child: PrimaryButton(
-                onPressed: login,
-                loading: loggingIn,
-                leading: const Icon(IconlyBold.login),
-                child: Text(l10n.login_submit),
+                onPressed: () =>
+                    controller.completeRegistration(passwordController.text),
+                trailing: const Icon(IconlyLight.arrowRight2),
+                child: Text(l10n.global_next),
               ),
             ),
           ],
