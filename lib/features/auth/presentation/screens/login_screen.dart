@@ -43,13 +43,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    var user = ref.watch(userProvider);
+  void initState() {
+    super.initState();
 
-    if (user != null) {
-      context.pushRoute(const HomeRoute());
+    final authService = ref.read(authServiceProvider);
+
+    if (authService.isUserLoggedIn()) {
+      context.router.push(const HomeRoute());
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const PaddingAll(),

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gym/features/auth/auth.dart';
 import 'package:gym/features/profile/profile.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -81,6 +82,22 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
     if (mounted) {
       context.router.push(const SetupCompleteRoute());
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    final userProfileDataSource = ref.read(userProfileDataSourceProvider);
+    final authService = ref.read(authServiceProvider);
+
+    userProfileDataSource
+        .hasProfile(authService.getCurrentUserId()!)
+        .then((value) {
+      if (value) {
+        context.router.push(const HomeRoute());
+      }
+    });
   }
 
   @override

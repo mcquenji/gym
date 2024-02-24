@@ -38,6 +38,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
     var currentIndex = getCurrentIndex();
 
     animateProgress(currentIndex);
+
+    final user = ref.read(userProvider);
+
+    if (user?.onboarded ?? false) {
+      context.router.push(const CompleteProfileRoute());
+    }
   }
 
   int getCurrentIndex() {
@@ -76,20 +82,16 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
       animateProgress(currentIndex);
     } else {
       var controller = ref.read(userProvider.notifier);
+      var router = context.router;
 
       await controller.completeOnboarding();
+
+      router.push(const CompleteProfileRoute());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var user = ref.watch(userProvider);
-
-    if (user?.onboarded ?? false) {
-      context.router.push(const CompleteProfileRoute());
-      return const Scaffold();
-    }
-
     return Scaffold(
       body: const AutoRouter(),
       floatingActionButton: GestureDetector(
