@@ -12,7 +12,7 @@ abstract class DataSource {
   final String _name;
 
   /// Creates a new [Service] with the specified name.
-  DataSource(this._name);
+  const DataSource(this._name);
 
   void log(Object? message, [Object? error, StackTrace? stackTrace]) {
     _log.info(message, error, stackTrace);

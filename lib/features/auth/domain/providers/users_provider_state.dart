@@ -5,7 +5,7 @@ import 'package:riverpod/riverpod.dart';
 /// Provides a map of all registered users where the key is the user's id.
 ///
 /// Note: Manipulating user information is not possible.
-class UsersProvider extends Notifier<UsersProviderState> {
+class UsersController extends Notifier<UsersProviderState> {
   late UsersDataSource usersDataSource;
   late AuthService authService;
 

@@ -5,23 +5,25 @@ import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final userProfileProvider =
-    NotifierProvider<UserProfileProvider, UserProfileProviderState>(
-  () => UserProfileProvider(),
+    NotifierProvider<UserProfileController, UserProfileProviderState>(
+  () => UserProfileController(),
 );
 
 /// Provides the profile of the current user.
 ///
 /// If the user is not logged in, or no profile has been set up yet, this provider will return `null`.
-class UserProfileProvider extends Notifier<UserProfileProviderState> {
+class UserProfileController extends Notifier<UserProfileProviderState> {
   late UserProfileDataSource userProfileDataSource;
   late User? user;
-  late AvatarProvider avatarController;
+  late AvatarController avatarController;
+  late ProfileHistoryController profileHistoryController;
 
   @override
   UserProfileProviderState build() {
     user = ref.watch(userProvider);
     userProfileDataSource = ref.watch(userProfileDataSourceProvider);
     avatarController = ref.watch(avatarProvider.notifier);
+    profileHistoryController = ref.watch(profileHistoryProvider.notifier);
     var userDataService = ref.watch(userDataServiceProvider);
 
     if (user == null) {
@@ -61,6 +63,7 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
     );
 
     await userProfileDataSource.write(userProfile);
+    await profileHistoryController.record(userProfile);
 
     await avatarController.createNewAvatar();
 
@@ -76,6 +79,7 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
         .copyWith(dateOfBirthTimestamp: dateOfBirth.millisecondsSinceEpoch);
 
     await userProfileDataSource.write(profile);
+    if (profile != state) await profileHistoryController.record(profile);
 
     state = profile;
   }
@@ -88,6 +92,7 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
     final profile = state!.copyWith(weight: weight);
 
     await userProfileDataSource.write(profile);
+    if (profile != state) await profileHistoryController.record(profile);
 
     state = profile;
   }
@@ -101,6 +106,8 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
 
     await userProfileDataSource.write(profile);
 
+    if (profile != state) await profileHistoryController.record(profile);
+
     state = profile;
   }
 
@@ -112,6 +119,7 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
     final profile = state!.copyWith(bodyFatPercentage: bodyFat);
 
     await userProfileDataSource.write(profile);
+    if (profile != state) await profileHistoryController.record(profile);
 
     state = profile;
   }

@@ -6,6 +6,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 ///
 /// Use [avatarProvider.notifier] to generate a new avatar.
 final avatarProvider =
-    AsyncNotifierProvider<AvatarProvider, AvatarProviderState>(
-  () => AvatarProvider('avatars'),
+    AsyncNotifierProvider<AvatarController, AvatarProviderState>(
+  () => AvatarController('avatars'),
 );

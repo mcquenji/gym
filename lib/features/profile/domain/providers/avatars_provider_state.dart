@@ -4,10 +4,10 @@ import 'package:gym/features/auth/auth.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class AvatarsProvider extends AsyncNotifier<AvatarsProviderState> {
+class AvatarsController extends AsyncNotifier<AvatarsProviderState> {
   final String path;
 
-  AvatarsProvider(this.path);
+  AvatarsController(this.path);
 
   @override
   FutureOr<AvatarsProviderState> build() async {

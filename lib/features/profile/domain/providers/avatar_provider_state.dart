@@ -7,13 +7,13 @@ import 'package:gym/features/profile/profile.dart';
 import 'package:gym/shared/shared.dart';
 import 'package:riverpod/riverpod.dart';
 
-class AvatarProvider extends AsyncNotifier<AvatarProviderState> {
+class AvatarController extends AsyncNotifier<AvatarProviderState> {
   User? user;
   late AvatarGeneratorService avatarGeneratorService;
 
   final String path;
 
-  AvatarProvider(this.path);
+  AvatarController(this.path);
 
   @override
   FutureOr<AvatarProviderState> build() async {

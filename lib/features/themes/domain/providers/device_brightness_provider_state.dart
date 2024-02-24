@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:gym/features/themes/domain/domain.dart';
 import 'package:riverpod/riverpod.dart';
 
-class ThemeBrightnessProvider extends StateNotifier<Brightness> {
+class ThemeBrightnessController extends StateNotifier<Brightness> {
   final SystemBrightnessService systemBrightnessService;
 
-  ThemeBrightnessProvider(this.systemBrightnessService)
+  ThemeBrightnessController(this.systemBrightnessService)
       : super(systemBrightnessService.getSystemBrightness()) {
     systemBrightnessService.registerBrightnessChangeCallback(
       () {

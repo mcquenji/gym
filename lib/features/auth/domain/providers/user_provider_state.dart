@@ -1,7 +1,7 @@
 import 'package:gym/features/auth/auth.dart';
 import 'package:riverpod/riverpod.dart';
 
-class UserProvider extends Notifier<UserProviderState> {
+class UserController extends Notifier<UserProviderState> {
   late AuthService authService;
   late UsersProviderState users;
   late UsersDataSource usersDataSource;

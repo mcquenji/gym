@@ -6,10 +6,10 @@ import 'package:riverpod/riverpod.dart';
 /// The state is automatically updated when the document changes.
 ///
 /// After the document is deleted, this provider will be disposed.
-class DocumentProvider extends StateNotifier<Map<String, dynamic>> {
+class DocumentController extends StateNotifier<Map<String, dynamic>> {
   final DocumentReference<Map<String, dynamic>> _document;
 
-  DocumentProvider(this._document) : super({}) {
+  DocumentController(this._document) : super({}) {
     _document.snapshots().listen(_snapshotToState);
   }
 

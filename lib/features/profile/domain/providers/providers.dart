@@ -6,3 +6,5 @@ export 'avatar_provider_state.dart';
 export 'user_profile_provider.dart';
 export 'user_profile_data_source_provider.dart';
 export 'user_data_service_provider.dart';
+export 'profile_history_data_source_provider.dart';
+export 'profile_history_provider.dart';

@@ -12,7 +12,7 @@ abstract class Service {
   final String _name;
 
   /// Creates a new [Service] with the specified name.
-  Service(this._name);
+  const Service(this._name);
 
   void log(Object? message, [Object? error, StackTrace? stackTrace]) {
     _log.fine(message, error, stackTrace);

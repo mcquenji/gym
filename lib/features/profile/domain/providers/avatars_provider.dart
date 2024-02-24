@@ -6,6 +6,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 ///
 /// The key is the user id and the value is the url of the image.
 final avatarsProvider =
-    AsyncNotifierProvider<AvatarsProvider, AvatarsProviderState>(
-  () => AvatarsProvider('avatars'),
+    AsyncNotifierProvider<AvatarsController, AvatarsProviderState>(
+  () => AvatarsController('avatars'),
 );

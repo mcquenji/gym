@@ -5,10 +5,10 @@ import 'package:riverpod/riverpod.dart';
 
 /// Provides the [Brightness] of the user's device.
 final deviceBrightnessProvider =
-    StateNotifierProvider<ThemeBrightnessProvider, Brightness>(
+    StateNotifierProvider<ThemeBrightnessController, Brightness>(
   (ref) {
     var systemBrightnessService = ref.watch(systemBrightnessServiceProvider);
 
-    return ThemeBrightnessProvider(systemBrightnessService);
+    return ThemeBrightnessController(systemBrightnessService);
   },
 );

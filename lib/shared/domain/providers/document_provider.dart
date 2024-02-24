@@ -11,9 +11,9 @@ import 'package:gym/shared/shared.dart';
 /// The state is automatically updated when the document changes.
 ///
 /// After the document is deleted, this provider will be disposed.
-final documentProvider = StateNotifierProvider.family<DocumentProvider,
+final documentProvider = StateNotifierProvider.family<DocumentController,
     Map<String, dynamic>, String>((ref, path) {
   final document = FirebaseFirestore.instance.doc(path);
 
-  return DocumentProvider(document);
+  return DocumentController(document);
 });
