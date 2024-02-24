@@ -9,11 +9,23 @@ class OnboardedGuard extends AutoRouteGuard {
   OnboardedGuard(this.ref);
 
   @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
-    final user = ref.read(userProvider);
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    final userDataSource = ref.read(usersDataSourceProvider);
+    final authService = ref.read(authServiceProvider);
+
+    void redirect() => router.push(const OnboardingRoute());
+
+    final userId = authService.getCurrentUserId();
+
+    if (userId == null) {
+      redirect();
+      return;
+    }
+
+    final user = await userDataSource.get(userId);
 
     if (!(user?.onboarded ?? false)) {
-      router.push(const OnboardingRoute());
+      redirect();
     } else {
       resolver.next();
     }

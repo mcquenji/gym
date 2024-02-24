@@ -8,6 +8,7 @@ import 'package:gym/features/onboarding/onboarding.dart';
 import 'package:gym/features/profile/profile.dart';
 import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/shared/shared.dart';
+import 'package:logging/logging.dart';
 
 part 'app_router.gr.dart';
 
@@ -210,7 +211,6 @@ class AppRouter extends _$AppRouter {
           guards: [
             AuthGuard(ref),
             OnboardedGuard(ref),
-            HasProfileGuard(ref),
           ],
           page: HomeRoute.page,
           path: '/',
@@ -218,20 +218,13 @@ class AppRouter extends _$AppRouter {
           children: [
             DefaultRoute(
               guards: [
-                // AuthGuard(ref),
-                // OnboardedGuard(ref),
-                // HasProfileGuard(ref),
+                HasProfileGuard(ref),
               ],
               page: ProfileWrapperRoute.page,
               path: 'profile',
               transitionsBuilder: TransitionsBuilders.slideBottom.cool,
               children: [
                 DefaultRoute(
-                  guards: [
-                    // AuthGuard(ref),
-                    // OnboardedGuard(ref),
-                    // HasProfileGuard(ref),
-                  ],
                   page: ProfileRoute.page,
                   path: '',
                 ),
@@ -277,4 +270,31 @@ extension CoolerRouteTransitions on RouteTransitionsBuilder {
           child: this.call(context, animation, secondaryAnimation, child),
         );
       };
+}
+
+class NavigationLogger extends NavigatorObserver {
+  void log(String action, Route route, Route? previousRoute) {
+    Logger("Navigation").finest(
+        "$action ${route.settings.name} <-- ${previousRoute?.settings.name}");
+  }
+
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    log('Pushed', route, previousRoute);
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    log('Popped', route, previousRoute);
+  }
+
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    log('Removed', route, previousRoute);
+  }
+
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+    log('Replaced', newRoute!, oldRoute);
+  }
 }

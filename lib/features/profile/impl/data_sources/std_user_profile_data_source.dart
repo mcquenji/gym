@@ -49,4 +49,14 @@ class StdUserProfileDataSource extends UserProfileDataSource {
           e);
     }
   }
+
+  @override
+  Future<bool> hasProfile(String userId) async {
+    final doc = await FirebaseFirestore.instance
+        .collection(userDataService.getUserDataCollectionPath(userId))
+        .doc(documentName)
+        .get();
+
+    return doc.exists;
+  }
 }

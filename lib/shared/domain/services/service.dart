@@ -15,6 +15,6 @@ abstract class Service {
   const Service(this._name);
 
   void log(Object? message, [Object? error, StackTrace? stackTrace]) {
-    _log.fine(message, error, stackTrace);
+    _log.finer(message, error, stackTrace);
   }
 }

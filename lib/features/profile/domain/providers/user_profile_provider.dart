@@ -24,7 +24,6 @@ class UserProfileController extends Notifier<UserProfileProviderState> {
     userProfileDataSource = ref.watch(userProfileDataSourceProvider);
     avatarController = ref.watch(avatarProvider.notifier);
     profileHistoryController = ref.watch(profileHistoryProvider.notifier);
-    var userDataService = ref.watch(userDataServiceProvider);
 
     if (user == null) {
       return null;

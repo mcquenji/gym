@@ -81,20 +81,10 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
     if (mounted) {
       context.router.push(const SetupCompleteRoute());
     }
-
-    await Future.delayed(1.seconds);
-
-    creatingProfile = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    var profile = ref.watch(userProfileProvider);
-
-    if (profile != null && !creatingProfile) {
-      context.router.push(const HomeRoute());
-    }
-
     final stagger = AnimationStagger(increment: 50.ms, delay: 300.ms);
 
     return Scaffold(

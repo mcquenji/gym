@@ -15,6 +15,6 @@ abstract class DataSource {
   const DataSource(this._name);
 
   void log(Object? message, [Object? error, StackTrace? stackTrace]) {
-    _log.info(message, error, stackTrace);
+    _log.fine(message, error, stackTrace);
   }
 }

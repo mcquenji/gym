@@ -12,4 +12,6 @@ abstract class UserProfileDataSource extends DataSource {
 
   /// Updates the user's profile.
   Future<void> write(UserProfile userProfile);
+
+  Future<bool> hasProfile(String userId);
 }
