@@ -171,6 +171,7 @@
         }
     },
     "profile_age_caption": "Age",
+    "profile_edit_hint": "You can edit your age by tapping on it (the same goes for your weight and height).",
     "global_error_loadingSVG": "Error loading SVG",
     "global_logout": "Logout"
 }

@@ -81,7 +81,7 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
     return input != null && input!.isNotEmpty ? input : null;
   }
 
-  updateWeight() async {
+  void updateWeight() async {
     final profile = ref.read(userProfileProvider);
     final controller = ref.read(userProfileProvider.notifier);
 
@@ -105,7 +105,7 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
     }
   }
 
-  updateHeight() async {
+  void updateHeight() async {
     final profile = ref.read(userProfileProvider);
     final controller = ref.read(userProfileProvider.notifier);
 
@@ -127,6 +127,80 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
     if (height != null) {
       await controller.setHeight(int.parse(height));
     }
+  }
+
+  void editProfile() async {
+    var controller = ref.read(userProfileProvider.notifier);
+    var profile = ref.read(userProfileProvider);
+
+    await showModalBottomSheet(
+      showDragHandle: true,
+      useRootNavigator: true,
+      context: context,
+      builder: (context) => Padding(
+        padding: const PaddingAll(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller:
+                  TextEditingController(text: profile?.weight.toString()),
+              decoration: InputDecoration(
+                hintText: l10n.completeProfile_weight,
+                prefixIcon: const Icon(Ionicons.scale_outline),
+                suffixText: l10n.completeProfile_weight_unit,
+                labelText: l10n.completeProfile_weight,
+              ),
+              inputFormatters: [
+                DecimalTextInputFormatter(1),
+                DecimalTextInputFormatter.digitsOnly,
+              ],
+              onChanged: (value) => controller.setWeight(double.parse(value)),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller:
+                  TextEditingController(text: profile?.height.toString()),
+              decoration: InputDecoration(
+                hintText: l10n.completeProfile_height,
+                prefixIcon: const Icon(Ionicons.body_outline),
+                suffixText: l10n.completeProfile_height_unit,
+                labelText: l10n.completeProfile_height,
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                FilteringTextInputFormatter.allow(RegExp(r'^\d{0,3}')),
+              ],
+              onChanged: (value) => controller.setHeight(int.parse(value)),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: TextEditingController(
+                text: profile?.bodyFatPercentage.toString(),
+              ),
+              decoration: InputDecoration(
+                hintText: l10n.completeProfile_bodyFat,
+                prefixIcon: const Icon(Ionicons.body_outline),
+                suffixText: "%",
+                labelText: l10n.completeProfile_bodyFat,
+              ),
+              inputFormatters: [
+                DecimalTextInputFormatter(1),
+                DecimalTextInputFormatter.digitsOnly,
+              ],
+              onChanged: (value) => controller.setBodyFat(double.parse(value)),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              l10n.profile_edit_hint,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.greyscale.grey2,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -178,7 +252,7 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
                 SizedBox(
                   child: SecondaryButton(
                     shrinkWrap: true,
-                    onPressed: () {},
+                    onPressed: editProfile,
                     gradient: theme.gradients.primaryGradient,
                     child: Text(l10n.profile_edit),
                   ),

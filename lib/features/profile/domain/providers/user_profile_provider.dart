@@ -1,6 +1,5 @@
 import 'package:gym/features/auth/auth.dart';
 import 'package:gym/features/profile/profile.dart';
-import 'package:gym/shared/shared.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
