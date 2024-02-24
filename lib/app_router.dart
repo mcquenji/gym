@@ -208,9 +208,9 @@ class AppRouter extends _$AppRouter {
         ),
         DefaultRoute(
           guards: [
-            // AuthGuard(ref),
-            // OnboardedGuard(ref),
-            // HasProfileGuard(ref),
+            AuthGuard(ref),
+            OnboardedGuard(ref),
+            HasProfileGuard(ref),
           ],
           page: HomeRoute.page,
           path: '/',

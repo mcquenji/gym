@@ -197,33 +197,44 @@ class AvataaarsGeneratorService extends AvatarGeneratorService {
     final mouthType = mouthTypes.random;
     final skinColor = skinColors.random;
 
-    var response = await networkService.get<String>(domain, queryParameters: {
-      "topType": topType,
-      "topColor": topColor,
-      "accessoriesType": accessory,
-      "facialHairType": facialHairType,
-      "facialHairColor": facialHairColor,
-      "clotheType": clotheType,
-      "clotheColor": clotheColor,
-      "eyeType": eyeType,
-      "eyebrowType": eyebrowType,
-      "mouthType": mouthType,
-      "skinColor": skinColor,
-      "avatarStyle": "Circle",
-    });
-
-    if (response.isNotOk) {
-      log(
-        "Failed to generate avatar with status code ${response.statusCode}",
-        response.body,
+    try {
+      var response = await networkService.get<String>(
+        domain,
+        queryParameters: {
+          "topType": topType,
+          "topColor": topColor,
+          "accessoriesType": accessory,
+          "facialHairType": facialHairType,
+          "facialHairColor": facialHairColor,
+          "clotheType": clotheType,
+          "clotheColor": clotheColor,
+          "eyeType": eyeType,
+          "eyebrowType": eyebrowType,
+          "mouthType": mouthType,
+          "skinColor": skinColor,
+          "avatarStyle": "Circle",
+        },
+        headers: {
+          "Accept": "image/svg+xml",
+        },
       );
 
-      throw Exception("Failed to generate avatar");
+      if (response.isNotOk) {
+        log(
+          "Failed to generate avatar with status code ${response.statusCode}",
+          response.body,
+        );
+
+        throw Exception("Failed to generate avatar");
+      }
+
+      log("Avatar generated successfully");
+
+      // Replace the circle color with `currentColor`, so we can theme it.
+      return response.body!.replaceAll("#65C9FF", "currentColor");
+    } catch (e) {
+      log("Failed to generate avatar with error: $e");
+      rethrow;
     }
-
-    log("Avatar generated successfully");
-
-    // Replace the circle color with `currentColor`, so we can theme it.
-    return response.body!.replaceAll("#65C9FF", "currentColor");
   }
 }

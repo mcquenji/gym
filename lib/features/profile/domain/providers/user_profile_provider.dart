@@ -15,11 +15,13 @@ final userProfileProvider =
 class UserProfileProvider extends Notifier<UserProfileProviderState> {
   late UserProfileDataSource userProfileDataSource;
   late User? user;
+  late AvatarProvider avatarController;
 
   @override
   UserProfileProviderState build() {
     user = ref.watch(userProvider);
     userProfileDataSource = ref.watch(userProfileDataSourceProvider);
+    avatarController = ref.watch(avatarProvider.notifier);
     var userDataService = ref.watch(userDataServiceProvider);
 
     if (user == null) {
@@ -59,6 +61,8 @@ class UserProfileProvider extends Notifier<UserProfileProviderState> {
     );
 
     await userProfileDataSource.write(userProfile);
+
+    await avatarController.createNewAvatar();
 
     state = userProfile;
   }
