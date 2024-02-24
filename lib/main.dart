@@ -25,7 +25,7 @@ void main() async {
 
   Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
-      print(record);
+      print("$record ${record.error ?? ""} ${record.stackTrace ?? ""}");
     }
   });
 

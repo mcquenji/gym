@@ -9,8 +9,6 @@ final userProfileDataSourceProvider = Provider<UserProfileDataSource>(
 
     return StdUserProfileDataSource(
       userDataService,
-      "users",
-      "data",
       "profile",
     );
   },

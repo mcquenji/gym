@@ -8,18 +8,13 @@ class StdProfileHistoryDataSource extends ProfileHistoryDataSource {
   /// This is the same for all users as the document is at `[usersCollection]/userId/[subCollectionName]/[documentName]`
   final String documentName;
 
-  /// The name of the collection that contains all users;
-  final String usersCollection;
-
-  /// The name of the sub-collection that contains the user's data.
-  final String subCollectionName;
+  final UserDataService userDataService;
 
   final AuthService authService;
 
   const StdProfileHistoryDataSource(
     this.authService,
-    this.usersCollection,
-    this.subCollectionName,
+    this.userDataService,
     this.documentName,
   ) : super();
 
@@ -30,14 +25,12 @@ class StdProfileHistoryDataSource extends ProfileHistoryDataSource {
       throw Exception('User is not logged in');
     }
 
-    final userId = authService.getCurrentUserId();
+    final userId = authService.getCurrentUserId()!;
 
     log('Retrieving profile history for user $userId');
 
     var doc = await FirebaseFirestore.instance
-        .collection(usersCollection)
-        .doc(userId)
-        .collection(subCollectionName)
+        .collection(userDataService.getUserDataCollectionPath(userId))
         .doc(documentName)
         .get();
 
@@ -49,15 +42,16 @@ class StdProfileHistoryDataSource extends ProfileHistoryDataSource {
     log('Profile history for user $userId successfully retrieved');
 
     return Map<DateTime, UserProfile>.fromEntries(
-      (doc.data() as Map<int, Map<String, dynamic>>).entries.map(
-            (e) => MapEntry(DateTime.fromMillisecondsSinceEpoch(e.key),
+      (doc.data() as Map<String, Map<String, dynamic>>).entries.map(
+            (e) => MapEntry(
+                DateTime.fromMillisecondsSinceEpoch(int.parse(e.key)),
                 UserProfile.fromJson(e.value)),
           ),
     );
   }
 
   @override
-  Future<void> record(UserProfile profile) {
+  Future<void> record(UserProfile profile) async {
     if (!authService.isUserLoggedIn()) {
       log('User is not logged in. Cannot record profile history.');
       throw Exception('User is not logged in');
@@ -70,13 +64,29 @@ class StdProfileHistoryDataSource extends ProfileHistoryDataSource {
 
     log('Recording profile history for user ${profile.id}');
 
-    return FirebaseFirestore.instance
-        .collection(usersCollection)
-        .doc(profile.id)
-        .collection(subCollectionName)
-        .doc(documentName)
-        .update({
-      DateTime.now().millisecondsSinceEpoch: profile.toJson(),
-    });
+    try {
+      var doc = await FirebaseFirestore.instance
+          .collection(userDataService.getUserDataCollectionPath(profile.id))
+          .doc(documentName)
+          .get();
+
+      final data = {
+        DateTime.now().millisecondsSinceEpoch.toString(): profile.toJson(),
+      };
+
+      if (!doc.exists) {
+        log('No profile history found for ${profile.id}. Initializing history with current profile.');
+        await doc.reference.set(data);
+
+        return;
+      }
+
+      doc.reference.update(data);
+
+      log('Profile history for user ${profile.id} successfully recorded');
+    } catch (e, stackTrace) {
+      log('Error recording profile history', e, stackTrace);
+      rethrow;
+    }
   }
 }

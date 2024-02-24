@@ -19,8 +19,6 @@ class ProfileHistoryController
   }
 
   Future<void> record(UserProfile profile) async {
-    state = const AsyncLoading();
-
     state = await AsyncValue.guard(() async {
       await profileHistoryDataSource.record(profile);
 

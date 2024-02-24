@@ -7,18 +7,10 @@ class StdUserProfileDataSource extends UserProfileDataSource {
   /// This is the same for all users as the document is at `[usersCollection]/userId/[subCollectionName]/[documentName]`
   final String documentName;
 
-  /// The name of the collection that contains all users;
-  final String usersCollection;
-
-  /// The name of the sub-collection that contains the user's data.
-  final String subCollectionName;
-
   final UserDataService userDataService;
 
   StdUserProfileDataSource(
     this.userDataService,
-    this.usersCollection,
-    this.subCollectionName,
     this.documentName,
   );
 

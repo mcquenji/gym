@@ -7,8 +7,7 @@ final profileHistoryDataSourceProvider =
     Provider<ProfileHistoryDataSource>((ref) {
   return StdProfileHistoryDataSource(
     ref.watch(authServiceProvider),
-    "users",
-    "data",
+    ref.watch(userDataServiceProvider),
     "history",
   );
 });

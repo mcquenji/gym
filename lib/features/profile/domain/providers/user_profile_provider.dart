@@ -30,9 +30,6 @@ class UserProfileController extends Notifier<UserProfileProviderState> {
       return null;
     }
 
-    // watch the users collection for changes
-    ref.watch(collection(userDataService.getUserDataCollectionPath(user!.id)));
-
     _fetchUserProfile();
 
     return stateOrNull;
