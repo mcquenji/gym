@@ -15,10 +15,11 @@ class HasProfileGuard extends AutoRouteGuard {
 
     final userProfileDataSource = ref.read(userProfileDataSourceProvider);
 
-    final profile = await userProfileDataSource
-        .getUserProfile(authService.getCurrentUserId()!);
+    final hasProfile = await userProfileDataSource.hasProfile(
+      authService.getCurrentUserId()!,
+    );
 
-    if (profile == null) {
+    if (!hasProfile) {
       router.push(const CompleteProfileRoute());
     } else {
       resolver.next();
