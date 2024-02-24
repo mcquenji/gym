@@ -52,3 +52,7 @@ lib/firebase_options.dart
 
 # artifacts
 extracted_enums.txt
+
+# mason
+.mason/
+mason-lock.json
