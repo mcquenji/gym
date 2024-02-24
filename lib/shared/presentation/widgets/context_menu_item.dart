@@ -1,13 +1,13 @@
 import 'package:advanced_icon/advanced_icon.dart';
 import 'package:flutter/material.dart';
 
-class PopupMenuIcon extends PopupMenuItem {
+class ContextMenuItem<T> extends PopupMenuItem<T> {
   final IconData icon;
   final String? label;
   final Color? iconColor;
   final Gradient? iconGradient;
 
-  PopupMenuIcon({
+  ContextMenuItem({
     super.key,
     required this.icon,
     this.iconColor,
@@ -20,6 +20,7 @@ class PopupMenuIcon extends PopupMenuItem {
     super.mouseCursor,
     super.padding,
     super.labelTextStyle,
+    super.value,
   }) : super(
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -34,6 +35,5 @@ class PopupMenuIcon extends PopupMenuItem {
               if (label != null) Text(label),
             ],
           ),
-          value: label,
         );
 }

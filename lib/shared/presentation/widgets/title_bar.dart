@@ -42,7 +42,7 @@ class TitleBar extends ConsumerWidget implements PreferredSizeWidget {
           const SizedBox(width: 16),
           PopupMenuButton(
             itemBuilder: (context) => <PopupMenuEntry>[
-              PopupMenuIcon(
+              ContextMenuItem(
                 onTap: () async {
                   var router = context.router;
                   await userController.logout();

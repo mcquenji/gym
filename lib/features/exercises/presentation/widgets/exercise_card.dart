@@ -28,63 +28,6 @@ class ExerciseCard extends StatefulWidget {
 class _ExerciseCardState extends State<ExerciseCard> {
   bool isContextMenuOpen = false;
 
-  void showContextMenu() async {
-    if (isContextMenuOpen) return;
-
-    final PopupMenuThemeData popupMenuTheme = PopupMenuTheme.of(context);
-    final RenderBox button = context.findRenderObject()! as RenderBox;
-    final RenderBox overlay =
-        Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
-    final PopupMenuPosition popupMenuPosition =
-        popupMenuTheme.position ?? PopupMenuPosition.over;
-    late Offset offset;
-    switch (popupMenuPosition) {
-      case PopupMenuPosition.over:
-        offset = Offset.zero;
-      case PopupMenuPosition.under:
-        offset = Offset(0, button.size.height + 8);
-    }
-    final RelativeRect position = RelativeRect.fromRect(
-      Rect.fromPoints(
-        button.localToGlobal(offset, ancestor: overlay),
-        button.localToGlobal(button.size.bottomRight(Offset.zero) + offset,
-            ancestor: overlay),
-      ),
-      Offset.zero & overlay.size,
-    );
-
-    setState(() {
-      isContextMenuOpen = true;
-    });
-
-    await showMenu(
-      context: context,
-      position: position,
-      items: <PopupMenuEntry>[
-        ...widget.actions,
-        if (widget.actions.isNotEmpty) const PopupMenuDivider(),
-        PopupMenuIcon(
-          icon: IconlyBroken.infoCircle,
-          label: context.l10n.exercisesDetails_contextMenu,
-          iconGradient: context.theme.gradients.primaryGradient.linear,
-          onTap: () {
-            context.router.push(
-              ExerciseDetailsRoute(
-                id: widget.exercise.id,
-              ),
-            );
-          },
-        ),
-      ],
-    );
-
-    if (mounted) {
-      setState(() {
-        isContextMenuOpen = false;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final content = Row(
@@ -142,8 +85,28 @@ class _ExerciseCardState extends State<ExerciseCard> {
       ],
     );
 
-    return GestureDetector(
-      onLongPress: showContextMenu,
+    return ContextMenu(
+      actions: [
+        ...widget.actions,
+        if (widget.actions.isNotEmpty) const PopupMenuDivider(),
+        ContextMenuItem(
+          icon: IconlyBroken.infoCircle,
+          label: context.l10n.exercisesDetails_contextMenu,
+          iconGradient: context.theme.gradients.primaryGradient.linear,
+          onTap: () {
+            context.router.push(
+              ExerciseDetailsRoute(
+                id: widget.exercise.id,
+              ),
+            );
+          },
+        ),
+      ],
+      onStateChanged: (isOpen) {
+        setState(() {
+          isContextMenuOpen = isOpen;
+        });
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

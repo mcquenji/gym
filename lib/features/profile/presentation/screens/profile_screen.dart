@@ -207,6 +207,7 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
     final profile = ref.watch(userProfileProvider);
+    final avatarController = ref.watch(avatarProvider.notifier);
 
     if (user == null || profile == null) {
       return const Scaffold(
@@ -226,8 +227,18 @@ class _EditProfileScreenState extends ConsumerState<ProfileScreen> {
           children: [
             Row(
               children: [
-                const Avatar(
-                  size: 50,
+                ContextMenu(
+                  actions: [
+                    ContextMenuItem(
+                      onTap: avatarController.createNewAvatar,
+                      label: l10n.profile_newAvatar,
+                      icon: Ionicons.shuffle,
+                      iconGradient: theme.gradients.primaryGradient.linear,
+                    ),
+                  ],
+                  child: const Avatar(
+                    size: 50,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
