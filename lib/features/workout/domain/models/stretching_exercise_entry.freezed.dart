@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'workout_set.dart';
+part of 'stretching_exercise_entry.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,14 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-WorkoutSet _$WorkoutSetFromJson(Map<String, dynamic> json) {
-  return _WorkoutSet.fromJson(json);
+StretchingExerciseEntry _$StretchingExerciseEntryFromJson(
+    Map<String, dynamic> json) {
+  return _StretchingExerciseEntry.fromJson(json);
 }
 
 /// @nodoc
-mixin _$WorkoutSet {
-  /// The id of the workout set
+mixin _$StretchingExerciseEntry {
+// The id of the workout set
   String get id => throw _privateConstructorUsedError;
 
   /// The id of the workout the set is associated with
@@ -29,40 +30,37 @@ mixin _$WorkoutSet {
   /// The id of the workout exercise the set is associated with
   String get exerciseId => throw _privateConstructorUsedError;
 
-  /// The number of sets completed
-  int get sets => throw _privateConstructorUsedError;
+  /// The duration of the stretching exercise in seconds
+  int get duration => throw _privateConstructorUsedError;
 
-  /// The number of reps completed
-  int get reps => throw _privateConstructorUsedError;
-
-  /// The weight lifted
-  int get weight => throw _privateConstructorUsedError;
+  /// The number of repetitions
+  int get repetitions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $WorkoutSetCopyWith<WorkoutSet> get copyWith =>
+  $StretchingExerciseEntryCopyWith<StretchingExerciseEntry> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WorkoutSetCopyWith<$Res> {
-  factory $WorkoutSetCopyWith(
-          WorkoutSet value, $Res Function(WorkoutSet) then) =
-      _$WorkoutSetCopyWithImpl<$Res, WorkoutSet>;
+abstract class $StretchingExerciseEntryCopyWith<$Res> {
+  factory $StretchingExerciseEntryCopyWith(StretchingExerciseEntry value,
+          $Res Function(StretchingExerciseEntry) then) =
+      _$StretchingExerciseEntryCopyWithImpl<$Res, StretchingExerciseEntry>;
   @useResult
   $Res call(
       {String id,
       String workoutId,
       String exerciseId,
-      int sets,
-      int reps,
-      int weight});
+      int duration,
+      int repetitions});
 }
 
 /// @nodoc
-class _$WorkoutSetCopyWithImpl<$Res, $Val extends WorkoutSet>
-    implements $WorkoutSetCopyWith<$Res> {
-  _$WorkoutSetCopyWithImpl(this._value, this._then);
+class _$StretchingExerciseEntryCopyWithImpl<$Res,
+        $Val extends StretchingExerciseEntry>
+    implements $StretchingExerciseEntryCopyWith<$Res> {
+  _$StretchingExerciseEntryCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -75,9 +73,8 @@ class _$WorkoutSetCopyWithImpl<$Res, $Val extends WorkoutSet>
     Object? id = null,
     Object? workoutId = null,
     Object? exerciseId = null,
-    Object? sets = null,
-    Object? reps = null,
-    Object? weight = null,
+    Object? duration = null,
+    Object? repetitions = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -92,45 +89,43 @@ class _$WorkoutSetCopyWithImpl<$Res, $Val extends WorkoutSet>
           ? _value.exerciseId
           : exerciseId // ignore: cast_nullable_to_non_nullable
               as String,
-      sets: null == sets
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      reps: null == reps
-          ? _value.reps
-          : reps // ignore: cast_nullable_to_non_nullable
-              as int,
-      weight: null == weight
-          ? _value.weight
-          : weight // ignore: cast_nullable_to_non_nullable
+      repetitions: null == repetitions
+          ? _value.repetitions
+          : repetitions // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$WorkoutSetImplCopyWith<$Res>
-    implements $WorkoutSetCopyWith<$Res> {
-  factory _$$WorkoutSetImplCopyWith(
-          _$WorkoutSetImpl value, $Res Function(_$WorkoutSetImpl) then) =
-      __$$WorkoutSetImplCopyWithImpl<$Res>;
+abstract class _$$StretchingExerciseEntryImplCopyWith<$Res>
+    implements $StretchingExerciseEntryCopyWith<$Res> {
+  factory _$$StretchingExerciseEntryImplCopyWith(
+          _$StretchingExerciseEntryImpl value,
+          $Res Function(_$StretchingExerciseEntryImpl) then) =
+      __$$StretchingExerciseEntryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String workoutId,
       String exerciseId,
-      int sets,
-      int reps,
-      int weight});
+      int duration,
+      int repetitions});
 }
 
 /// @nodoc
-class __$$WorkoutSetImplCopyWithImpl<$Res>
-    extends _$WorkoutSetCopyWithImpl<$Res, _$WorkoutSetImpl>
-    implements _$$WorkoutSetImplCopyWith<$Res> {
-  __$$WorkoutSetImplCopyWithImpl(
-      _$WorkoutSetImpl _value, $Res Function(_$WorkoutSetImpl) _then)
+class __$$StretchingExerciseEntryImplCopyWithImpl<$Res>
+    extends _$StretchingExerciseEntryCopyWithImpl<$Res,
+        _$StretchingExerciseEntryImpl>
+    implements _$$StretchingExerciseEntryImplCopyWith<$Res> {
+  __$$StretchingExerciseEntryImplCopyWithImpl(
+      _$StretchingExerciseEntryImpl _value,
+      $Res Function(_$StretchingExerciseEntryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -139,11 +134,10 @@ class __$$WorkoutSetImplCopyWithImpl<$Res>
     Object? id = null,
     Object? workoutId = null,
     Object? exerciseId = null,
-    Object? sets = null,
-    Object? reps = null,
-    Object? weight = null,
+    Object? duration = null,
+    Object? repetitions = null,
   }) {
-    return _then(_$WorkoutSetImpl(
+    return _then(_$StretchingExerciseEntryImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -156,17 +150,13 @@ class __$$WorkoutSetImplCopyWithImpl<$Res>
           ? _value.exerciseId
           : exerciseId // ignore: cast_nullable_to_non_nullable
               as String,
-      sets: null == sets
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      reps: null == reps
-          ? _value.reps
-          : reps // ignore: cast_nullable_to_non_nullable
-              as int,
-      weight: null == weight
-          ? _value.weight
-          : weight // ignore: cast_nullable_to_non_nullable
+      repetitions: null == repetitions
+          ? _value.repetitions
+          : repetitions // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -174,19 +164,18 @@ class __$$WorkoutSetImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WorkoutSetImpl implements _WorkoutSet {
-  _$WorkoutSetImpl(
+class _$StretchingExerciseEntryImpl implements _StretchingExerciseEntry {
+  _$StretchingExerciseEntryImpl(
       {required this.id,
       required this.workoutId,
       required this.exerciseId,
-      required this.sets,
-      required this.reps,
-      required this.weight});
+      required this.duration,
+      required this.repetitions});
 
-  factory _$WorkoutSetImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WorkoutSetImplFromJson(json);
+  factory _$StretchingExerciseEntryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StretchingExerciseEntryImplFromJson(json);
 
-  /// The id of the workout set
+// The id of the workout set
   @override
   final String id;
 
@@ -198,72 +187,67 @@ class _$WorkoutSetImpl implements _WorkoutSet {
   @override
   final String exerciseId;
 
-  /// The number of sets completed
+  /// The duration of the stretching exercise in seconds
   @override
-  final int sets;
+  final int duration;
 
-  /// The number of reps completed
+  /// The number of repetitions
   @override
-  final int reps;
-
-  /// The weight lifted
-  @override
-  final int weight;
+  final int repetitions;
 
   @override
   String toString() {
-    return 'WorkoutSet(id: $id, workoutId: $workoutId, exerciseId: $exerciseId, sets: $sets, reps: $reps, weight: $weight)';
+    return 'StretchingExerciseEntry(id: $id, workoutId: $workoutId, exerciseId: $exerciseId, duration: $duration, repetitions: $repetitions)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WorkoutSetImpl &&
+            other is _$StretchingExerciseEntryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.workoutId, workoutId) ||
                 other.workoutId == workoutId) &&
             (identical(other.exerciseId, exerciseId) ||
                 other.exerciseId == exerciseId) &&
-            (identical(other.sets, sets) || other.sets == sets) &&
-            (identical(other.reps, reps) || other.reps == reps) &&
-            (identical(other.weight, weight) || other.weight == weight));
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.repetitions, repetitions) ||
+                other.repetitions == repetitions));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, workoutId, exerciseId, sets, reps, weight);
+  int get hashCode => Object.hash(
+      runtimeType, id, workoutId, exerciseId, duration, repetitions);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WorkoutSetImplCopyWith<_$WorkoutSetImpl> get copyWith =>
-      __$$WorkoutSetImplCopyWithImpl<_$WorkoutSetImpl>(this, _$identity);
+  _$$StretchingExerciseEntryImplCopyWith<_$StretchingExerciseEntryImpl>
+      get copyWith => __$$StretchingExerciseEntryImplCopyWithImpl<
+          _$StretchingExerciseEntryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WorkoutSetImplToJson(
+    return _$$StretchingExerciseEntryImplToJson(
       this,
     );
   }
 }
 
-abstract class _WorkoutSet implements WorkoutSet {
-  factory _WorkoutSet(
+abstract class _StretchingExerciseEntry implements StretchingExerciseEntry {
+  factory _StretchingExerciseEntry(
       {required final String id,
       required final String workoutId,
       required final String exerciseId,
-      required final int sets,
-      required final int reps,
-      required final int weight}) = _$WorkoutSetImpl;
+      required final int duration,
+      required final int repetitions}) = _$StretchingExerciseEntryImpl;
 
-  factory _WorkoutSet.fromJson(Map<String, dynamic> json) =
-      _$WorkoutSetImpl.fromJson;
+  factory _StretchingExerciseEntry.fromJson(Map<String, dynamic> json) =
+      _$StretchingExerciseEntryImpl.fromJson;
 
-  @override
-
-  /// The id of the workout set
+  @override // The id of the workout set
   String get id;
   @override
 
@@ -275,18 +259,14 @@ abstract class _WorkoutSet implements WorkoutSet {
   String get exerciseId;
   @override
 
-  /// The number of sets completed
-  int get sets;
+  /// The duration of the stretching exercise in seconds
+  int get duration;
   @override
 
-  /// The number of reps completed
-  int get reps;
-  @override
-
-  /// The weight lifted
-  int get weight;
+  /// The number of repetitions
+  int get repetitions;
   @override
   @JsonKey(ignore: true)
-  _$$WorkoutSetImplCopyWith<_$WorkoutSetImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$StretchingExerciseEntryImplCopyWith<_$StretchingExerciseEntryImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

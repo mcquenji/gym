@@ -1,12 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gym/features/workout/workout.dart';
 
-part 'workout_set.freezed.dart';
-part 'workout_set.g.dart';
+part 'weight_lifting_exercise_entry.freezed.dart';
+part 'weight_lifting_exercise_entry.g.dart';
 
-/// A recorded set of a workout exercise a user has completed
+/// A recorded set of a workout exercise (where weights are being lifted) a user has completed.
 @freezed
-class WorkoutSet with _$WorkoutSet {
-  factory WorkoutSet({
+class WeightLiftingExerciseEntry
+    with _$WeightLiftingExerciseEntry
+    implements ExerciseEntry {
+  factory WeightLiftingExerciseEntry({
     /// The id of the workout set
     required String id,
 
@@ -26,6 +29,6 @@ class WorkoutSet with _$WorkoutSet {
     required int weight,
   }) = _WorkoutSet;
 
-  factory WorkoutSet.fromJson(Map<String, dynamic> json) =>
-      _$WorkoutSetFromJson(json);
+  factory WeightLiftingExerciseEntry.fromJson(Map<String, dynamic> json) =>
+      _$WeightLiftingExerciseEntryFromJson(json);
 }

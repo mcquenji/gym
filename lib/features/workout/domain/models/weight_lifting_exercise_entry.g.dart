@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'workout_set.dart';
+part of 'weight_lifting_exercise_entry.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
