@@ -21,10 +21,13 @@ CardioExerciseEntryData _$CardioExerciseEntryDataFromJson(
 
 /// @nodoc
 mixin _$CardioExerciseEntryData {
-  /// The duration of the cardio exercise in seconds
-  int get duration => throw _privateConstructorUsedError;
+  /// The duration of the cardio exercise in seconds.
+  /// This is the total time spent doing the exercise.
+  ///
+  /// Use [duration] to get this value as a [Duration].
+  int get seconds => throw _privateConstructorUsedError;
 
-  /// The distance of the cardio exercise in meters
+  /// The distance of the cardio exercise in meters.
   int get distance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +42,7 @@ abstract class $CardioExerciseEntryDataCopyWith<$Res> {
           $Res Function(CardioExerciseEntryData) then) =
       _$CardioExerciseEntryDataCopyWithImpl<$Res, CardioExerciseEntryData>;
   @useResult
-  $Res call({int duration, int distance});
+  $Res call({int seconds, int distance});
 }
 
 /// @nodoc
@@ -56,13 +59,13 @@ class _$CardioExerciseEntryDataCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? duration = null,
+    Object? seconds = null,
     Object? distance = null,
   }) {
     return _then(_value.copyWith(
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
               as int,
       distance: null == distance
           ? _value.distance
@@ -81,7 +84,7 @@ abstract class _$$CardioExerciseEntryDataImplCopyWith<$Res>
       __$$CardioExerciseEntryDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int duration, int distance});
+  $Res call({int seconds, int distance});
 }
 
 /// @nodoc
@@ -97,13 +100,13 @@ class __$$CardioExerciseEntryDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? duration = null,
+    Object? seconds = null,
     Object? distance = null,
   }) {
     return _then(_$CardioExerciseEntryDataImpl(
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
               as int,
       distance: null == distance
           ? _value.distance
@@ -115,24 +118,27 @@ class __$$CardioExerciseEntryDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CardioExerciseEntryDataImpl implements _CardioExerciseEntryData {
-  _$CardioExerciseEntryDataImpl(
-      {required this.duration, required this.distance});
+class _$CardioExerciseEntryDataImpl extends _CardioExerciseEntryData {
+  _$CardioExerciseEntryDataImpl({required this.seconds, required this.distance})
+      : super._();
 
   factory _$CardioExerciseEntryDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$CardioExerciseEntryDataImplFromJson(json);
 
-  /// The duration of the cardio exercise in seconds
+  /// The duration of the cardio exercise in seconds.
+  /// This is the total time spent doing the exercise.
+  ///
+  /// Use [duration] to get this value as a [Duration].
   @override
-  final int duration;
+  final int seconds;
 
-  /// The distance of the cardio exercise in meters
+  /// The distance of the cardio exercise in meters.
   @override
   final int distance;
 
   @override
   String toString() {
-    return 'CardioExerciseEntryData(duration: $duration, distance: $distance)';
+    return 'CardioExerciseEntryData(seconds: $seconds, distance: $distance)';
   }
 
   @override
@@ -140,15 +146,14 @@ class _$CardioExerciseEntryDataImpl implements _CardioExerciseEntryData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CardioExerciseEntryDataImpl &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
+            (identical(other.seconds, seconds) || other.seconds == seconds) &&
             (identical(other.distance, distance) ||
                 other.distance == distance));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, duration, distance);
+  int get hashCode => Object.hash(runtimeType, seconds, distance);
 
   @JsonKey(ignore: true)
   @override
@@ -165,21 +170,25 @@ class _$CardioExerciseEntryDataImpl implements _CardioExerciseEntryData {
   }
 }
 
-abstract class _CardioExerciseEntryData implements CardioExerciseEntryData {
+abstract class _CardioExerciseEntryData extends CardioExerciseEntryData {
   factory _CardioExerciseEntryData(
-      {required final int duration,
+      {required final int seconds,
       required final int distance}) = _$CardioExerciseEntryDataImpl;
+  _CardioExerciseEntryData._() : super._();
 
   factory _CardioExerciseEntryData.fromJson(Map<String, dynamic> json) =
       _$CardioExerciseEntryDataImpl.fromJson;
 
   @override
 
-  /// The duration of the cardio exercise in seconds
-  int get duration;
+  /// The duration of the cardio exercise in seconds.
+  /// This is the total time spent doing the exercise.
+  ///
+  /// Use [duration] to get this value as a [Duration].
+  int get seconds;
   @override
 
-  /// The distance of the cardio exercise in meters
+  /// The distance of the cardio exercise in meters.
   int get distance;
   @override
   @JsonKey(ignore: true)

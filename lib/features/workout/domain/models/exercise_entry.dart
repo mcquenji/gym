@@ -29,22 +29,25 @@ class ExerciseEntry with _$ExerciseEntry {
     /// The type of the data is determined by the [type] field.
     ///
     /// Based on the value of [type], you can cast the data to the appropriate type:
-    /// - Use [dataAsCardioExerciseEntry] to get the data as a [CardioExerciseEntryData].
-    /// - Use [dataAsStretchingExerciseEntry] to get the data as a [StretchingExerciseEntryData].
-    /// - Use [dataAsWeightLiftingExerciseEntry] to get the data as a [WeightLiftingExerciseEntryData].
+    /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+    /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+    /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
     required Map<String, dynamic> data,
 
     /// The type of the [data] the entry contains.
-    required ExerciseEntryDataType type,
+    required ExerciseDataType type,
   }) = _ExerciseEntry;
 
-  CardioExerciseEntryData get dataAsCardioExerciseEntry =>
+  /// The [data] of the entry as a [CardioExerciseEntryData].
+  CardioExerciseEntryData get cardioData =>
       CardioExerciseEntryData.fromJson(data);
 
-  StretchingExerciseEntryData get dataAsStretchingExerciseEntry =>
+  /// The [data] of the entry as a [StretchingExerciseEntryData].
+  StretchingExerciseEntryData get stretchingData =>
       StretchingExerciseEntryData.fromJson(data);
 
-  WeightLiftingExerciseEntryData get dataAsWeightLiftingExerciseEntry =>
+  /// The [data] of the entry as a [WeightLiftingExerciseEntryData].
+  WeightLiftingExerciseEntryData get weightLiftingData =>
       WeightLiftingExerciseEntryData.fromJson(data);
 
   factory ExerciseEntry.fromJson(Map<String, dynamic> json) =>

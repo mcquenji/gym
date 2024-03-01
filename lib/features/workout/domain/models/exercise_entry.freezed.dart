@@ -39,13 +39,13 @@ mixin _$ExerciseEntry {
   /// The type of the data is determined by the [type] field.
   ///
   /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - Use [dataAsCardioExerciseEntry] to get the data as a [CardioExerciseEntryData].
-  /// - Use [dataAsStretchingExerciseEntry] to get the data as a [StretchingExerciseEntryData].
-  /// - Use [dataAsWeightLiftingExerciseEntry] to get the data as a [WeightLiftingExerciseEntryData].
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
 
   /// The type of the [data] the entry contains.
-  ExerciseEntryDataType get type => throw _privateConstructorUsedError;
+  ExerciseDataType get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,7 +65,7 @@ abstract class $ExerciseEntryCopyWith<$Res> {
       String exerciseId,
       int timestamp,
       Map<String, dynamic> data,
-      ExerciseEntryDataType type});
+      ExerciseDataType type});
 }
 
 /// @nodoc
@@ -112,7 +112,7 @@ class _$ExerciseEntryCopyWithImpl<$Res, $Val extends ExerciseEntry>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as ExerciseEntryDataType,
+              as ExerciseDataType,
     ) as $Val);
   }
 }
@@ -131,7 +131,7 @@ abstract class _$$ExerciseEntryImplCopyWith<$Res>
       String exerciseId,
       int timestamp,
       Map<String, dynamic> data,
-      ExerciseEntryDataType type});
+      ExerciseDataType type});
 }
 
 /// @nodoc
@@ -176,7 +176,7 @@ class __$$ExerciseEntryImplCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as ExerciseEntryDataType,
+              as ExerciseDataType,
     ));
   }
 }
@@ -220,9 +220,9 @@ class _$ExerciseEntryImpl extends _ExerciseEntry {
   /// The type of the data is determined by the [type] field.
   ///
   /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - Use [dataAsCardioExerciseEntry] to get the data as a [CardioExerciseEntryData].
-  /// - Use [dataAsStretchingExerciseEntry] to get the data as a [StretchingExerciseEntryData].
-  /// - Use [dataAsWeightLiftingExerciseEntry] to get the data as a [WeightLiftingExerciseEntryData].
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
   final Map<String, dynamic> _data;
 
   /// The data of the entry
@@ -230,9 +230,9 @@ class _$ExerciseEntryImpl extends _ExerciseEntry {
   /// The type of the data is determined by the [type] field.
   ///
   /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - Use [dataAsCardioExerciseEntry] to get the data as a [CardioExerciseEntryData].
-  /// - Use [dataAsStretchingExerciseEntry] to get the data as a [StretchingExerciseEntryData].
-  /// - Use [dataAsWeightLiftingExerciseEntry] to get the data as a [WeightLiftingExerciseEntryData].
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
   @override
   Map<String, dynamic> get data {
     if (_data is EqualUnmodifiableMapView) return _data;
@@ -242,7 +242,7 @@ class _$ExerciseEntryImpl extends _ExerciseEntry {
 
   /// The type of the [data] the entry contains.
   @override
-  final ExerciseEntryDataType type;
+  final ExerciseDataType type;
 
   @override
   String toString() {
@@ -291,7 +291,7 @@ abstract class _ExerciseEntry extends ExerciseEntry {
       required final String exerciseId,
       required final int timestamp,
       required final Map<String, dynamic> data,
-      required final ExerciseEntryDataType type}) = _$ExerciseEntryImpl;
+      required final ExerciseDataType type}) = _$ExerciseEntryImpl;
   _ExerciseEntry._() : super._();
 
   factory _ExerciseEntry.fromJson(Map<String, dynamic> json) =
@@ -320,14 +320,14 @@ abstract class _ExerciseEntry extends ExerciseEntry {
   /// The type of the data is determined by the [type] field.
   ///
   /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - Use [dataAsCardioExerciseEntry] to get the data as a [CardioExerciseEntryData].
-  /// - Use [dataAsStretchingExerciseEntry] to get the data as a [StretchingExerciseEntryData].
-  /// - Use [dataAsWeightLiftingExerciseEntry] to get the data as a [WeightLiftingExerciseEntryData].
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
   Map<String, dynamic> get data;
   @override
 
   /// The type of the [data] the entry contains.
-  ExerciseEntryDataType get type;
+  ExerciseDataType get type;
   @override
   @JsonKey(ignore: true)
   _$$ExerciseEntryImplCopyWith<_$ExerciseEntryImpl> get copyWith =>

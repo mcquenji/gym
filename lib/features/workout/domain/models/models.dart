@@ -5,3 +5,7 @@ export 'exercise_entry_data.dart';
 export 'cardio_exercise_entry_data.dart';
 export 'stretching_exercise_entry_data.dart';
 export 'exercise_entry.dart';
+export 'workout_exercise_data.dart';
+export 'weight_lifting_workout_exercise_data.dart';
+export 'cardio_workout_exercise_data.dart';
+export 'stretching_workout_exercise_data.dart';

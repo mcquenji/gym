@@ -9,13 +9,11 @@ part of 'stretching_exercise_entry_data.dart';
 _$StretchingExerciseEntryDataImpl _$$StretchingExerciseEntryDataImplFromJson(
         Map<String, dynamic> json) =>
     _$StretchingExerciseEntryDataImpl(
-      duration: json['duration'] as int,
-      repetitions: json['repetitions'] as int,
+      seconds: json['seconds'] as int,
     );
 
 Map<String, dynamic> _$$StretchingExerciseEntryDataImplToJson(
         _$StretchingExerciseEntryDataImpl instance) =>
     <String, dynamic>{
-      'duration': instance.duration,
-      'repetitions': instance.repetitions,
+      'seconds': instance.seconds,
     };

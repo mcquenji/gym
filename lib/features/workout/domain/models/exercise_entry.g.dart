@@ -13,7 +13,7 @@ _$ExerciseEntryImpl _$$ExerciseEntryImplFromJson(Map<String, dynamic> json) =>
       exerciseId: json['exerciseId'] as String,
       timestamp: json['timestamp'] as int,
       data: json['data'] as Map<String, dynamic>,
-      type: $enumDecode(_$ExerciseEntryDataTypeEnumMap, json['type']),
+      type: $enumDecode(_$ExerciseDataTypeEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$$ExerciseEntryImplToJson(_$ExerciseEntryImpl instance) =>
@@ -23,11 +23,11 @@ Map<String, dynamic> _$$ExerciseEntryImplToJson(_$ExerciseEntryImpl instance) =>
       'exerciseId': instance.exerciseId,
       'timestamp': instance.timestamp,
       'data': instance.data,
-      'type': _$ExerciseEntryDataTypeEnumMap[instance.type]!,
+      'type': _$ExerciseDataTypeEnumMap[instance.type]!,
     };
 
-const _$ExerciseEntryDataTypeEnumMap = {
-  ExerciseEntryDataType.weightLifting: 'weightLifting',
-  ExerciseEntryDataType.stretching: 'stretching',
-  ExerciseEntryDataType.cardio: 'cardio',
+const _$ExerciseDataTypeEnumMap = {
+  ExerciseDataType.weightLifting: 'weightLifting',
+  ExerciseDataType.stretching: 'stretching',
+  ExerciseDataType.cardio: 'cardio',
 };

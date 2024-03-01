@@ -21,11 +21,10 @@ StretchingExerciseEntryData _$StretchingExerciseEntryDataFromJson(
 
 /// @nodoc
 mixin _$StretchingExerciseEntryData {
-  /// The duration of the stretching exercise in seconds
-  int get duration => throw _privateConstructorUsedError;
-
-  /// The number of repetitions
-  int get repetitions => throw _privateConstructorUsedError;
+  /// The duration of the stretching exercise in seconds.
+  ///
+  /// Use [duration] to get this value as a [Duration].
+  int get seconds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +40,7 @@ abstract class $StretchingExerciseEntryDataCopyWith<$Res> {
       _$StretchingExerciseEntryDataCopyWithImpl<$Res,
           StretchingExerciseEntryData>;
   @useResult
-  $Res call({int duration, int repetitions});
+  $Res call({int seconds});
 }
 
 /// @nodoc
@@ -58,17 +57,12 @@ class _$StretchingExerciseEntryDataCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? duration = null,
-    Object? repetitions = null,
+    Object? seconds = null,
   }) {
     return _then(_value.copyWith(
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int,
-      repetitions: null == repetitions
-          ? _value.repetitions
-          : repetitions // ignore: cast_nullable_to_non_nullable
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -83,7 +77,7 @@ abstract class _$$StretchingExerciseEntryDataImplCopyWith<$Res>
       __$$StretchingExerciseEntryDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int duration, int repetitions});
+  $Res call({int seconds});
 }
 
 /// @nodoc
@@ -99,17 +93,12 @@ class __$$StretchingExerciseEntryDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? duration = null,
-    Object? repetitions = null,
+    Object? seconds = null,
   }) {
     return _then(_$StretchingExerciseEntryDataImpl(
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int,
-      repetitions: null == repetitions
-          ? _value.repetitions
-          : repetitions // ignore: cast_nullable_to_non_nullable
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -117,26 +106,22 @@ class __$$StretchingExerciseEntryDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$StretchingExerciseEntryDataImpl
-    implements _StretchingExerciseEntryData {
-  _$StretchingExerciseEntryDataImpl(
-      {required this.duration, required this.repetitions});
+class _$StretchingExerciseEntryDataImpl extends _StretchingExerciseEntryData {
+  _$StretchingExerciseEntryDataImpl({required this.seconds}) : super._();
 
   factory _$StretchingExerciseEntryDataImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$StretchingExerciseEntryDataImplFromJson(json);
 
-  /// The duration of the stretching exercise in seconds
+  /// The duration of the stretching exercise in seconds.
+  ///
+  /// Use [duration] to get this value as a [Duration].
   @override
-  final int duration;
-
-  /// The number of repetitions
-  @override
-  final int repetitions;
+  final int seconds;
 
   @override
   String toString() {
-    return 'StretchingExerciseEntryData(duration: $duration, repetitions: $repetitions)';
+    return 'StretchingExerciseEntryData(seconds: $seconds)';
   }
 
   @override
@@ -144,15 +129,12 @@ class _$StretchingExerciseEntryDataImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StretchingExerciseEntryDataImpl &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
-            (identical(other.repetitions, repetitions) ||
-                other.repetitions == repetitions));
+            (identical(other.seconds, seconds) || other.seconds == seconds));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, duration, repetitions);
+  int get hashCode => Object.hash(runtimeType, seconds);
 
   @JsonKey(ignore: true)
   @override
@@ -170,22 +152,20 @@ class _$StretchingExerciseEntryDataImpl
 }
 
 abstract class _StretchingExerciseEntryData
-    implements StretchingExerciseEntryData {
-  factory _StretchingExerciseEntryData(
-      {required final int duration,
-      required final int repetitions}) = _$StretchingExerciseEntryDataImpl;
+    extends StretchingExerciseEntryData {
+  factory _StretchingExerciseEntryData({required final int seconds}) =
+      _$StretchingExerciseEntryDataImpl;
+  _StretchingExerciseEntryData._() : super._();
 
   factory _StretchingExerciseEntryData.fromJson(Map<String, dynamic> json) =
       _$StretchingExerciseEntryDataImpl.fromJson;
 
   @override
 
-  /// The duration of the stretching exercise in seconds
-  int get duration;
-  @override
-
-  /// The number of repetitions
-  int get repetitions;
+  /// The duration of the stretching exercise in seconds.
+  ///
+  /// Use [duration] to get this value as a [Duration].
+  int get seconds;
   @override
   @JsonKey(ignore: true)
   _$$StretchingExerciseEntryDataImplCopyWith<_$StretchingExerciseEntryDataImpl>

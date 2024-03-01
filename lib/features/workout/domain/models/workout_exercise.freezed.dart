@@ -23,14 +23,18 @@ mixin _$WorkoutExercise {
   /// The id of the underlying exercise
   String get id => throw _privateConstructorUsedError;
 
-  /// The number of sets
-  int get sets => throw _privateConstructorUsedError;
+  /// The data of the exercise.
+  ///
+  /// The type of the data is determined by the [type] field.
+  ///
+  /// Based on the value of [type], you can cast the data to the appropriate type:
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
+  Map<String, dynamic> get data => throw _privateConstructorUsedError;
 
-  /// The maximum number of reps per set
-  int get maxReps => throw _privateConstructorUsedError;
-
-  /// The minimum number of reps per set
-  int get minReps => throw _privateConstructorUsedError;
+  /// The type of the [data] the exercise contains.
+  ExerciseDataType get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +48,7 @@ abstract class $WorkoutExerciseCopyWith<$Res> {
           WorkoutExercise value, $Res Function(WorkoutExercise) then) =
       _$WorkoutExerciseCopyWithImpl<$Res, WorkoutExercise>;
   @useResult
-  $Res call({String id, int sets, int maxReps, int minReps});
+  $Res call({String id, Map<String, dynamic> data, ExerciseDataType type});
 }
 
 /// @nodoc
@@ -61,27 +65,22 @@ class _$WorkoutExerciseCopyWithImpl<$Res, $Val extends WorkoutExercise>
   @override
   $Res call({
     Object? id = null,
-    Object? sets = null,
-    Object? maxReps = null,
-    Object? minReps = null,
+    Object? data = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      sets: null == sets
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxReps: null == maxReps
-          ? _value.maxReps
-          : maxReps // ignore: cast_nullable_to_non_nullable
-              as int,
-      minReps: null == minReps
-          ? _value.minReps
-          : minReps // ignore: cast_nullable_to_non_nullable
-              as int,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ExerciseDataType,
     ) as $Val);
   }
 }
@@ -94,7 +93,7 @@ abstract class _$$WorkoutExerciseImplCopyWith<$Res>
       __$$WorkoutExerciseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, int sets, int maxReps, int minReps});
+  $Res call({String id, Map<String, dynamic> data, ExerciseDataType type});
 }
 
 /// @nodoc
@@ -109,39 +108,35 @@ class __$$WorkoutExerciseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? sets = null,
-    Object? maxReps = null,
-    Object? minReps = null,
+    Object? data = null,
+    Object? type = null,
   }) {
     return _then(_$WorkoutExerciseImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      sets: null == sets
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxReps: null == maxReps
-          ? _value.maxReps
-          : maxReps // ignore: cast_nullable_to_non_nullable
-              as int,
-      minReps: null == minReps
-          ? _value.minReps
-          : minReps // ignore: cast_nullable_to_non_nullable
-              as int,
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ExerciseDataType,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$WorkoutExerciseImpl implements _WorkoutExercise {
+class _$WorkoutExerciseImpl extends _WorkoutExercise {
   _$WorkoutExerciseImpl(
       {required this.id,
-      required this.sets,
-      required this.maxReps,
-      required this.minReps});
+      required final Map<String, dynamic> data,
+      required this.type})
+      : _data = data,
+        super._();
 
   factory _$WorkoutExerciseImpl.fromJson(Map<String, dynamic> json) =>
       _$$WorkoutExerciseImplFromJson(json);
@@ -150,21 +145,38 @@ class _$WorkoutExerciseImpl implements _WorkoutExercise {
   @override
   final String id;
 
-  /// The number of sets
-  @override
-  final int sets;
+  /// The data of the exercise.
+  ///
+  /// The type of the data is determined by the [type] field.
+  ///
+  /// Based on the value of [type], you can cast the data to the appropriate type:
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
+  final Map<String, dynamic> _data;
 
-  /// The maximum number of reps per set
+  /// The data of the exercise.
+  ///
+  /// The type of the data is determined by the [type] field.
+  ///
+  /// Based on the value of [type], you can cast the data to the appropriate type:
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
   @override
-  final int maxReps;
+  Map<String, dynamic> get data {
+    if (_data is EqualUnmodifiableMapView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_data);
+  }
 
-  /// The minimum number of reps per set
+  /// The type of the [data] the exercise contains.
   @override
-  final int minReps;
+  final ExerciseDataType type;
 
   @override
   String toString() {
-    return 'WorkoutExercise(id: $id, sets: $sets, maxReps: $maxReps, minReps: $minReps)';
+    return 'WorkoutExercise(id: $id, data: $data, type: $type)';
   }
 
   @override
@@ -173,14 +185,14 @@ class _$WorkoutExerciseImpl implements _WorkoutExercise {
         (other.runtimeType == runtimeType &&
             other is _$WorkoutExerciseImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.sets, sets) || other.sets == sets) &&
-            (identical(other.maxReps, maxReps) || other.maxReps == maxReps) &&
-            (identical(other.minReps, minReps) || other.minReps == minReps));
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, sets, maxReps, minReps);
+  int get hashCode => Object.hash(
+      runtimeType, id, const DeepCollectionEquality().hash(_data), type);
 
   @JsonKey(ignore: true)
   @override
@@ -197,12 +209,12 @@ class _$WorkoutExerciseImpl implements _WorkoutExercise {
   }
 }
 
-abstract class _WorkoutExercise implements WorkoutExercise {
+abstract class _WorkoutExercise extends WorkoutExercise {
   factory _WorkoutExercise(
       {required final String id,
-      required final int sets,
-      required final int maxReps,
-      required final int minReps}) = _$WorkoutExerciseImpl;
+      required final Map<String, dynamic> data,
+      required final ExerciseDataType type}) = _$WorkoutExerciseImpl;
+  _WorkoutExercise._() : super._();
 
   factory _WorkoutExercise.fromJson(Map<String, dynamic> json) =
       _$WorkoutExerciseImpl.fromJson;
@@ -213,16 +225,19 @@ abstract class _WorkoutExercise implements WorkoutExercise {
   String get id;
   @override
 
-  /// The number of sets
-  int get sets;
+  /// The data of the exercise.
+  ///
+  /// The type of the data is determined by the [type] field.
+  ///
+  /// Based on the value of [type], you can cast the data to the appropriate type:
+  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
+  Map<String, dynamic> get data;
   @override
 
-  /// The maximum number of reps per set
-  int get maxReps;
-  @override
-
-  /// The minimum number of reps per set
-  int get minReps;
+  /// The type of the [data] the exercise contains.
+  ExerciseDataType get type;
   @override
   @JsonKey(ignore: true)
   _$$WorkoutExerciseImplCopyWith<_$WorkoutExerciseImpl> get copyWith =>

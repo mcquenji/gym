@@ -8,13 +8,17 @@ part 'stretching_exercise_entry_data.g.dart';
 class StretchingExerciseEntryData
     with _$StretchingExerciseEntryData
     implements ExerciseEntryData {
-  factory StretchingExerciseEntryData({
-    /// The duration of the stretching exercise in seconds
-    required int duration,
+  const StretchingExerciseEntryData._();
 
-    /// The number of repetitions
-    required int repetitions,
+  factory StretchingExerciseEntryData({
+    /// The duration of the stretching exercise in seconds.
+    ///
+    /// Use [duration] to get this value as a [Duration].
+    required int seconds,
   }) = _StretchingExerciseEntryData;
+
+  /// The duration of the stretching exercise.
+  Duration get duration => Duration(seconds: seconds);
 
   factory StretchingExerciseEntryData.fromJson(Map<String, dynamic> json) =>
       _$StretchingExerciseEntryDataFromJson(json);
