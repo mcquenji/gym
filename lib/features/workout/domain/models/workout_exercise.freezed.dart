@@ -23,15 +23,15 @@ mixin _$WorkoutExercise {
   /// The id of the underlying exercise
   String get id => throw _privateConstructorUsedError;
 
-  /// The data of the exercise.
+  /// The requirements that must be met to complete the exercise.
   ///
-  /// The type of the data is determined by the [type] field.
+  /// The type of the requirements is determined by the [type] field.
   ///
-  /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
-  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
-  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
-  Map<String, dynamic> get data => throw _privateConstructorUsedError;
+  /// Based on the value of [type], you can cast the requirements to the appropriate type:
+  /// - [cardioRequirements] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingRequirements] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingRequirements] if [type] is [ExerciseDataType.weightLifting]
+  Map<String, dynamic> get requirements => throw _privateConstructorUsedError;
 
   /// The type of the [data] the exercise contains.
   ExerciseDataType get type => throw _privateConstructorUsedError;
@@ -48,7 +48,8 @@ abstract class $WorkoutExerciseCopyWith<$Res> {
           WorkoutExercise value, $Res Function(WorkoutExercise) then) =
       _$WorkoutExerciseCopyWithImpl<$Res, WorkoutExercise>;
   @useResult
-  $Res call({String id, Map<String, dynamic> data, ExerciseDataType type});
+  $Res call(
+      {String id, Map<String, dynamic> requirements, ExerciseDataType type});
 }
 
 /// @nodoc
@@ -65,7 +66,7 @@ class _$WorkoutExerciseCopyWithImpl<$Res, $Val extends WorkoutExercise>
   @override
   $Res call({
     Object? id = null,
-    Object? data = null,
+    Object? requirements = null,
     Object? type = null,
   }) {
     return _then(_value.copyWith(
@@ -73,9 +74,9 @@ class _$WorkoutExerciseCopyWithImpl<$Res, $Val extends WorkoutExercise>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
+      requirements: null == requirements
+          ? _value.requirements
+          : requirements // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       type: null == type
           ? _value.type
@@ -93,7 +94,8 @@ abstract class _$$WorkoutExerciseImplCopyWith<$Res>
       __$$WorkoutExerciseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, Map<String, dynamic> data, ExerciseDataType type});
+  $Res call(
+      {String id, Map<String, dynamic> requirements, ExerciseDataType type});
 }
 
 /// @nodoc
@@ -108,7 +110,7 @@ class __$$WorkoutExerciseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? data = null,
+    Object? requirements = null,
     Object? type = null,
   }) {
     return _then(_$WorkoutExerciseImpl(
@@ -116,9 +118,9 @@ class __$$WorkoutExerciseImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      data: null == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
+      requirements: null == requirements
+          ? _value._requirements
+          : requirements // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       type: null == type
           ? _value.type
@@ -133,9 +135,9 @@ class __$$WorkoutExerciseImplCopyWithImpl<$Res>
 class _$WorkoutExerciseImpl extends _WorkoutExercise {
   _$WorkoutExerciseImpl(
       {required this.id,
-      required final Map<String, dynamic> data,
+      required final Map<String, dynamic> requirements,
       required this.type})
-      : _data = data,
+      : _requirements = requirements,
         super._();
 
   factory _$WorkoutExerciseImpl.fromJson(Map<String, dynamic> json) =>
@@ -145,29 +147,29 @@ class _$WorkoutExerciseImpl extends _WorkoutExercise {
   @override
   final String id;
 
-  /// The data of the exercise.
+  /// The requirements that must be met to complete the exercise.
   ///
-  /// The type of the data is determined by the [type] field.
+  /// The type of the requirements is determined by the [type] field.
   ///
-  /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
-  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
-  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
-  final Map<String, dynamic> _data;
+  /// Based on the value of [type], you can cast the requirements to the appropriate type:
+  /// - [cardioRequirements] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingRequirements] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingRequirements] if [type] is [ExerciseDataType.weightLifting]
+  final Map<String, dynamic> _requirements;
 
-  /// The data of the exercise.
+  /// The requirements that must be met to complete the exercise.
   ///
-  /// The type of the data is determined by the [type] field.
+  /// The type of the requirements is determined by the [type] field.
   ///
-  /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
-  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
-  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
+  /// Based on the value of [type], you can cast the requirements to the appropriate type:
+  /// - [cardioRequirements] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingRequirements] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingRequirements] if [type] is [ExerciseDataType.weightLifting]
   @override
-  Map<String, dynamic> get data {
-    if (_data is EqualUnmodifiableMapView) return _data;
+  Map<String, dynamic> get requirements {
+    if (_requirements is EqualUnmodifiableMapView) return _requirements;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_data);
+    return EqualUnmodifiableMapView(_requirements);
   }
 
   /// The type of the [data] the exercise contains.
@@ -176,7 +178,7 @@ class _$WorkoutExerciseImpl extends _WorkoutExercise {
 
   @override
   String toString() {
-    return 'WorkoutExercise(id: $id, data: $data, type: $type)';
+    return 'WorkoutExercise(id: $id, requirements: $requirements, type: $type)';
   }
 
   @override
@@ -185,14 +187,15 @@ class _$WorkoutExerciseImpl extends _WorkoutExercise {
         (other.runtimeType == runtimeType &&
             other is _$WorkoutExerciseImpl &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other._data, _data) &&
+            const DeepCollectionEquality()
+                .equals(other._requirements, _requirements) &&
             (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, const DeepCollectionEquality().hash(_data), type);
+  int get hashCode => Object.hash(runtimeType, id,
+      const DeepCollectionEquality().hash(_requirements), type);
 
   @JsonKey(ignore: true)
   @override
@@ -212,7 +215,7 @@ class _$WorkoutExerciseImpl extends _WorkoutExercise {
 abstract class _WorkoutExercise extends WorkoutExercise {
   factory _WorkoutExercise(
       {required final String id,
-      required final Map<String, dynamic> data,
+      required final Map<String, dynamic> requirements,
       required final ExerciseDataType type}) = _$WorkoutExerciseImpl;
   _WorkoutExercise._() : super._();
 
@@ -225,15 +228,15 @@ abstract class _WorkoutExercise extends WorkoutExercise {
   String get id;
   @override
 
-  /// The data of the exercise.
+  /// The requirements that must be met to complete the exercise.
   ///
-  /// The type of the data is determined by the [type] field.
+  /// The type of the requirements is determined by the [type] field.
   ///
-  /// Based on the value of [type], you can cast the data to the appropriate type:
-  /// - [cardioData] if [type] is [ExerciseDataType.cardio]
-  /// - [stretchingData] if [type] is [ExerciseDataType.stretching]
-  /// - [weightLiftingData] if [type] is [ExerciseDataType.weightLifting]
-  Map<String, dynamic> get data;
+  /// Based on the value of [type], you can cast the requirements to the appropriate type:
+  /// - [cardioRequirements] if [type] is [ExerciseDataType.cardio]
+  /// - [stretchingRequirements] if [type] is [ExerciseDataType.stretching]
+  /// - [weightLiftingRequirements] if [type] is [ExerciseDataType.weightLifting]
+  Map<String, dynamic> get requirements;
   @override
 
   /// The type of the [data] the exercise contains.

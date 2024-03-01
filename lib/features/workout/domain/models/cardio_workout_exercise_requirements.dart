@@ -1,16 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gym/features/workout/workout.dart';
 
-part 'cardio_workout_exercise_data.freezed.dart';
-part 'cardio_workout_exercise_data.g.dart';
+part 'cardio_workout_exercise_requirements.freezed.dart';
+part 'cardio_workout_exercise_requirements.g.dart';
 
 @freezed
-class CardioWorkoutExerciseData
-    with _$CardioWorkoutExerciseData
-    implements WorkoutExerciseData {
-  const CardioWorkoutExerciseData._();
+class CardioWorkoutExerciseRequirements
+    with _$CardioWorkoutExerciseRequirements
+    implements WorkoutExerciseRequirements {
+  const CardioWorkoutExerciseRequirements._();
 
-  factory CardioWorkoutExerciseData({
+  factory CardioWorkoutExerciseRequirements({
     /// The min duration of the cardio exercise in seconds.
     ///
     /// Use [minDuration] to get this value as a [Duration].
@@ -20,7 +20,7 @@ class CardioWorkoutExerciseData
     ///
     /// Use [maxDuration] to get this value as a [Duration].
     required int maxSeconds,
-  }) = _CardioWorkoutExerciseData;
+  }) = _CardioWorkoutExerciseRequirements;
 
   /// The min duration of the cardio exercise.
   Duration get minDuration => Duration(seconds: minSeconds);
@@ -28,6 +28,7 @@ class CardioWorkoutExerciseData
   /// The max duration of the cardio exercise.
   Duration get maxDuration => Duration(seconds: maxSeconds);
 
-  factory CardioWorkoutExerciseData.fromJson(Map<String, dynamic> json) =>
-      _$CardioWorkoutExerciseDataFromJson(json);
+  factory CardioWorkoutExerciseRequirements.fromJson(
+          Map<String, dynamic> json) =>
+      _$CardioWorkoutExerciseRequirementsFromJson(json);
 }

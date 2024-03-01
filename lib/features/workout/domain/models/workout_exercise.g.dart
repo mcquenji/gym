@@ -10,7 +10,7 @@ _$WorkoutExerciseImpl _$$WorkoutExerciseImplFromJson(
         Map<String, dynamic> json) =>
     _$WorkoutExerciseImpl(
       id: json['id'] as String,
-      data: json['data'] as Map<String, dynamic>,
+      requirements: json['requirements'] as Map<String, dynamic>,
       type: $enumDecode(_$ExerciseDataTypeEnumMap, json['type']),
     );
 
@@ -18,7 +18,7 @@ Map<String, dynamic> _$$WorkoutExerciseImplToJson(
         _$WorkoutExerciseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'data': instance.data,
+      'requirements': instance.requirements,
       'type': _$ExerciseDataTypeEnumMap[instance.type]!,
     };
 

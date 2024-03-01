@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'weight_lifting_workout_exercise_data.dart';
+part of 'weight_lifting_workout_exercise_requirements.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,14 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-WeightLiftingWorkoutExerciseData _$WeightLiftingWorkoutExerciseDataFromJson(
-    Map<String, dynamic> json) {
-  return _WeightLiftingWorkoutExerciseData.fromJson(json);
+WeightLiftingWorkoutExerciseRequirements
+    _$WeightLiftingWorkoutExerciseRequirementsFromJson(
+        Map<String, dynamic> json) {
+  return _WeightLiftingWorkoutExerciseRequirements.fromJson(json);
 }
 
 /// @nodoc
-mixin _$WeightLiftingWorkoutExerciseData {
+mixin _$WeightLiftingWorkoutExerciseRequirements {
   /// The number of sets
   int get sets => throw _privateConstructorUsedError;
 
@@ -32,26 +33,28 @@ mixin _$WeightLiftingWorkoutExerciseData {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $WeightLiftingWorkoutExerciseDataCopyWith<WeightLiftingWorkoutExerciseData>
+  $WeightLiftingWorkoutExerciseRequirementsCopyWith<
+          WeightLiftingWorkoutExerciseRequirements>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WeightLiftingWorkoutExerciseDataCopyWith<$Res> {
-  factory $WeightLiftingWorkoutExerciseDataCopyWith(
-          WeightLiftingWorkoutExerciseData value,
-          $Res Function(WeightLiftingWorkoutExerciseData) then) =
-      _$WeightLiftingWorkoutExerciseDataCopyWithImpl<$Res,
-          WeightLiftingWorkoutExerciseData>;
+abstract class $WeightLiftingWorkoutExerciseRequirementsCopyWith<$Res> {
+  factory $WeightLiftingWorkoutExerciseRequirementsCopyWith(
+          WeightLiftingWorkoutExerciseRequirements value,
+          $Res Function(WeightLiftingWorkoutExerciseRequirements) then) =
+      _$WeightLiftingWorkoutExerciseRequirementsCopyWithImpl<$Res,
+          WeightLiftingWorkoutExerciseRequirements>;
   @useResult
   $Res call({int sets, int maxReps, int minReps});
 }
 
 /// @nodoc
-class _$WeightLiftingWorkoutExerciseDataCopyWithImpl<$Res,
-        $Val extends WeightLiftingWorkoutExerciseData>
-    implements $WeightLiftingWorkoutExerciseDataCopyWith<$Res> {
-  _$WeightLiftingWorkoutExerciseDataCopyWithImpl(this._value, this._then);
+class _$WeightLiftingWorkoutExerciseRequirementsCopyWithImpl<$Res,
+        $Val extends WeightLiftingWorkoutExerciseRequirements>
+    implements $WeightLiftingWorkoutExerciseRequirementsCopyWith<$Res> {
+  _$WeightLiftingWorkoutExerciseRequirementsCopyWithImpl(
+      this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -83,25 +86,25 @@ class _$WeightLiftingWorkoutExerciseDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$WeightLiftingWorkoutExerciseDataImplCopyWith<$Res>
-    implements $WeightLiftingWorkoutExerciseDataCopyWith<$Res> {
-  factory _$$WeightLiftingWorkoutExerciseDataImplCopyWith(
-          _$WeightLiftingWorkoutExerciseDataImpl value,
-          $Res Function(_$WeightLiftingWorkoutExerciseDataImpl) then) =
-      __$$WeightLiftingWorkoutExerciseDataImplCopyWithImpl<$Res>;
+abstract class _$$WeightLiftingWorkoutExerciseRequirementsImplCopyWith<$Res>
+    implements $WeightLiftingWorkoutExerciseRequirementsCopyWith<$Res> {
+  factory _$$WeightLiftingWorkoutExerciseRequirementsImplCopyWith(
+          _$WeightLiftingWorkoutExerciseRequirementsImpl value,
+          $Res Function(_$WeightLiftingWorkoutExerciseRequirementsImpl) then) =
+      __$$WeightLiftingWorkoutExerciseRequirementsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int sets, int maxReps, int minReps});
 }
 
 /// @nodoc
-class __$$WeightLiftingWorkoutExerciseDataImplCopyWithImpl<$Res>
-    extends _$WeightLiftingWorkoutExerciseDataCopyWithImpl<$Res,
-        _$WeightLiftingWorkoutExerciseDataImpl>
-    implements _$$WeightLiftingWorkoutExerciseDataImplCopyWith<$Res> {
-  __$$WeightLiftingWorkoutExerciseDataImplCopyWithImpl(
-      _$WeightLiftingWorkoutExerciseDataImpl _value,
-      $Res Function(_$WeightLiftingWorkoutExerciseDataImpl) _then)
+class __$$WeightLiftingWorkoutExerciseRequirementsImplCopyWithImpl<$Res>
+    extends _$WeightLiftingWorkoutExerciseRequirementsCopyWithImpl<$Res,
+        _$WeightLiftingWorkoutExerciseRequirementsImpl>
+    implements _$$WeightLiftingWorkoutExerciseRequirementsImplCopyWith<$Res> {
+  __$$WeightLiftingWorkoutExerciseRequirementsImplCopyWithImpl(
+      _$WeightLiftingWorkoutExerciseRequirementsImpl _value,
+      $Res Function(_$WeightLiftingWorkoutExerciseRequirementsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -111,7 +114,7 @@ class __$$WeightLiftingWorkoutExerciseDataImplCopyWithImpl<$Res>
     Object? maxReps = null,
     Object? minReps = null,
   }) {
-    return _then(_$WeightLiftingWorkoutExerciseDataImpl(
+    return _then(_$WeightLiftingWorkoutExerciseRequirementsImpl(
       sets: null == sets
           ? _value.sets
           : sets // ignore: cast_nullable_to_non_nullable
@@ -130,14 +133,14 @@ class __$$WeightLiftingWorkoutExerciseDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WeightLiftingWorkoutExerciseDataImpl
-    implements _WeightLiftingWorkoutExerciseData {
-  _$WeightLiftingWorkoutExerciseDataImpl(
+class _$WeightLiftingWorkoutExerciseRequirementsImpl
+    implements _WeightLiftingWorkoutExerciseRequirements {
+  _$WeightLiftingWorkoutExerciseRequirementsImpl(
       {required this.sets, required this.maxReps, required this.minReps});
 
-  factory _$WeightLiftingWorkoutExerciseDataImpl.fromJson(
+  factory _$WeightLiftingWorkoutExerciseRequirementsImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$WeightLiftingWorkoutExerciseDataImplFromJson(json);
+      _$$WeightLiftingWorkoutExerciseRequirementsImplFromJson(json);
 
   /// The number of sets
   @override
@@ -153,14 +156,14 @@ class _$WeightLiftingWorkoutExerciseDataImpl
 
   @override
   String toString() {
-    return 'WeightLiftingWorkoutExerciseData(sets: $sets, maxReps: $maxReps, minReps: $minReps)';
+    return 'WeightLiftingWorkoutExerciseRequirements(sets: $sets, maxReps: $maxReps, minReps: $minReps)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeightLiftingWorkoutExerciseDataImpl &&
+            other is _$WeightLiftingWorkoutExerciseRequirementsImpl &&
             (identical(other.sets, sets) || other.sets == sets) &&
             (identical(other.maxReps, maxReps) || other.maxReps == maxReps) &&
             (identical(other.minReps, minReps) || other.minReps == minReps));
@@ -173,29 +176,31 @@ class _$WeightLiftingWorkoutExerciseDataImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WeightLiftingWorkoutExerciseDataImplCopyWith<
-          _$WeightLiftingWorkoutExerciseDataImpl>
-      get copyWith => __$$WeightLiftingWorkoutExerciseDataImplCopyWithImpl<
-          _$WeightLiftingWorkoutExerciseDataImpl>(this, _$identity);
+  _$$WeightLiftingWorkoutExerciseRequirementsImplCopyWith<
+          _$WeightLiftingWorkoutExerciseRequirementsImpl>
+      get copyWith =>
+          __$$WeightLiftingWorkoutExerciseRequirementsImplCopyWithImpl<
+              _$WeightLiftingWorkoutExerciseRequirementsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WeightLiftingWorkoutExerciseDataImplToJson(
+    return _$$WeightLiftingWorkoutExerciseRequirementsImplToJson(
       this,
     );
   }
 }
 
-abstract class _WeightLiftingWorkoutExerciseData
-    implements WeightLiftingWorkoutExerciseData {
-  factory _WeightLiftingWorkoutExerciseData(
-      {required final int sets,
-      required final int maxReps,
-      required final int minReps}) = _$WeightLiftingWorkoutExerciseDataImpl;
+abstract class _WeightLiftingWorkoutExerciseRequirements
+    implements WeightLiftingWorkoutExerciseRequirements {
+  factory _WeightLiftingWorkoutExerciseRequirements(
+          {required final int sets,
+          required final int maxReps,
+          required final int minReps}) =
+      _$WeightLiftingWorkoutExerciseRequirementsImpl;
 
-  factory _WeightLiftingWorkoutExerciseData.fromJson(
+  factory _WeightLiftingWorkoutExerciseRequirements.fromJson(
           Map<String, dynamic> json) =
-      _$WeightLiftingWorkoutExerciseDataImpl.fromJson;
+      _$WeightLiftingWorkoutExerciseRequirementsImpl.fromJson;
 
   @override
 
@@ -211,7 +216,7 @@ abstract class _WeightLiftingWorkoutExerciseData
   int get minReps;
   @override
   @JsonKey(ignore: true)
-  _$$WeightLiftingWorkoutExerciseDataImplCopyWith<
-          _$WeightLiftingWorkoutExerciseDataImpl>
+  _$$WeightLiftingWorkoutExerciseRequirementsImplCopyWith<
+          _$WeightLiftingWorkoutExerciseRequirementsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

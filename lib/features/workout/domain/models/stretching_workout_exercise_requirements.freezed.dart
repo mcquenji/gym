@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'cardio_workout_exercise_data.dart';
+part of 'stretching_workout_exercise_requirements.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,43 +14,46 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-CardioWorkoutExerciseData _$CardioWorkoutExerciseDataFromJson(
-    Map<String, dynamic> json) {
-  return _CardioWorkoutExerciseData.fromJson(json);
+StretchingWorkoutExerciseRequirements
+    _$StretchingWorkoutExerciseRequirementsFromJson(Map<String, dynamic> json) {
+  return _StretchingWorkoutExerciseRequirements.fromJson(json);
 }
 
 /// @nodoc
-mixin _$CardioWorkoutExerciseData {
-  /// The min duration of the cardio exercise in seconds.
+mixin _$StretchingWorkoutExerciseRequirements {
+  /// The min duration of the stretching exercise in seconds.
   ///
   /// Use [minDuration] to get this value as a [Duration].
   int get minSeconds => throw _privateConstructorUsedError;
 
-  /// The max duration of the cardio exercise in seconds.
+  /// The max duration of the stretching exercise in seconds.
   ///
   /// Use [maxDuration] to get this value as a [Duration].
   int get maxSeconds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CardioWorkoutExerciseDataCopyWith<CardioWorkoutExerciseData> get copyWith =>
-      throw _privateConstructorUsedError;
+  $StretchingWorkoutExerciseRequirementsCopyWith<
+          StretchingWorkoutExerciseRequirements>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CardioWorkoutExerciseDataCopyWith<$Res> {
-  factory $CardioWorkoutExerciseDataCopyWith(CardioWorkoutExerciseData value,
-          $Res Function(CardioWorkoutExerciseData) then) =
-      _$CardioWorkoutExerciseDataCopyWithImpl<$Res, CardioWorkoutExerciseData>;
+abstract class $StretchingWorkoutExerciseRequirementsCopyWith<$Res> {
+  factory $StretchingWorkoutExerciseRequirementsCopyWith(
+          StretchingWorkoutExerciseRequirements value,
+          $Res Function(StretchingWorkoutExerciseRequirements) then) =
+      _$StretchingWorkoutExerciseRequirementsCopyWithImpl<$Res,
+          StretchingWorkoutExerciseRequirements>;
   @useResult
   $Res call({int minSeconds, int maxSeconds});
 }
 
 /// @nodoc
-class _$CardioWorkoutExerciseDataCopyWithImpl<$Res,
-        $Val extends CardioWorkoutExerciseData>
-    implements $CardioWorkoutExerciseDataCopyWith<$Res> {
-  _$CardioWorkoutExerciseDataCopyWithImpl(this._value, this._then);
+class _$StretchingWorkoutExerciseRequirementsCopyWithImpl<$Res,
+        $Val extends StretchingWorkoutExerciseRequirements>
+    implements $StretchingWorkoutExerciseRequirementsCopyWith<$Res> {
+  _$StretchingWorkoutExerciseRequirementsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -77,25 +80,25 @@ class _$CardioWorkoutExerciseDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$CardioWorkoutExerciseDataImplCopyWith<$Res>
-    implements $CardioWorkoutExerciseDataCopyWith<$Res> {
-  factory _$$CardioWorkoutExerciseDataImplCopyWith(
-          _$CardioWorkoutExerciseDataImpl value,
-          $Res Function(_$CardioWorkoutExerciseDataImpl) then) =
-      __$$CardioWorkoutExerciseDataImplCopyWithImpl<$Res>;
+abstract class _$$StretchingWorkoutExerciseRequirementsImplCopyWith<$Res>
+    implements $StretchingWorkoutExerciseRequirementsCopyWith<$Res> {
+  factory _$$StretchingWorkoutExerciseRequirementsImplCopyWith(
+          _$StretchingWorkoutExerciseRequirementsImpl value,
+          $Res Function(_$StretchingWorkoutExerciseRequirementsImpl) then) =
+      __$$StretchingWorkoutExerciseRequirementsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int minSeconds, int maxSeconds});
 }
 
 /// @nodoc
-class __$$CardioWorkoutExerciseDataImplCopyWithImpl<$Res>
-    extends _$CardioWorkoutExerciseDataCopyWithImpl<$Res,
-        _$CardioWorkoutExerciseDataImpl>
-    implements _$$CardioWorkoutExerciseDataImplCopyWith<$Res> {
-  __$$CardioWorkoutExerciseDataImplCopyWithImpl(
-      _$CardioWorkoutExerciseDataImpl _value,
-      $Res Function(_$CardioWorkoutExerciseDataImpl) _then)
+class __$$StretchingWorkoutExerciseRequirementsImplCopyWithImpl<$Res>
+    extends _$StretchingWorkoutExerciseRequirementsCopyWithImpl<$Res,
+        _$StretchingWorkoutExerciseRequirementsImpl>
+    implements _$$StretchingWorkoutExerciseRequirementsImplCopyWith<$Res> {
+  __$$StretchingWorkoutExerciseRequirementsImplCopyWithImpl(
+      _$StretchingWorkoutExerciseRequirementsImpl _value,
+      $Res Function(_$StretchingWorkoutExerciseRequirementsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +107,7 @@ class __$$CardioWorkoutExerciseDataImplCopyWithImpl<$Res>
     Object? minSeconds = null,
     Object? maxSeconds = null,
   }) {
-    return _then(_$CardioWorkoutExerciseDataImpl(
+    return _then(_$StretchingWorkoutExerciseRequirementsImpl(
       minSeconds: null == minSeconds
           ? _value.minSeconds
           : minSeconds // ignore: cast_nullable_to_non_nullable
@@ -119,21 +122,23 @@ class __$$CardioWorkoutExerciseDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CardioWorkoutExerciseDataImpl extends _CardioWorkoutExerciseData {
-  _$CardioWorkoutExerciseDataImpl(
+class _$StretchingWorkoutExerciseRequirementsImpl
+    extends _StretchingWorkoutExerciseRequirements {
+  _$StretchingWorkoutExerciseRequirementsImpl(
       {required this.minSeconds, required this.maxSeconds})
       : super._();
 
-  factory _$CardioWorkoutExerciseDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CardioWorkoutExerciseDataImplFromJson(json);
+  factory _$StretchingWorkoutExerciseRequirementsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$StretchingWorkoutExerciseRequirementsImplFromJson(json);
 
-  /// The min duration of the cardio exercise in seconds.
+  /// The min duration of the stretching exercise in seconds.
   ///
   /// Use [minDuration] to get this value as a [Duration].
   @override
   final int minSeconds;
 
-  /// The max duration of the cardio exercise in seconds.
+  /// The max duration of the stretching exercise in seconds.
   ///
   /// Use [maxDuration] to get this value as a [Duration].
   @override
@@ -141,14 +146,14 @@ class _$CardioWorkoutExerciseDataImpl extends _CardioWorkoutExerciseData {
 
   @override
   String toString() {
-    return 'CardioWorkoutExerciseData(minSeconds: $minSeconds, maxSeconds: $maxSeconds)';
+    return 'StretchingWorkoutExerciseRequirements(minSeconds: $minSeconds, maxSeconds: $maxSeconds)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CardioWorkoutExerciseDataImpl &&
+            other is _$StretchingWorkoutExerciseRequirementsImpl &&
             (identical(other.minSeconds, minSeconds) ||
                 other.minSeconds == minSeconds) &&
             (identical(other.maxSeconds, maxSeconds) ||
@@ -162,41 +167,45 @@ class _$CardioWorkoutExerciseDataImpl extends _CardioWorkoutExerciseData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CardioWorkoutExerciseDataImplCopyWith<_$CardioWorkoutExerciseDataImpl>
-      get copyWith => __$$CardioWorkoutExerciseDataImplCopyWithImpl<
-          _$CardioWorkoutExerciseDataImpl>(this, _$identity);
+  _$$StretchingWorkoutExerciseRequirementsImplCopyWith<
+          _$StretchingWorkoutExerciseRequirementsImpl>
+      get copyWith => __$$StretchingWorkoutExerciseRequirementsImplCopyWithImpl<
+          _$StretchingWorkoutExerciseRequirementsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CardioWorkoutExerciseDataImplToJson(
+    return _$$StretchingWorkoutExerciseRequirementsImplToJson(
       this,
     );
   }
 }
 
-abstract class _CardioWorkoutExerciseData extends CardioWorkoutExerciseData {
-  factory _CardioWorkoutExerciseData(
-      {required final int minSeconds,
-      required final int maxSeconds}) = _$CardioWorkoutExerciseDataImpl;
-  _CardioWorkoutExerciseData._() : super._();
+abstract class _StretchingWorkoutExerciseRequirements
+    extends StretchingWorkoutExerciseRequirements {
+  factory _StretchingWorkoutExerciseRequirements(
+          {required final int minSeconds, required final int maxSeconds}) =
+      _$StretchingWorkoutExerciseRequirementsImpl;
+  _StretchingWorkoutExerciseRequirements._() : super._();
 
-  factory _CardioWorkoutExerciseData.fromJson(Map<String, dynamic> json) =
-      _$CardioWorkoutExerciseDataImpl.fromJson;
+  factory _StretchingWorkoutExerciseRequirements.fromJson(
+          Map<String, dynamic> json) =
+      _$StretchingWorkoutExerciseRequirementsImpl.fromJson;
 
   @override
 
-  /// The min duration of the cardio exercise in seconds.
+  /// The min duration of the stretching exercise in seconds.
   ///
   /// Use [minDuration] to get this value as a [Duration].
   int get minSeconds;
   @override
 
-  /// The max duration of the cardio exercise in seconds.
+  /// The max duration of the stretching exercise in seconds.
   ///
   /// Use [maxDuration] to get this value as a [Duration].
   int get maxSeconds;
   @override
   @JsonKey(ignore: true)
-  _$$CardioWorkoutExerciseDataImplCopyWith<_$CardioWorkoutExerciseDataImpl>
+  _$$StretchingWorkoutExerciseRequirementsImplCopyWith<
+          _$StretchingWorkoutExerciseRequirementsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
