@@ -9,3 +9,4 @@ export 'workout_exercise_requirements.dart';
 export 'weight_lifting_workout_exercise_requirements.dart';
 export 'cardio_workout_exercise_requirements.dart';
 export 'stretching_workout_exercise_requirements.dart';
+export 'workout_session.dart';

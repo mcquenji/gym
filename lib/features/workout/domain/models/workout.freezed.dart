@@ -20,14 +20,17 @@ Workout _$WorkoutFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Workout {
-  /// The id of the workout
+  /// The id of the workout.
   String get id => throw _privateConstructorUsedError;
 
-  /// The name of the workout
+  /// The name of the workout.
   String get name => throw _privateConstructorUsedError;
 
-  /// The id of the user who created the workout
+  /// The id of the user who created the workout.
   String get creatorId => throw _privateConstructorUsedError;
+
+  /// The exercises that make up the workout.
+  List<WorkoutExercise> get exercises => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +42,11 @@ abstract class $WorkoutCopyWith<$Res> {
   factory $WorkoutCopyWith(Workout value, $Res Function(Workout) then) =
       _$WorkoutCopyWithImpl<$Res, Workout>;
   @useResult
-  $Res call({String id, String name, String creatorId});
+  $Res call(
+      {String id,
+      String name,
+      String creatorId,
+      List<WorkoutExercise> exercises});
 }
 
 /// @nodoc
@@ -58,6 +65,7 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
     Object? id = null,
     Object? name = null,
     Object? creatorId = null,
+    Object? exercises = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -72,6 +80,10 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String,
+      exercises: null == exercises
+          ? _value.exercises
+          : exercises // ignore: cast_nullable_to_non_nullable
+              as List<WorkoutExercise>,
     ) as $Val);
   }
 }
@@ -83,7 +95,11 @@ abstract class _$$WorkoutImplCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
       __$$WorkoutImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String creatorId});
+  $Res call(
+      {String id,
+      String name,
+      String creatorId,
+      List<WorkoutExercise> exercises});
 }
 
 /// @nodoc
@@ -100,6 +116,7 @@ class __$$WorkoutImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? creatorId = null,
+    Object? exercises = null,
   }) {
     return _then(_$WorkoutImpl(
       id: null == id
@@ -114,6 +131,10 @@ class __$$WorkoutImplCopyWithImpl<$Res>
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String,
+      exercises: null == exercises
+          ? _value._exercises
+          : exercises // ignore: cast_nullable_to_non_nullable
+              as List<WorkoutExercise>,
     ));
   }
 }
@@ -122,26 +143,41 @@ class __$$WorkoutImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WorkoutImpl implements _Workout {
   _$WorkoutImpl(
-      {required this.id, required this.name, required this.creatorId});
+      {required this.id,
+      required this.name,
+      required this.creatorId,
+      required final List<WorkoutExercise> exercises})
+      : _exercises = exercises;
 
   factory _$WorkoutImpl.fromJson(Map<String, dynamic> json) =>
       _$$WorkoutImplFromJson(json);
 
-  /// The id of the workout
+  /// The id of the workout.
   @override
   final String id;
 
-  /// The name of the workout
+  /// The name of the workout.
   @override
   final String name;
 
-  /// The id of the user who created the workout
+  /// The id of the user who created the workout.
   @override
   final String creatorId;
 
+  /// The exercises that make up the workout.
+  final List<WorkoutExercise> _exercises;
+
+  /// The exercises that make up the workout.
+  @override
+  List<WorkoutExercise> get exercises {
+    if (_exercises is EqualUnmodifiableListView) return _exercises;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_exercises);
+  }
+
   @override
   String toString() {
-    return 'Workout(id: $id, name: $name, creatorId: $creatorId)';
+    return 'Workout(id: $id, name: $name, creatorId: $creatorId, exercises: $exercises)';
   }
 
   @override
@@ -152,12 +188,15 @@ class _$WorkoutImpl implements _Workout {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.creatorId, creatorId) ||
-                other.creatorId == creatorId));
+                other.creatorId == creatorId) &&
+            const DeepCollectionEquality()
+                .equals(other._exercises, _exercises));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, creatorId);
+  int get hashCode => Object.hash(runtimeType, id, name, creatorId,
+      const DeepCollectionEquality().hash(_exercises));
 
   @JsonKey(ignore: true)
   @override
@@ -177,22 +216,27 @@ abstract class _Workout implements Workout {
   factory _Workout(
       {required final String id,
       required final String name,
-      required final String creatorId}) = _$WorkoutImpl;
+      required final String creatorId,
+      required final List<WorkoutExercise> exercises}) = _$WorkoutImpl;
 
   factory _Workout.fromJson(Map<String, dynamic> json) = _$WorkoutImpl.fromJson;
 
   @override
 
-  /// The id of the workout
+  /// The id of the workout.
   String get id;
   @override
 
-  /// The name of the workout
+  /// The name of the workout.
   String get name;
   @override
 
-  /// The id of the user who created the workout
+  /// The id of the user who created the workout.
   String get creatorId;
+  @override
+
+  /// The exercises that make up the workout.
+  List<WorkoutExercise> get exercises;
   @override
   @JsonKey(ignore: true)
   _$$WorkoutImplCopyWith<_$WorkoutImpl> get copyWith =>
