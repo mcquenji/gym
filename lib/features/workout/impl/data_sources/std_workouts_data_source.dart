@@ -60,4 +60,13 @@ class StdWorkoutsDataSource extends WorkoutsDataSource {
       rethrow;
     }
   }
+
+  @override
+  String generateId() {
+    final id = FirebaseFirestore.instance.collection(collection).doc().id;
+
+    log('Generated id: $id');
+
+    return id;
+  }
 }

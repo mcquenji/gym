@@ -13,7 +13,7 @@ _$WorkoutSessionImpl _$$WorkoutSessionImplFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       completedAtTimestamp: json['completedAtTimestamp'] as int?,
       startedAtTimestamp: json['startedAtTimestamp'] as int,
-      sets: (json['sets'] as List<dynamic>?)
+      completedSets: (json['completedSets'] as List<dynamic>?)
               ?.map((e) => ExerciseEntry.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
@@ -35,7 +35,7 @@ Map<String, dynamic> _$$WorkoutSessionImplToJson(
       'userId': instance.userId,
       'completedAtTimestamp': instance.completedAtTimestamp,
       'startedAtTimestamp': instance.startedAtTimestamp,
-      'sets': instance.sets,
+      'completedSets': instance.completedSets,
       'hotSwaps': instance.hotSwaps,
       'skippedExercises': instance.skippedExercises,
     };

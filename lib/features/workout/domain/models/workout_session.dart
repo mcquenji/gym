@@ -27,7 +27,7 @@ class WorkoutSession with _$WorkoutSession {
     required int startedAtTimestamp,
 
     /// A list of the sets that were completed during the workout.
-    @Default([]) List<ExerciseEntry> sets,
+    @Default([]) List<ExerciseEntry> completedSets,
 
     /// A map of the hot swaps that were made during the workout.
     ///

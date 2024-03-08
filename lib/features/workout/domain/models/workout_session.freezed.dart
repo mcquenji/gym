@@ -38,7 +38,7 @@ mixin _$WorkoutSession {
   int get startedAtTimestamp => throw _privateConstructorUsedError;
 
   /// A list of the sets that were completed during the workout.
-  List<ExerciseEntry> get sets => throw _privateConstructorUsedError;
+  List<ExerciseEntry> get completedSets => throw _privateConstructorUsedError;
 
   /// A map of the hot swaps that were made during the workout.
   ///
@@ -66,7 +66,7 @@ abstract class $WorkoutSessionCopyWith<$Res> {
       String userId,
       int? completedAtTimestamp,
       int startedAtTimestamp,
-      List<ExerciseEntry> sets,
+      List<ExerciseEntry> completedSets,
       Map<String, String> hotSwaps,
       List<String> skippedExercises});
 }
@@ -89,7 +89,7 @@ class _$WorkoutSessionCopyWithImpl<$Res, $Val extends WorkoutSession>
     Object? userId = null,
     Object? completedAtTimestamp = freezed,
     Object? startedAtTimestamp = null,
-    Object? sets = null,
+    Object? completedSets = null,
     Object? hotSwaps = null,
     Object? skippedExercises = null,
   }) {
@@ -114,9 +114,9 @@ class _$WorkoutSessionCopyWithImpl<$Res, $Val extends WorkoutSession>
           ? _value.startedAtTimestamp
           : startedAtTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      sets: null == sets
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
+      completedSets: null == completedSets
+          ? _value.completedSets
+          : completedSets // ignore: cast_nullable_to_non_nullable
               as List<ExerciseEntry>,
       hotSwaps: null == hotSwaps
           ? _value.hotSwaps
@@ -144,7 +144,7 @@ abstract class _$$WorkoutSessionImplCopyWith<$Res>
       String userId,
       int? completedAtTimestamp,
       int startedAtTimestamp,
-      List<ExerciseEntry> sets,
+      List<ExerciseEntry> completedSets,
       Map<String, String> hotSwaps,
       List<String> skippedExercises});
 }
@@ -165,7 +165,7 @@ class __$$WorkoutSessionImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? completedAtTimestamp = freezed,
     Object? startedAtTimestamp = null,
-    Object? sets = null,
+    Object? completedSets = null,
     Object? hotSwaps = null,
     Object? skippedExercises = null,
   }) {
@@ -190,9 +190,9 @@ class __$$WorkoutSessionImplCopyWithImpl<$Res>
           ? _value.startedAtTimestamp
           : startedAtTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      sets: null == sets
-          ? _value._sets
-          : sets // ignore: cast_nullable_to_non_nullable
+      completedSets: null == completedSets
+          ? _value._completedSets
+          : completedSets // ignore: cast_nullable_to_non_nullable
               as List<ExerciseEntry>,
       hotSwaps: null == hotSwaps
           ? _value._hotSwaps
@@ -215,10 +215,10 @@ class _$WorkoutSessionImpl extends _WorkoutSession {
       required this.userId,
       required this.completedAtTimestamp,
       required this.startedAtTimestamp,
-      final List<ExerciseEntry> sets = const [],
+      final List<ExerciseEntry> completedSets = const [],
       final Map<String, String> hotSwaps = const {},
       final List<String> skippedExercises = const []})
-      : _sets = sets,
+      : _completedSets = completedSets,
         _hotSwaps = hotSwaps,
         _skippedExercises = skippedExercises,
         super._();
@@ -249,15 +249,15 @@ class _$WorkoutSessionImpl extends _WorkoutSession {
   final int startedAtTimestamp;
 
   /// A list of the sets that were completed during the workout.
-  final List<ExerciseEntry> _sets;
+  final List<ExerciseEntry> _completedSets;
 
   /// A list of the sets that were completed during the workout.
   @override
   @JsonKey()
-  List<ExerciseEntry> get sets {
-    if (_sets is EqualUnmodifiableListView) return _sets;
+  List<ExerciseEntry> get completedSets {
+    if (_completedSets is EqualUnmodifiableListView) return _completedSets;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sets);
+    return EqualUnmodifiableListView(_completedSets);
   }
 
   /// A map of the hot swaps that were made during the workout.
@@ -291,7 +291,7 @@ class _$WorkoutSessionImpl extends _WorkoutSession {
 
   @override
   String toString() {
-    return 'WorkoutSession(id: $id, workoutId: $workoutId, userId: $userId, completedAtTimestamp: $completedAtTimestamp, startedAtTimestamp: $startedAtTimestamp, sets: $sets, hotSwaps: $hotSwaps, skippedExercises: $skippedExercises)';
+    return 'WorkoutSession(id: $id, workoutId: $workoutId, userId: $userId, completedAtTimestamp: $completedAtTimestamp, startedAtTimestamp: $startedAtTimestamp, completedSets: $completedSets, hotSwaps: $hotSwaps, skippedExercises: $skippedExercises)';
   }
 
   @override
@@ -307,7 +307,8 @@ class _$WorkoutSessionImpl extends _WorkoutSession {
                 other.completedAtTimestamp == completedAtTimestamp) &&
             (identical(other.startedAtTimestamp, startedAtTimestamp) ||
                 other.startedAtTimestamp == startedAtTimestamp) &&
-            const DeepCollectionEquality().equals(other._sets, _sets) &&
+            const DeepCollectionEquality()
+                .equals(other._completedSets, _completedSets) &&
             const DeepCollectionEquality().equals(other._hotSwaps, _hotSwaps) &&
             const DeepCollectionEquality()
                 .equals(other._skippedExercises, _skippedExercises));
@@ -322,7 +323,7 @@ class _$WorkoutSessionImpl extends _WorkoutSession {
       userId,
       completedAtTimestamp,
       startedAtTimestamp,
-      const DeepCollectionEquality().hash(_sets),
+      const DeepCollectionEquality().hash(_completedSets),
       const DeepCollectionEquality().hash(_hotSwaps),
       const DeepCollectionEquality().hash(_skippedExercises));
 
@@ -348,7 +349,7 @@ abstract class _WorkoutSession extends WorkoutSession {
       required final String userId,
       required final int? completedAtTimestamp,
       required final int startedAtTimestamp,
-      final List<ExerciseEntry> sets,
+      final List<ExerciseEntry> completedSets,
       final Map<String, String> hotSwaps,
       final List<String> skippedExercises}) = _$WorkoutSessionImpl;
   _WorkoutSession._() : super._();
@@ -381,7 +382,7 @@ abstract class _WorkoutSession extends WorkoutSession {
   @override
 
   /// A list of the sets that were completed during the workout.
-  List<ExerciseEntry> get sets;
+  List<ExerciseEntry> get completedSets;
   @override
 
   /// A map of the hot swaps that were made during the workout.

@@ -12,4 +12,6 @@ abstract class WorkoutSessionsDataSource extends DataSource {
 
   /// Deletes a workout session from the database.
   Future<void> deleteWorkoutSession(String workoutSessionId);
+
+  String generateId();
 }
