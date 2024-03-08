@@ -53,16 +53,16 @@ class WorkoutSessionsRepository
     await workoutSessionsDataSource.write(updatedSession);
   }
 
-  /// Hot swaps the given [exerciseId] during a workout [session] with a [newExerciseId].
+  /// Hot swaps an [exercise] with the given [id] during a workout [session].
   Future<void> hotSwapExercise(
     WorkoutSession session,
-    String exerciseId,
-    String newExerciseId,
+    String id,
+    WorkoutExercise exercise,
   ) async {
     final updatedSession = session.copyWith(
       hotSwaps: {
         ...session.hotSwaps,
-        exerciseId: newExerciseId,
+        id: exercise,
       },
     );
 

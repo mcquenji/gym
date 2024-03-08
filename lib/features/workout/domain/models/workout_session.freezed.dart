@@ -42,8 +42,9 @@ mixin _$WorkoutSession {
 
   /// A map of the hot swaps that were made during the workout.
   ///
-  /// The key is the id of the exercise that was swapped out, and the value is the id of the exercise that was swapped in.
-  Map<String, String> get hotSwaps => throw _privateConstructorUsedError;
+  /// The key is the id of the exercise that was swapped out, and the value is the exercise that was swapped in.
+  Map<String, WorkoutExercise> get hotSwaps =>
+      throw _privateConstructorUsedError;
 
   /// A list of the id's of skipped exercises during the workout.
   List<String> get skippedExercises => throw _privateConstructorUsedError;
@@ -67,7 +68,7 @@ abstract class $WorkoutSessionCopyWith<$Res> {
       int? completedAtTimestamp,
       int startedAtTimestamp,
       List<ExerciseEntry> completedSets,
-      Map<String, String> hotSwaps,
+      Map<String, WorkoutExercise> hotSwaps,
       List<String> skippedExercises});
 }
 
@@ -121,7 +122,7 @@ class _$WorkoutSessionCopyWithImpl<$Res, $Val extends WorkoutSession>
       hotSwaps: null == hotSwaps
           ? _value.hotSwaps
           : hotSwaps // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as Map<String, WorkoutExercise>,
       skippedExercises: null == skippedExercises
           ? _value.skippedExercises
           : skippedExercises // ignore: cast_nullable_to_non_nullable
@@ -145,7 +146,7 @@ abstract class _$$WorkoutSessionImplCopyWith<$Res>
       int? completedAtTimestamp,
       int startedAtTimestamp,
       List<ExerciseEntry> completedSets,
-      Map<String, String> hotSwaps,
+      Map<String, WorkoutExercise> hotSwaps,
       List<String> skippedExercises});
 }
 
@@ -197,7 +198,7 @@ class __$$WorkoutSessionImplCopyWithImpl<$Res>
       hotSwaps: null == hotSwaps
           ? _value._hotSwaps
           : hotSwaps // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as Map<String, WorkoutExercise>,
       skippedExercises: null == skippedExercises
           ? _value._skippedExercises
           : skippedExercises // ignore: cast_nullable_to_non_nullable
@@ -216,7 +217,7 @@ class _$WorkoutSessionImpl extends _WorkoutSession {
       required this.completedAtTimestamp,
       required this.startedAtTimestamp,
       final List<ExerciseEntry> completedSets = const [],
-      final Map<String, String> hotSwaps = const {},
+      final Map<String, WorkoutExercise> hotSwaps = const {},
       final List<String> skippedExercises = const []})
       : _completedSets = completedSets,
         _hotSwaps = hotSwaps,
@@ -262,15 +263,15 @@ class _$WorkoutSessionImpl extends _WorkoutSession {
 
   /// A map of the hot swaps that were made during the workout.
   ///
-  /// The key is the id of the exercise that was swapped out, and the value is the id of the exercise that was swapped in.
-  final Map<String, String> _hotSwaps;
+  /// The key is the id of the exercise that was swapped out, and the value is the exercise that was swapped in.
+  final Map<String, WorkoutExercise> _hotSwaps;
 
   /// A map of the hot swaps that were made during the workout.
   ///
-  /// The key is the id of the exercise that was swapped out, and the value is the id of the exercise that was swapped in.
+  /// The key is the id of the exercise that was swapped out, and the value is the exercise that was swapped in.
   @override
   @JsonKey()
-  Map<String, String> get hotSwaps {
+  Map<String, WorkoutExercise> get hotSwaps {
     if (_hotSwaps is EqualUnmodifiableMapView) return _hotSwaps;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_hotSwaps);
@@ -350,7 +351,7 @@ abstract class _WorkoutSession extends WorkoutSession {
       required final int? completedAtTimestamp,
       required final int startedAtTimestamp,
       final List<ExerciseEntry> completedSets,
-      final Map<String, String> hotSwaps,
+      final Map<String, WorkoutExercise> hotSwaps,
       final List<String> skippedExercises}) = _$WorkoutSessionImpl;
   _WorkoutSession._() : super._();
 
@@ -387,8 +388,8 @@ abstract class _WorkoutSession extends WorkoutSession {
 
   /// A map of the hot swaps that were made during the workout.
   ///
-  /// The key is the id of the exercise that was swapped out, and the value is the id of the exercise that was swapped in.
-  Map<String, String> get hotSwaps;
+  /// The key is the id of the exercise that was swapped out, and the value is the exercise that was swapped in.
+  Map<String, WorkoutExercise> get hotSwaps;
   @override
 
   /// A list of the id's of skipped exercises during the workout.

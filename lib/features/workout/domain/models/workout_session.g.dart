@@ -18,7 +18,8 @@ _$WorkoutSessionImpl _$$WorkoutSessionImplFromJson(Map<String, dynamic> json) =>
               .toList() ??
           const [],
       hotSwaps: (json['hotSwaps'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
+            (k, e) => MapEntry(
+                k, WorkoutExercise.fromJson(e as Map<String, dynamic>)),
           ) ??
           const {},
       skippedExercises: (json['skippedExercises'] as List<dynamic>?)

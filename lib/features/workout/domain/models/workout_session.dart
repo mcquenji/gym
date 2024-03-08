@@ -31,8 +31,8 @@ class WorkoutSession with _$WorkoutSession {
 
     /// A map of the hot swaps that were made during the workout.
     ///
-    /// The key is the id of the exercise that was swapped out, and the value is the id of the exercise that was swapped in.
-    @Default({}) Map<String, String> hotSwaps,
+    /// The key is the id of the exercise that was swapped out, and the value is the exercise that was swapped in.
+    @Default({}) Map<String, WorkoutExercise> hotSwaps,
 
     /// A list of the id's of skipped exercises during the workout.
     @Default([]) List<String> skippedExercises,
