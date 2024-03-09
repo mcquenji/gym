@@ -12,7 +12,7 @@ class AuthGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) {
     var authService = ref.read(authServiceProvider);
 
-    var loggedIn = authService.isUserLoggedIn();
+    var loggedIn = authService.isAuthenticated;
 
     if (loggedIn) {
       resolver.next(true);

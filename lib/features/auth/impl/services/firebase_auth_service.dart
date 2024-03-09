@@ -25,7 +25,7 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  bool isUserLoggedIn() => FirebaseAuth.instance.currentUser != null;
+  bool get isAuthenticated => FirebaseAuth.instance.currentUser != null;
 
   @override
   Future<void> login(String email, String password) async {
@@ -171,7 +171,7 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<String> generateReferralCode() async {
-    if (!isUserLoggedIn()) {
+    if (!isAuthenticated) {
       throw Exception("No user is currently logged in");
     }
 

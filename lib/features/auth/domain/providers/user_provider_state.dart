@@ -12,7 +12,7 @@ class UserController extends Notifier<UserProviderState> {
     users = ref.watch(usersProvider);
     usersDataSource = ref.watch(usersDataSourceProvider);
 
-    if (authService.isUserLoggedIn()) {
+    if (authService.isAuthenticated) {
       return users[authService.getCurrentUserId()];
     }
 

@@ -170,9 +170,22 @@
             }
         }
     },
+    "workoutCard_exercises": "{exercises} Exercises",
+    "@workout_card_exercises": {
+        "description": "workout_card_exercises",
+        "placeholders": {
+            "exercises": {
+                "type": "int"
+            }
+        }
+    },
     "profile_age_caption": "Age",
     "profile_edit_hint": "You can edit your age by tapping on it (the same goes for your weight and height).",
     "profile_newAvatar": "New random avatar",
+    "profile_workouts_title": "Workouts",
+    "profile_workouts_add": "Add",
+    "profile_workouts_notice": "You can’t edit workouts somebody else created.\nHowever, you can copy them and modify them afterwards.",
+    "profile_workouts_edit": "You can’t edit workouts somebody else created.\nHowever, you can copy them and modify them afterwards.",
     "global_error_loadingSVG": "Error loading SVG",
     "global_logout": "Logout"
 }

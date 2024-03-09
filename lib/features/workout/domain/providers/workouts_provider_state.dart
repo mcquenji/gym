@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:gym/features/auth/auth.dart';
+import 'package:gym/features/exercises/exercises.dart';
 import 'package:gym/features/workout/workout.dart';
 import 'package:gym/shared/shared.dart';
 import 'package:riverpod/riverpod.dart';
@@ -38,6 +39,7 @@ class WorkoutsRepository extends AsyncNotifier<WorkoutsRepositoryState> {
       creatorId: user!.id,
       name: name,
       exercises: [],
+      predominantCategory: ExerciseCategory.strength,
     );
 
     return workoutsDataSource.write(workout);

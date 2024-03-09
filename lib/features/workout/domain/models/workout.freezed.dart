@@ -32,6 +32,14 @@ mixin _$Workout {
   /// The exercises that make up the workout.
   List<WorkoutExercise> get exercises => throw _privateConstructorUsedError;
 
+  /// The category that the workout falls under.
+  ///
+  /// This is calculated based on the predominant category of the exercises in the workout.
+  ///
+  /// If the workout has no exercises, this value will be default to [ExerciseCategory.strength].
+  ExerciseCategory get predominantCategory =>
+      throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $WorkoutCopyWith<Workout> get copyWith => throw _privateConstructorUsedError;
@@ -46,7 +54,8 @@ abstract class $WorkoutCopyWith<$Res> {
       {String id,
       String name,
       String creatorId,
-      List<WorkoutExercise> exercises});
+      List<WorkoutExercise> exercises,
+      ExerciseCategory predominantCategory});
 }
 
 /// @nodoc
@@ -66,6 +75,7 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
     Object? name = null,
     Object? creatorId = null,
     Object? exercises = null,
+    Object? predominantCategory = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -84,6 +94,10 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
           ? _value.exercises
           : exercises // ignore: cast_nullable_to_non_nullable
               as List<WorkoutExercise>,
+      predominantCategory: null == predominantCategory
+          ? _value.predominantCategory
+          : predominantCategory // ignore: cast_nullable_to_non_nullable
+              as ExerciseCategory,
     ) as $Val);
   }
 }
@@ -99,7 +113,8 @@ abstract class _$$WorkoutImplCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
       {String id,
       String name,
       String creatorId,
-      List<WorkoutExercise> exercises});
+      List<WorkoutExercise> exercises,
+      ExerciseCategory predominantCategory});
 }
 
 /// @nodoc
@@ -117,6 +132,7 @@ class __$$WorkoutImplCopyWithImpl<$Res>
     Object? name = null,
     Object? creatorId = null,
     Object? exercises = null,
+    Object? predominantCategory = null,
   }) {
     return _then(_$WorkoutImpl(
       id: null == id
@@ -135,6 +151,10 @@ class __$$WorkoutImplCopyWithImpl<$Res>
           ? _value._exercises
           : exercises // ignore: cast_nullable_to_non_nullable
               as List<WorkoutExercise>,
+      predominantCategory: null == predominantCategory
+          ? _value.predominantCategory
+          : predominantCategory // ignore: cast_nullable_to_non_nullable
+              as ExerciseCategory,
     ));
   }
 }
@@ -146,7 +166,8 @@ class _$WorkoutImpl implements _Workout {
       {required this.id,
       required this.name,
       required this.creatorId,
-      required final List<WorkoutExercise> exercises})
+      required final List<WorkoutExercise> exercises,
+      required this.predominantCategory})
       : _exercises = exercises;
 
   factory _$WorkoutImpl.fromJson(Map<String, dynamic> json) =>
@@ -175,9 +196,17 @@ class _$WorkoutImpl implements _Workout {
     return EqualUnmodifiableListView(_exercises);
   }
 
+  /// The category that the workout falls under.
+  ///
+  /// This is calculated based on the predominant category of the exercises in the workout.
+  ///
+  /// If the workout has no exercises, this value will be default to [ExerciseCategory.strength].
+  @override
+  final ExerciseCategory predominantCategory;
+
   @override
   String toString() {
-    return 'Workout(id: $id, name: $name, creatorId: $creatorId, exercises: $exercises)';
+    return 'Workout(id: $id, name: $name, creatorId: $creatorId, exercises: $exercises, predominantCategory: $predominantCategory)';
   }
 
   @override
@@ -190,13 +219,15 @@ class _$WorkoutImpl implements _Workout {
             (identical(other.creatorId, creatorId) ||
                 other.creatorId == creatorId) &&
             const DeepCollectionEquality()
-                .equals(other._exercises, _exercises));
+                .equals(other._exercises, _exercises) &&
+            (identical(other.predominantCategory, predominantCategory) ||
+                other.predominantCategory == predominantCategory));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, creatorId,
-      const DeepCollectionEquality().hash(_exercises));
+      const DeepCollectionEquality().hash(_exercises), predominantCategory);
 
   @JsonKey(ignore: true)
   @override
@@ -217,7 +248,8 @@ abstract class _Workout implements Workout {
       {required final String id,
       required final String name,
       required final String creatorId,
-      required final List<WorkoutExercise> exercises}) = _$WorkoutImpl;
+      required final List<WorkoutExercise> exercises,
+      required final ExerciseCategory predominantCategory}) = _$WorkoutImpl;
 
   factory _Workout.fromJson(Map<String, dynamic> json) = _$WorkoutImpl.fromJson;
 
@@ -237,6 +269,14 @@ abstract class _Workout implements Workout {
 
   /// The exercises that make up the workout.
   List<WorkoutExercise> get exercises;
+  @override
+
+  /// The category that the workout falls under.
+  ///
+  /// This is calculated based on the predominant category of the exercises in the workout.
+  ///
+  /// If the workout has no exercises, this value will be default to [ExerciseCategory.strength].
+  ExerciseCategory get predominantCategory;
   @override
   @JsonKey(ignore: true)
   _$$WorkoutImplCopyWith<_$WorkoutImpl> get copyWith =>

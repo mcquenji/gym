@@ -14,6 +14,8 @@ _$WorkoutImpl _$$WorkoutImplFromJson(Map<String, dynamic> json) =>
       exercises: (json['exercises'] as List<dynamic>)
           .map((e) => WorkoutExercise.fromJson(e as Map<String, dynamic>))
           .toList(),
+      predominantCategory:
+          $enumDecode(_$ExerciseCategoryEnumMap, json['predominantCategory']),
     );
 
 Map<String, dynamic> _$$WorkoutImplToJson(_$WorkoutImpl instance) =>
@@ -22,4 +24,16 @@ Map<String, dynamic> _$$WorkoutImplToJson(_$WorkoutImpl instance) =>
       'name': instance.name,
       'creatorId': instance.creatorId,
       'exercises': instance.exercises,
+      'predominantCategory':
+          _$ExerciseCategoryEnumMap[instance.predominantCategory]!,
     };
+
+const _$ExerciseCategoryEnumMap = {
+  ExerciseCategory.stretching: 'stretching',
+  ExerciseCategory.powerlifting: 'powerlifting',
+  ExerciseCategory.strongman: 'strongman',
+  ExerciseCategory.cardio: 'cardio',
+  ExerciseCategory.olympicWeightlifting: 'olympic weightlifting',
+  ExerciseCategory.plyometrics: 'plyometrics',
+  ExerciseCategory.strength: 'strength',
+};

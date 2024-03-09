@@ -48,7 +48,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     final authService = ref.read(authServiceProvider);
 
-    if (authService.isUserLoggedIn()) {
+    if (authService.isAuthenticated) {
       context.router.push(const HomeRoute());
     }
   }

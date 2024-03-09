@@ -27,7 +27,7 @@ abstract class AuthService extends Service {
   Future<void> resetPassword(String code, String password);
 
   /// Returns true if a user is currently authenticated.
-  bool isUserLoggedIn();
+  bool get isAuthenticated;
 
   /// Returns the id of the currently authenticated user or `null` if no user is authenticated.
   String? getCurrentUserId();

@@ -20,7 +20,7 @@ class StdProfileHistoryDataSource extends ProfileHistoryDataSource {
 
   @override
   Future<Map<DateTime, UserProfile>> getHistory() async {
-    if (!authService.isUserLoggedIn()) {
+    if (!authService.isAuthenticated) {
       log('User is not logged in. Cannot retrieve profile history.');
       throw Exception('User is not logged in');
     }
@@ -52,7 +52,7 @@ class StdProfileHistoryDataSource extends ProfileHistoryDataSource {
 
   @override
   Future<void> record(UserProfile profile) async {
-    if (!authService.isUserLoggedIn()) {
+    if (!authService.isAuthenticated) {
       log('User is not logged in. Cannot record profile history.');
       throw Exception('User is not logged in');
     }
