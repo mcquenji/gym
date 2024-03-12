@@ -1,12 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gym/features/auth/auth.dart';
+import 'package:gym/features/profile/profile.dart';
 import 'package:gym/features/workout/workout.dart';
 
 class StdUserWorkoutsDataSource extends UserWorkoutsDataSource {
-  final String collection;
   final AuthService authService;
+  final UserDataService userDataService;
+  final String documentId;
 
-  StdUserWorkoutsDataSource(this.collection, this.authService);
+  const StdUserWorkoutsDataSource(
+    this.documentId,
+    this.authService,
+    this.userDataService,
+  );
 
   static const field = 'workouts';
 
@@ -21,9 +26,8 @@ class StdUserWorkoutsDataSource extends UserWorkoutsDataSource {
     }
 
     try {
-      final workouts = await FirebaseFirestore.instance
-          .collection(collection)
-          .doc(authService.getCurrentUserId())
+      final workouts = await userDataService
+          .getUserDataDocument(authService.getCurrentUserId()!, documentId)
           .get();
 
       if (!workouts.exists) {
@@ -50,9 +54,8 @@ class StdUserWorkoutsDataSource extends UserWorkoutsDataSource {
     }
 
     try {
-      await FirebaseFirestore.instance
-          .collection(collection)
-          .doc(authService.getCurrentUserId())
+      await userDataService
+          .getUserDataDocument(authService.getCurrentUserId()!, documentId)
           .set({field: workouts});
 
       log("Successfully wrote ${workouts.length} user workouts");
